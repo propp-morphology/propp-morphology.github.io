@@ -151,7 +151,9 @@ main { padding-block: 56px 72px; }
 .diagram .br.ours { stroke: var(--muted); stroke-dasharray: 2 3; }
 .diagram .st { fill: var(--paper); stroke: var(--ink); stroke-width: 1.6; }
 .diagram .bar { fill: var(--muted); }
-.diagram .dot { fill: var(--ink); }
+.diagram .dot { fill: var(--ink); pointer-events: none; }
+.diagram g:focus-visible { outline: none; }
+.diagram .col:focus-visible .hit, .diagram .lane:focus-visible .hit { stroke: var(--accent); stroke-width: 2; }
 .diagram .hit { fill: transparent; cursor: pointer; }
 .diagram .col.is-sel .st { fill: var(--accent); stroke: var(--accent); }
 .diagram .col.is-mate .st { stroke: var(--accent); stroke-width: 2.6; }
@@ -334,17 +336,17 @@ footer p { max-width: 90ch; }
     { id: "end", fs: ["XXIII","XXIV","XXV","XXVI","XXVII","XXVIII","XXIX","XXX","XXXI"], src: "ours" }];
   const GROUP_OF = {}; GROUPS.forEach(g => g.fs.forEach(f => (GROUP_OF[f] = g))); GROUP_OF.VIIIa = GROUP_OF.VIII;
 
-  // Pairs, each with Propp's own words (Russian text, ch. III). "pair": he calls them a pair; "corr": he says the forms correspond.
+  // Pairs, each with Propp's own words: ru from the 1928 text (FEB), en from the 1968 translation, pg its page (ch. III). "pair": he calls them a pair; "corr": he says the forms correspond.
   // at: the function under which he says it, or "sum" for his summary at the end of ch. III.
   const PAIRS = [
-    { a: "II", b: "III", k: "pair", at: "III", ru: "Функции II и III составляют парный элемент.", en: "Functions II and III form a paired element." },
-    { a: "IV", b: "V", k: "pair", at: "V", ru: "Здесь перед нами опять парные функции.", en: "Here again we have paired functions." },
-    { a: "VI", b: "VII", k: "corr", at: "VII", ru: "…запреты всегда нарушаются, обманные предложения, наоборот, всегда принимаются и выполняются.", en: "Interdictions are always violated; deceitful proposals, on the contrary, are always accepted and carried out." },
-    { a: "VIII", b: "XIX", k: "pair", at: "XIX", ru: "Данная функция образует пару с вредительством (А).", en: "This function forms a pair with villainy (A)." },
-    { a: "XVI", b: "XVIII", k: "pair", at: "sum", ru: "…борьба — победа…", en: "struggle–victory, among the pairs of his summary" },
-    { a: "XVII", b: "XXVII", k: "corr", at: "XXVII", ru: "…узнавание представляет собою функцию, корреспондирующую с клеймением, с отметкой.", en: "Recognition is a function corresponding to branding, to marking." },
+    { a: "II", b: "III", k: "pair", at: "III", pg: 27, ru: "Функции II и III составляют парный элемент.", en: "Functions II and III form a paired element." },
+    { a: "IV", b: "V", k: "pair", at: "V", pg: 29, ru: "Здесь перед нами опять парные функции.", en: "Once again we are confronted with paired functions." },
+    { a: "VI", b: "VII", k: "corr", at: "VII", pg: 30, ru: "…запреты всегда нарушаются, обманные предложения, наоборот, всегда принимаются и выполняются.", en: "…interdictions are always broken and, conversely, deceitful proposals are always accepted and fulfilled." },
+    { a: "VIII", b: "XIX", k: "pair", at: "XIX", pg: 53, ru: "Данная функция образует пару с вредительством (A).", en: "This function, together with villainy (A), constitutes a pair." },
+    { a: "XVI", b: "XVIII", k: "pair", at: "sum", ru: "…борьба-победа…", en: "struggle–victory, among the pairs of his summary" },
+    { a: "XVII", b: "XXVII", k: "corr", at: "XXVII", pg: 62, ru: "…узнавание представляет собою функцию, корреспондирующую с клеймением, с отметкой.", en: "…recognition serves as a function corresponding to branding and marking." },
     { a: "XXI", b: "XXII", k: "pair", at: "sum", ru: "…преследование — спасение…", en: "pursuit–rescue, among the pairs of his summary" },
-    { a: "XXV", b: "XXVI", k: "corr", at: "XXVI", ru: "Формы решения, конечно, в точности соответствуют формам задач.", en: "The forms of the solution correspond exactly to the forms of the task." }];
+    { a: "XXV", b: "XXVI", k: "corr", at: "XXVI", pg: 62, ru: "Формы решения, конечно, в точности соответствуют формам задач.", en: "Forms of solution correspond exactly, of course, to the forms of tasks." }];
   const MATE = {}; PAIRS.forEach(p => { MATE[p.a] = { f: p.b, p }; MATE[p.b] = { f: p.a, p }; }); MATE.VIIIa = MATE.VIII;
   const mateCols = f => { const m = f && MATE[f]; return m ? [col(m.f)] : []; };
   const mateCards = f => { const m = f && MATE[f]; if (!m) return []; return m.f === "VIII" ? ["VIII", "VIIIa"] : [m.f]; };
@@ -374,12 +376,12 @@ footer p { max-width: 90ch; }
       theses: "Propp's four theses",
       vocabH: "Thirty-one functions",
       vocabP: "Each function is an act of a character, named by its meaning for the course of the action. Propp sets some of them in pairs and some in groups. Select a function to read its entry: it is filled in every diagram on the page and its pair is outlined. Select it again to close the entry.",
-      vocabNotes: () => `<p>Propp writes that “a very large number of functions are arranged in pairs” and names four: interdiction–violation, reconnaissance–delivery, struggle–victory, pursuit–rescue, “etc.” <span class="pg">(1968, p. 64)</span> Under the definitions he names one more pair, villainy–liquidation, and three correspondences: trickery–complicity, branding–recognition, difficult task–solution. A solid frame and ⇄ mark a pair; a dashed frame and ≈ mark a correspondence.</p>
+      vocabNotes: () => `<p>Propp writes that “a large number of functions are arranged in pairs” and names four: interdiction–violation, reconnaissance–delivery, struggle–victory, pursuit–rescue, “etc.” <span class="pg">(1968, p. 64)</span> Under the definitions he names one more pair, villainy–liquidation, and three correspondences: trickery–complicity, branding–recognition, difficult task–solution. A solid frame and ⇄ mark a pair; a dashed frame and ≈ mark a correspondence.</p>
         <p>Departure and return are not a pair in Propp: he compares the return with the arrival (${fs_("XV")}). Nor are unfounded claims and exposure: he ties the exposure to the recognition before it. A and a hold one place, since a move opens with a villainy or a lack.</p>`,
       groups: {
         prep: ["Preparatory part", "preparation", "Propp's group: the first seven functions, which prepare the villainy"],
-        compl: ["Complication", "complication", () => `Propp's group: ${syms("VIII", "IX", "X", "XI")} “constitute the complication”`],
-        donor: ["The donor", "donor", () => `Propp's group: ${syms("XII", "XIII", "XIV")} “form something whole”`],
+        compl: ["Complication", "complication", () => `Propp's group: ${syms("VIII", "IX", "X", "XI")} “constitute the complication” (1968, pp. 64–65)`],
+        donor: ["The donor", "donor", () => `Propp's group: ${syms("XII", "XIII", "XIV")} “also form something of a whole” (1968, p. 65)`],
         strug: ["Transference and struggle", "struggle", "this page's grouping"],
         ret: ["Liquidation and return", "return", "this page's grouping"],
         end: ["Arrival, recognition, ending", "ending", "this page's grouping"] },
@@ -395,7 +397,7 @@ footer p { max-width: 90ch; }
       tNeg: " (negative)", tInv: " · earlier in Propp's scheme than a function before it", tOurs: " · our reading",
       seqH: "The sequence, and who acts where",
       seqP: "Propp holds the order of functions to be constant (thesis III), and that is the most disputed of his claims; the formulas on this page mark every place where a tale departs from it. Here the scheme is one line. Arcs join the pairs; bars give how many of the 45 tales in his 1928 table contain the function; the lanes place each dramatis persona at the functions of its sphere of action.",
-      seqNotes: (c, C) => `<p>Propp classes moves by whether they develop through struggle–victory (${syms("XVI")}–${syms("XVIII")}), through a difficult task and its solution (${syms("XXV")}–${syms("XXVI")}), through both, or through neither (ch. IX). In the 13 tales on this page the two meet in one move ${c.table1928[0]} times in ${c.table1928[1]} moves of the 1928 table, ${c.table1969[0]} in ${c.table1969[1]} of the 1969 table, and ${c.analysis[0]} in ${c.analysis[1]} of his analyses (No. 123, move II).</p>
+      seqNotes: (c, C) => `<p>Propp classes moves by whether they develop through struggle–victory (${syms("XVI")}–${syms("XVIII")}), through a difficult task and its solution (${syms("XXV")}–${syms("XXVI")}), through both, or through neither (ch. IX). In the 13 tales on this page the two meet in one move ${c.table1928[0]} times in ${c.table1928[1]} moves of the 1928 table, ${c.table1969[0]} in ${c.table1969[1]} of the 1969 table, and ${c.analysis[0]} in ${c.analysis[1]} of his analyses${c.ex.length ? ` (${c.ex.map(([t, m]) => `No. ${t}, move ${m}`).join("; ")})` : ""}.</p>
         <p>The lanes follow the spheres of action <span class="pg">(1968, pp. ${C.pages.spheres})</span>. Select a lane to follow one character.</p>`,
       bar: ["1928 table,", "tales of 45"], fork: () => `${syms("XVI")}–${syms("XVIII")} or ${syms("XXV")}–${syms("XXVI")}: almost never both in one move`,
       ofTales: v => `${v} of 45 tales`, schemeLabel: "The 31 functions in Propp's order, with pairs, frequencies and the dramatis personae who perform them",
@@ -446,7 +448,7 @@ footer p { max-width: 90ch; }
       tNeg: " (отрицательная форма)", tInv: " · раньше по схеме Проппа, чем функция перед ней", tOurs: " · наше прочтение",
       seqH: "Последовательность и действующие лица",
       seqP: "Пропп считает порядок функций постоянным (тезис III), и это самое спорное его утверждение; формулы на этой странице отмечают каждое место, где сказка от него отступает. Здесь схема вытянута в одну линию. Дуги соединяют пары; столбики показывают, в скольких из 45 сказок таблицы 1928 г. есть функция; дорожки ставят каждое действующее лицо у функций его круга действий.",
-      seqNotes: (c, C) => `<p>Пропп различает ходы, которые развиваются через борьбу — победу (${syms("XVI")}–${syms("XVIII")}), через трудную задачу и ее решение (${syms("XXV")}–${syms("XXVI")}), через то и другое или ни через то, ни через другое (гл. IX). В 13 сказках этой страницы обе пары встречаются в одном ходе ${c.table1928[0]} раз из ${c.table1928[1]} ходов таблицы 1928 г., ${c.table1969[0]} из ${c.table1969[1]} в таблице 1969 г. и ${c.analysis[0]} из ${c.analysis[1]} в разборах Проппа (№ 123, ход II).</p>
+      seqNotes: (c, C) => `<p>Пропп различает ходы, которые развиваются через борьбу — победу (${syms("XVI")}–${syms("XVIII")}), через трудную задачу и ее решение (${syms("XXV")}–${syms("XXVI")}), через то и другое или ни через то, ни через другое (гл. IX). В 13 сказках этой страницы обе пары встречаются в одном ходе ${c.table1928[0]} раз из ${c.table1928[1]} ходов таблицы 1928 г., ${c.table1969[0]} из ${c.table1969[1]} в таблице 1969 г. и ${c.analysis[0]} из ${c.analysis[1]} в разборах Проппа${c.ex.length ? ` (${c.ex.map(([t, m]) => `№ ${t}, ход ${m}`).join("; ")})` : ""}.</p>
         <p>Дорожки следуют кругам действий <span class="pg">(с. ${C.pages.spheres})</span>. Нажмите на дорожку, чтобы проследить одно действующее лицо.</p>`,
       bar: ["таблица 1928 г.,", "сказок из 45"], fork: () => `${syms("XVI")}–${syms("XVIII")} или ${syms("XXV")}–${syms("XXVI")}: почти никогда в одном ходе`,
       ofTales: v => `${v} из 45 сказок`, schemeLabel: "31 функция в порядке Проппа: пары, частота и действующие лица",
@@ -557,6 +559,8 @@ footer p { max-width: 90ch; }
   }
   function renderVocab() {
     const adj = new Set(PAIRS.filter(p => IDX[p.b] - IDX[p.a] === 1).map(p => p.a));
+    const vocab = document.querySelector(".vocab");
+    if ($("entry").parentNode !== vocab) vocab.appendChild($("entry"));   // placeEntry may have moved it among the cards
     $("groups").innerHTML = GROUPS.map(g => {
       const units = []; let i = 0;
       const fs = g.id === "compl" ? ["VIII", "VIIIa", "IX", "X", "XI"] : g.fs;
@@ -582,7 +586,7 @@ footer p { max-width: 90ch; }
     el.innerHTML = `<div class="hd"><span class="big">${esc(fs_(f))}</span><div><div class="meta">${esc(L.fn)} ${f}</div><h3>${esc(x.name[lang])}</h3></div></div>
       <blockquote>${esc(L.q(x.quote[lang][0]))} <span class="pg">${L.pg(x.quote[lang][1])}</span></blockquote>
       <div class="line"><span>${m ? `${esc(m.p.k === "pair" ? L.pair : L.corr)}: <button class="linkbtn" data-go="${m.f}">${esc(fs_(m.f))} ${esc(nm(m.f))}</button>` : `<span class="meta">${esc(L.noPair)}</span>`}</span><span>${roles}</span></div>
-      ${!m ? "" : m.p.at === "sum" ? `<p class="why">${L.sumSaid(m.p)}</p>` : `<p class="why">${esc(L.said(m.p.at))} ${lang === "en" ? `“${esc(m.p.en)}” <span class="ru" lang="ru">${esc(m.p.ru)}</span>` : esc(L.q(m.p.ru))}</p>`}
+      ${!m ? "" : m.p.at === "sum" ? `<p class="why">${L.sumSaid(m.p)}</p>` : `<p class="why">${esc(L.said(m.p.at))} ${lang === "en" ? `“${esc(m.p.en)}” <span class="pg">${L.pg(m.p.pg)}</span> <span class="ru" lang="ru">${esc(m.p.ru)}</span>` : esc(L.q(m.p.ru))}</p>`}
       <details id="entry-more"${wide.matches ? " open" : ""}><summary>${esc(L.more)}</summary><dl>
         <dt>${esc(L.dGroup)}</dt><dd>${g ? esc(gName(g)) + ", " + esc(g.src === "propp" ? L.gProp : L.gOurs) : ""}</dd>
         <dt>${esc(L.dOther)}</dt><dd>${sym(x.sym[other])}</dd>
@@ -618,11 +622,11 @@ footer p { max-width: 90ch; }
     s += `<text x="0" y="${LINE + 54}" font-size="13" class="mut">${esc(L.bar[0])}</text><text x="0" y="${LINE + 70}" font-size="13" class="mut">${esc(L.bar[1])}</text>`;
     ROLES.forEach((k, r) => {
       const y = LANE0 + r * LH;
-      s += `<g class="lane" data-role="${k}"><rect class="hit" x="0" y="${y - LH / 2}" width="${W}" height="${LH}"/><path class="hair" d="M${LW - 6} ${y}H${W - 4}"/><text x="0" y="${y + 4.5}" font-size="13">${esc(L.roles[k])}</text></g>`;
+      s += `<g class="lane" data-role="${k}" tabindex="0" role="button" aria-pressed="false" aria-label="${esc(L.roles[k])}"><rect class="hit" x="0" y="${y - LH / 2}" width="${W}" height="${LH}"/><path class="hair" d="M${LW - 6} ${y}H${W - 4}"/><text x="0" y="${y + 4.5}" font-size="13">${esc(L.roles[k])}</text></g>`;
     });
     SEQ.forEach((f, i) => {
       const cx = x(i), v = F[f].t28, bh = v ? Math.max(2, (v / 45) * 46) : 0;
-      let g = `<g class="col" data-f="${f}"><rect class="hit" x="${cx - STEP / 2}" y="${TOP + 14}" width="${STEP}" height="${LANE0 + 7 * LH - TOP - 20}"/><title>${f} ${esc(nm(f))}${v ? " · " + esc(L.ofTales(v)) : ""}</title>`;
+      let g = `<g class="col" data-f="${f}" tabindex="0" role="button" aria-pressed="false" aria-label="${f} ${esc(nm(f))}"><rect class="hit" x="${cx - STEP / 2}" y="${TOP + 14}" width="${STEP}" height="${LANE0 - LH / 2 - TOP - 16}"/><title>${f} ${esc(nm(f))}${v ? " · " + esc(L.ofTales(v)) : ""}</title>`;
       g += `<circle class="st" cx="${cx}" cy="${LINE}" r="4.5"/><text class="sym" x="${cx}" y="${LINE + 26}" font-size="16" text-anchor="middle">${stSym(f)}</text>`;
       g += v ? `<rect class="bar" x="${cx - 5}" y="${LINE + 82 - bh}" width="10" height="${bh}"/>` : `<text x="${cx}" y="${LINE + 80}" font-size="13" text-anchor="middle" class="mut">·</text>`;
       ROLES.forEach((k, r) => { if (F[f].roles.includes(k)) g += `<circle class="dot" data-role="${k}" cx="${cx}" cy="${LANE0 + r * LH}" r="5"/>`; });
@@ -642,7 +646,7 @@ footer p { max-width: 90ch; }
     let s = "";
     ROLES.forEach((k, r) => {
       const cx = LX + r * LANEW + LANEW / 2;
-      s += `<g class="lane" data-role="${k}"><rect class="hit" x="${cx - LANEW / 2}" y="0" width="${LANEW}" height="${H}"/><path class="hair" d="M${cx} ${TOP - 6}V${H - 8}"/><text transform="translate(${cx + 4} ${TOP - 12}) rotate(-90)" font-size="13">${esc(L.roles[k])}</text></g>`;
+      s += `<g class="lane" data-role="${k}" tabindex="0" role="button" aria-pressed="false" aria-label="${esc(L.roles[k])}"><rect class="hit" x="${cx - LANEW / 2}" y="0" width="${LANEW}" height="${H}"/><path class="hair" d="M${cx} ${TOP - 6}V${H - 8}"/><text transform="translate(${cx + 4} ${TOP - 12}) rotate(-90)" font-size="13">${esc(L.roles[k])}</text></g>`;
     });
     GROUPS.forEach(g => {
       const a = y(IDX[g.fs[0]]) - STEP / 2, o = g.src === "ours";
@@ -656,7 +660,7 @@ footer p { max-width: 90ch; }
     const room = Math.max(12, Math.floor((LX - SX - 52) / 7.2));
     SEQ.forEach((f, i) => {
       const cy = y(i), name = nm(f), cut = name.length > room ? name.slice(0, Math.max(name.lastIndexOf(" ", room), 8)) + "…" : name;
-      let g = `<g class="col" data-f="${f}"><rect class="hit" x="0" y="${cy - STEP / 2}" width="${W}" height="${STEP}"/><title>${esc(name)}</title>`;
+      let g = `<g class="col" data-f="${f}" tabindex="0" role="button" aria-pressed="false" aria-label="${f} ${esc(name)}"><rect class="hit" x="0" y="${cy - STEP / 2}" width="${LX - 4}" height="${STEP}"/><title>${esc(name)}</title>`;
       g += `<circle class="st" cx="${SX}" cy="${cy}" r="4.5"/><text class="sym" x="${SX + 12}" y="${cy + 5.5}" font-size="16">${stSym(f)}</text>`;
       g += `<text x="${SX + 44}" y="${cy + 4.5}" font-size="13">${esc(cut)}</text>`;
       ROLES.forEach((k, r) => { if (F[f].roles.includes(k)) g += `<circle class="dot" data-role="${k}" cx="${LX + r * LANEW + LANEW / 2}" cy="${cy}" r="4.5"/>`; });
@@ -665,14 +669,15 @@ footer p { max-width: 90ch; }
     return `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(L.schemeLabel)}">${s}</svg>`;
   }
   function renderSeqNotes() {
-    const cnt = {};
+    const cnt = {}, ex = [];
     for (const src of SRCS) {
       let n = 0, both = 0;
       D.tales.forEach(t => { const rows = t.src[src]; if (!rows) return; const mv = {};
         rows.forEach(r => (mv[r[0]] = mv[r[0]] || new Set()).add(r[1]));
-        Object.values(mv).forEach(fs => { n++; if ((fs.has("XVI") || fs.has("XVIII")) && (fs.has("XXV") || fs.has("XXVI"))) both++; }); });
+        Object.entries(mv).forEach(([m, fs]) => { n++; if ((fs.has("XVI") || fs.has("XVIII")) && (fs.has("XXV") || fs.has("XXVI"))) { both++; if (src === "analysis") ex.push([t.no, m]); } }); });
       cnt[src] = [both, n];
     }
+    cnt.ex = ex;
     $("seq-notes").innerHTML = L.seqNotes(cnt, C);
   }
 
@@ -755,9 +760,9 @@ footer p { max-width: 90ch; }
       c.classList.toggle("dim", !!state.role && !F[c.dataset.f].roles.includes(state.role));
     });
     document.querySelectorAll(".tk").forEach(t => { t.classList.toggle("is-sel", col(t.dataset.f) === sc); t.classList.toggle("is-mate", mc.includes(col(t.dataset.f))); });
-    document.querySelectorAll(".diagram .col").forEach(g => { g.classList.toggle("is-sel", g.dataset.f === sc); g.classList.toggle("is-mate", mc.includes(g.dataset.f)); });
+    document.querySelectorAll(".diagram .col").forEach(g => { g.classList.toggle("is-sel", g.dataset.f === sc); g.classList.toggle("is-mate", mc.includes(g.dataset.f)); g.setAttribute("aria-pressed", String(g.dataset.f === sc)); });
     document.querySelectorAll(".diagram .arc").forEach(a => a.classList.toggle("on", !!sc && a.dataset.pair.split(" ").includes(sc)));
-    document.querySelectorAll(".diagram .lane").forEach(l => l.classList.toggle("is-role", l.dataset.role === state.role));
+    document.querySelectorAll(".diagram .lane").forEach(l => { l.classList.toggle("is-role", l.dataset.role === state.role); l.setAttribute("aria-pressed", String(l.dataset.role === state.role)); });
     document.querySelectorAll(".diagram .dot").forEach(d => d.classList.toggle("is-role", d.dataset.role === state.role));
     document.querySelectorAll(".grid [data-col]").forEach(c => { c.classList.toggle("is-sel", c.dataset.col === sc); c.classList.toggle("is-mate", mc.includes(c.dataset.col)); });
     document.querySelectorAll(".talelist button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.tale === state.tale)));
@@ -781,6 +786,12 @@ footer p { max-width: 90ch; }
       state.sel = t.dataset.f; renderEntry(); placeEntry(); renderReader(); return;
     }
     if (t.dataset.f) toggle(t.dataset.f);
+  });
+
+  document.addEventListener("keydown", e => {
+    if ((e.key === "Enter" || e.key === " ") && e.target.matches && e.target.matches(".diagram g.col, .diagram g.lane")) {
+      e.preventDefault(); e.target.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+    }
   });
 
   function renderAll() {
