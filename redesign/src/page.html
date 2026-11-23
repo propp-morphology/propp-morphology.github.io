@@ -1,0 +1,813 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;700;800&display=swap">
+<style>
+/* Layout: a periodic table of the tale. One grotesk (it carries Latin, Cyrillic, Greek and Propp's arrows), five sizes,
+   no italics; hierarchy comes from weight, position and the grid. The opening band takes its colours from the 1928
+   Academia cover. Form carries the meaning: a solid line is a pair Propp names, a dashed line is a correspondence
+   he states; the selected function is filled, its pair is outlined. */
+:root {
+  --paper: #f5f5f1; --ink: #1e2230; --muted: #5b606d; --rule: #d4d3cb; --faint: #e8e7e1;
+  --accent: #2c51c9; --wash: #dde4f8;
+  --band: #1f2330; --band-ink: #ece4cf; --band-muted: #a8a492; --spine: #e6dcc3; --spine-ink: #1f2330;
+  --font: "Geologica", "Segoe UI", system-ui, sans-serif;
+  --s1: 13px; --s2: 16px; --s3: 22px; --s4: 28px; --s5: clamp(34px, 5.4vw, 60px);
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --paper: #15181f; --ink: #e8e3d5; --muted: #a2a39b; --rule: #363a46; --faint: #22262f;
+  --accent: #93a8ff; --wash: #28325c; --band: #0d0f14; --band-ink: #ece4cf; --band-muted: #9c9887;
+  --spine: #d9cfb5; --spine-ink: #1f2330; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --paper: #15181f; --ink: #e8e3d5; --muted: #a2a39b; --rule: #363a46; --faint: #22262f;
+  --accent: #93a8ff; --wash: #28325c; --band: #0d0f14; --band-ink: #ece4cf; --band-muted: #9c9887;
+  --spine: #d9cfb5; --spine-ink: #1f2330; color-scheme: dark }
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; }
+body { background: var(--paper); color: var(--ink); font-family: var(--font); font-size: var(--s2); line-height: 1.55; font-weight: 400; }
+.gut { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.inner { max-width: 1180px; margin: 0 auto; }
+p { margin: 0; }
+h1, h2, h3, h4 { margin: 0; text-wrap: balance; }
+h2 { font-size: var(--s4); line-height: 1.2; font-weight: 700; letter-spacing: -0.01em; }
+h3, h4 { font-size: var(--s2); font-weight: 700; }
+.meta { font-size: var(--s1); color: var(--muted); }
+.pg { color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+sup, sub { font-size: 0.66em; line-height: 0; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.linkbtn { appearance: none; border: 0; background: none; padding: 0; cursor: pointer; text-decoration: underline;
+  text-decoration-color: var(--rule); text-underline-offset: 3px; }
+.linkbtn:hover { text-decoration-color: currentColor; }
+
+/* ---------- the cover band ---------- */
+.band { background: var(--band); color: var(--band-ink); margin-top: calc(-1 * env(safe-area-inset-top, 0px)); padding-top: env(safe-area-inset-top, 0px); }
+.band .inner { display: grid; grid-template-columns: 112px minmax(0, 1fr); }
+.spine { background: var(--spine); color: var(--spine-ink); padding: 36px 14px 36px max(14px, env(safe-area-inset-left, 0px));
+  display: flex; flex-direction: column; justify-content: space-between; gap: 40px; font-size: var(--s1); font-weight: 700; line-height: 1.35;
+  hyphens: auto; overflow-wrap: anywhere; }
+.spine span:last-child { font-weight: 400; }
+.cover { padding-block: 40px 36px; display: grid; gap: 26px; min-width: 0; }
+.topline { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: var(--s2); font-weight: 700; }
+.topline nav { font-weight: 400; color: var(--band-muted); }
+.topline nav b { color: var(--band-ink); }
+h1 { font-size: var(--s5); line-height: 1.02; font-weight: 800; letter-spacing: -0.02em; max-width: 14ch; }
+.lede { max-width: 62ch; }
+.lede .pg, .band .meta { color: var(--band-muted); }
+
+/* ---------- formulas: tokens on one line, pairs drawn as arcs ---------- */
+.fml { position: relative; padding-top: 58px; width: max-content; min-width: 100%; font-size: var(--s3); }
+.fml svg.arcs { position: absolute; left: 0; top: 0; overflow: visible; pointer-events: none; }
+.fml svg.arcs path { fill: none; stroke: currentColor; stroke-width: 1.3; }
+.fml svg.arcs path.corr { stroke-dasharray: 3 3.5; }
+.fml svg.arcs path.on { stroke: var(--accent); stroke-width: 2.4; }
+.band .fml svg.arcs path.on { stroke: var(--band-ink); }
+.toks { display: flex; align-items: flex-start; white-space: nowrap; }
+.seg { display: grid; gap: 8px; padding-right: 22px; }
+.seg + .seg { padding-left: 22px; border-left: 1px solid color-mix(in oklab, currentColor 28%, transparent); }
+.seg .row { display: flex; align-items: baseline; gap: 2px; }
+.seg .lab { font-size: var(--s1); opacity: 0.72; }
+.tk { appearance: none; background: none; border: 0; padding: 1px 4px; cursor: pointer; font-size: inherit; line-height: 1.2; border-radius: 2px; position: relative; }
+.tk:hover { background: color-mix(in oklab, currentColor 12%, transparent); }
+.tk.neg .s { text-decoration: line-through; text-decoration-thickness: 1px; }
+.tk.ours .s { text-decoration: underline dotted; text-underline-offset: 4px; }
+.tk.inv::after { content: "⤺"; position: absolute; left: 50%; transform: translateX(-50%); top: -14px; font-size: var(--s1); }
+.tk.is-sel { background: var(--wash); color: var(--ink); box-shadow: inset 0 0 0 2px var(--accent); }
+.tk.is-mate { box-shadow: inset 0 0 0 1.5px var(--accent); }
+.band .tk.is-sel { background: var(--band-ink); color: var(--band); box-shadow: none; }
+.band .tk.is-mate { box-shadow: inset 0 0 0 1.5px var(--band-ink); }
+.rep { display: inline-flex; align-items: baseline; gap: 2px; }
+.rep .br { opacity: 0.55; }
+.rep .n { font-size: var(--s1); opacity: 0.75; margin-left: 1px; }
+.key { display: flex; flex-wrap: wrap; gap: 6px 24px; font-size: var(--s1); align-items: center; }
+.band .key { color: var(--band-muted); }
+.key svg { vertical-align: middle; margin-right: 6px; }
+.key path { fill: none; stroke: currentColor; stroke-width: 1.3; }
+.key .box { display: inline-block; width: 14px; height: 14px; vertical-align: -2px; margin-right: 6px; }
+
+/* ---------- page body ---------- */
+main { padding-block: 56px 72px; }
+.flow { display: grid; gap: 80px; }
+.sec { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; }
+.sec > * { min-width: 0; }
+.intro { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px 48px; }
+.intro > * { min-width: 0; }
+.intro > div:first-child { display: grid; gap: 12px; align-content: start; }
+.intro p { max-width: 68ch; }
+.apparatus { display: grid; gap: 12px; }
+.apparatus:empty { display: none; }
+.theses { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px 36px; }
+.theses li { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 8px; }
+.theses b { font-weight: 800; }
+
+/* ---------- the periodic table of functions ---------- */
+.vocab { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; align-items: start; }
+@media (min-width: 1060px) { .vocab.has-entry { grid-template-columns: minmax(0, 1fr) 360px; } .entry { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 16px); } }
+.groups { display: grid; gap: 24px; min-width: 0; }
+.grp { display: grid; gap: 8px; }
+.grp h3 { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+.grp h3 .meta { font-weight: 400; }
+.cards { display: flex; flex-wrap: wrap; gap: 6px; align-items: stretch; }
+.unit { display: flex; border: 1px solid var(--rule); background: var(--paper); }
+.unit.pair { border: 1.5px solid var(--ink); }
+.unit.corr { border: 1.5px dashed var(--ink); }
+.unit .join { align-self: center; color: var(--muted); padding: 0 1px; font-size: var(--s1); }
+.or { align-self: center; font-size: var(--s1); color: var(--muted); }
+.card { appearance: none; border: 0; background: none; cursor: pointer; text-align: left; width: 108px; min-height: 100px;
+  padding: 7px 9px 9px; display: grid; grid-template-rows: auto auto 1fr auto; gap: 0; position: relative; }
+.card .r { font-size: var(--s1); color: var(--muted); font-variant-numeric: tabular-nums; line-height: 1.2; }
+.card .s { font-size: var(--s4); line-height: 1.15; font-weight: 700; }
+.card .nm { font-size: var(--s1); line-height: 1.3; hyphens: auto; }
+.card .pt { font-size: var(--s1); color: var(--muted); margin-top: 4px; }
+.card:hover { background: var(--faint); }
+.card.is-sel { background: var(--wash); box-shadow: inset 0 0 0 2px var(--accent); }
+.card.is-mate { box-shadow: inset 0 0 0 2px var(--accent); }
+.card.is-mate .pt, .card.is-sel .pt { color: var(--accent); }
+.card.dim { opacity: 0.3; }
+.card.zero { border: 1px dashed var(--rule); cursor: default; }
+.entry { border-top: 3px solid var(--ink); padding-top: 16px; display: grid; gap: 12px; min-width: 0; }
+.entry .hd { display: flex; gap: 16px; align-items: center; }
+.entry .big { font-size: var(--s5); line-height: 1; font-weight: 800; min-width: 1ch; }
+.entry h3 { font-size: var(--s3); line-height: 1.2; }
+.entry blockquote { margin: 0; }
+.entry .line { display: flex; flex-wrap: wrap; gap: 4px 16px; }
+.entry .why .ru { color: var(--muted); }
+.entry details summary { cursor: pointer; font-size: var(--s1); color: var(--muted); }
+.entry dl { margin: 8px 0 0; display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 6px 12px; }
+.entry dt { color: var(--muted); }
+.entry dd { margin: 0; }
+
+/* ---------- the sequence diagram ---------- */
+.diagram svg { display: block; }
+.diagram text { fill: var(--ink); font-family: var(--font); }
+.diagram .mut { fill: var(--muted); }
+.diagram .ln { stroke: var(--ink); stroke-width: 2; fill: none; }
+.diagram .hair { stroke: var(--rule); stroke-width: 1; fill: none; }
+.diagram .arc { stroke: var(--ink); stroke-width: 1.3; fill: none; }
+.diagram .arc.corr { stroke-dasharray: 3 3.5; }
+.diagram .br { stroke: var(--ink); stroke-width: 1; fill: none; }
+.diagram .br.ours { stroke: var(--muted); stroke-dasharray: 2 3; }
+.diagram .st { fill: var(--paper); stroke: var(--ink); stroke-width: 1.6; }
+.diagram .bar { fill: var(--muted); }
+.diagram .dot { fill: var(--ink); pointer-events: none; }
+.diagram g:focus-visible { outline: none; }
+.diagram .col:focus-visible .hit, .diagram .lane:focus-visible .hit { stroke: var(--accent); stroke-width: 2; }
+.diagram .hit { fill: transparent; cursor: pointer; }
+.diagram .col.is-sel .st { fill: var(--accent); stroke: var(--accent); }
+.diagram .col.is-mate .st { stroke: var(--accent); stroke-width: 2.6; }
+.diagram .col.is-sel text.sym, .diagram .col.is-mate text.sym { fill: var(--accent); font-weight: 700; }
+.diagram .col.is-sel .bar { fill: var(--accent); }
+.diagram .col.is-mate .bar { fill: color-mix(in oklab, var(--accent) 55%, var(--paper)); }
+.diagram .arc.on { stroke: var(--accent); stroke-width: 2.4; }
+.diagram .lane { cursor: pointer; }
+.diagram .lane.is-role text { fill: var(--accent); font-weight: 700; }
+.diagram .dot.is-role { fill: var(--accent); }
+.fork { stroke: var(--ink); stroke-width: 1; fill: none; stroke-dasharray: 4 3; }
+
+/* ---------- tales ---------- */
+.talelist { display: flex; flex-wrap: wrap; gap: 6px 8px; }
+.talelist button { appearance: none; border: 1px solid var(--rule); background: none; cursor: pointer; padding: 5px 10px; font-size: var(--s1); text-align: left; }
+.talelist button .no { color: var(--muted); margin-right: 6px; font-variant-numeric: tabular-nums; }
+.talelist button[aria-pressed="true"] { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+.reader { display: grid; gap: 28px; }
+.reader h3 { font-size: var(--s3); }
+.reader h3 .meta { font-weight: 400; margin-left: 8px; }
+.move { display: grid; gap: 6px; }
+.clause { background: var(--faint); padding: 14px 16px; display: grid; gap: 8px; max-width: 78ch; }
+.clause .lab { color: var(--muted); font-size: var(--s1); }
+.clause mark { background: var(--wash); color: var(--ink); }
+.clause .tale { white-space: pre-line; }
+
+/* ---------- moves ---------- */
+.mvs { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 32px 36px; }
+.mvs figure { margin: 0; display: grid; gap: 8px; align-content: start; }
+.mvs svg { width: 100%; height: auto; display: block; }
+.mvs .ln { stroke: var(--ink); stroke-width: 2.2; stroke-linecap: round; fill: none; }
+.mvs .dash { stroke: var(--muted); stroke-width: 1.2; stroke-dasharray: 3 4; fill: none; }
+.mvs text { font-family: var(--font); font-size: 13px; fill: var(--muted); }
+.mvs text.lab { fill: var(--ink); font-weight: 700; }
+.mvs .dot { fill: var(--ink); }
+.mvs figcaption b { font-weight: 800; margin-right: 4px; }
+.mvs .q { color: var(--muted); }
+
+/* ---------- Propp's tables (collapsed, at the end) ---------- */
+details.tables { border-top: 1px solid var(--rule); padding-top: 18px; }
+details.tables > summary { cursor: pointer; font-size: var(--s3); font-weight: 700; list-style-position: outside; }
+details.tables > summary .meta { font-weight: 400; margin-left: 8px; }
+details.tables[open] > summary { margin-bottom: 20px; }
+.tables-body { display: grid; gap: 18px; }
+.ctl { display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: baseline; }
+.ctl .opts { display: flex; flex-wrap: wrap; gap: 4px 16px; }
+.ctl button { appearance: none; border: 0; background: none; padding: 2px 0; cursor: pointer; color: var(--muted); border-bottom: 2px solid transparent; }
+.ctl button[aria-pressed="true"] { color: var(--ink); border-bottom-color: var(--ink); }
+table.grid { border-collapse: separate; border-spacing: 0; font-size: var(--s1); }
+.grid th, .grid td { padding: 0; text-align: center; font-weight: 400; }
+.grid thead th { color: var(--muted); padding-bottom: 4px; }
+.grid thead tr.g th { text-align: left; padding-left: 4px; border-left: 1px solid var(--rule); white-space: nowrap; }
+.grid thead tr.f th { font-size: var(--s2); color: var(--ink); }
+.grid .rl { position: sticky; left: 0; z-index: 1; background: var(--paper); text-align: left; padding: 0 10px 0 0; min-width: 180px; max-width: 220px; }
+.grid .rl button { appearance: none; border: 0; background: none; cursor: pointer; text-align: left; padding: 4px 0; line-height: 1.3; width: 100%; }
+.grid .rl .no { color: var(--muted); margin-right: 4px; }
+.grid .rl .mv { font-weight: 700; margin-left: 4px; }
+.grid td.c { width: 32px; min-width: 32px; height: 30px; border-top: 1px solid var(--faint); font-size: var(--s2); }
+.grid td.c.gs, .grid th.gs { border-left: 1px solid var(--rule); }
+.grid td.c .e { display: inline-block; width: 4px; height: 4px; border-radius: 50%; background: var(--rule); vertical-align: middle; }
+.grid td.c .x { font-size: 0.62em; color: var(--muted); vertical-align: sub; margin-left: 1px; }
+.grid td.c.neg .v { text-decoration: line-through; }
+.grid td.c.ours .v { text-decoration: underline dotted; text-underline-offset: 3px; }
+.grid tr.first td, .grid tr.first th { border-top: 1px solid var(--rule); }
+.grid .is-sel { background: var(--wash) !important; }
+.grid .is-mate { background: color-mix(in oklab, var(--wash) 50%, transparent) !important; }
+
+footer { border-top: 1px solid var(--rule); padding-block: 20px 48px; color: var(--muted); }
+footer p { max-width: 90ch; }
+
+@media (max-width: 720px) {
+  .band .inner { grid-template-columns: minmax(0, 1fr); }
+  .spine { flex-direction: row; padding: 10px 16px; gap: 12px; }
+  .spine span:last-child { display: none; }
+  .cover { padding-block: 26px 28px; }
+  .card { width: 96px; }
+  .grid .rl { min-width: 118px; max-width: 140px; }
+  .entry .big { font-size: var(--s4); }
+  .entry dl { grid-template-columns: 1fr; gap: 0; }
+  .entry dd { margin-bottom: 6px; }
+}
+@media (min-width: 721px) { .cover { padding-left: 40px; } }
+@media (prefers-reduced-motion: no-preference) { .card, .tk { transition: background-color .15s, opacity .15s, box-shadow .15s; } }
+</style>
+
+<header class="band">
+  <div class="inner">
+    <div class="spine" aria-hidden="true"><span id="t-spine1"></span><span id="t-spine2"></span></div>
+    <div class="cover gut">
+      <div class="topline"><span id="t-author"></span><nav id="lang" aria-label="Language / Язык"></nav></div>
+      <h1 id="t-h1"></h1>
+      <p class="lede" id="lede"></p>
+      <div class="scroll"><div class="fml" id="hero-fml"></div></div>
+      <div class="key" id="hero-key"></div>
+      <p class="meta" id="t-proto"></p>
+    </div>
+  </div>
+</header>
+
+<main class="gut"><div class="inner flow">
+
+  <section class="sec" aria-labelledby="t-theses">
+    <h2 id="t-theses" class="meta" style="font-size:var(--s1);font-weight:400"></h2>
+    <ol class="theses" id="theses"></ol>
+  </section>
+
+  <section class="sec" id="vocabulary" aria-labelledby="t-vocab-h">
+    <div class="intro">
+      <div><h2 id="t-vocab-h"></h2><p id="t-vocab-p"></p></div>
+      <div class="apparatus" id="vocab-notes"></div>
+    </div>
+    <div class="vocab">
+      <div class="groups" id="groups"></div>
+      <article class="entry" id="entry" aria-live="polite"></article>
+    </div>
+  </section>
+
+  <section class="sec" id="sequence" aria-labelledby="t-seq-h">
+    <div class="intro">
+      <div><h2 id="t-seq-h"></h2><p id="t-seq-p"></p></div>
+      <div class="apparatus" id="seq-notes"></div>
+    </div>
+    <div class="scroll diagram" id="scheme"></div>
+  </section>
+
+  <section class="sec" id="moves" aria-labelledby="t-moves-h">
+    <div class="intro">
+      <div><h2 id="t-moves-h"></h2><p id="t-moves-p"></p></div>
+    </div>
+    <div class="mvs" id="mvs"></div>
+  </section>
+
+  <section class="sec" id="tales" aria-labelledby="t-tales-h">
+    <div class="intro">
+      <div><h2 id="t-tales-h"></h2><p id="t-tales-p"></p></div>
+      <div class="apparatus"><p id="t-tales-note"></p></div>
+    </div>
+    <div class="talelist" id="talelist"></div>
+    <div class="reader" id="reader"></div>
+  </section>
+
+  <details class="tables" id="tables">
+    <summary><span id="t-tables-s"></span><span class="meta" id="t-tables-sub"></span></summary>
+    <div class="tables-body">
+      <p style="max-width:68ch" id="t-tables-p"></p>
+      <div class="ctl"><span class="meta" id="t-src-l"></span><div class="opts" id="src"></div></div>
+      <div class="scroll" id="matrix"></div>
+      <p style="max-width:68ch" id="t-tables-note"></p>
+    </div>
+  </details>
+
+</div></main>
+<footer class="gut"><div class="inner"><p id="foot"></p></div></footer>
+
+<script id="data" type="application/json">__DATA__</script>
+<script>
+(function () {
+  "use strict";
+  const D = JSON.parse(document.getElementById("data").textContent);
+  const F = Object.fromEntries(D.functions.map(f => [f.id, f]));
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+  const $ = id => document.getElementById(id);
+  // The site serves one page per language (data-page); the preview switches with #en / #ru.
+  const PAGE = document.documentElement.dataset.page;
+  let lang = PAGE || (location.hash === "#ru" ? "ru" : "en");
+
+  const SEQ = ["I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII","XIII","XIV","XV","XVI","XVII","XVIII",
+    "XIX","XX","XXI","XXII","XXIII","XXIV","XXV","XXVI","XXVII","XXVIII","XXIX","XXX","XXXI"];
+  const col = f => (f === "VIIIa" ? "VIII" : f);
+  const IDX = Object.fromEntries(SEQ.map((f, i) => [f, i])); IDX.VIIIa = IDX.VIII;
+  const ROMAN = ["I", "II", "III", "IV"];
+
+  // Groups: "propp" = he names the group; "ours" = this page's division.
+  const GROUPS = [
+    { id: "prep", fs: ["I","II","III","IV","V","VI","VII"], src: "propp" },
+    { id: "compl", fs: ["VIII","IX","X","XI"], src: "propp" },
+    { id: "donor", fs: ["XII","XIII","XIV"], src: "propp" },
+    { id: "strug", fs: ["XV","XVI","XVII","XVIII"], src: "ours" },
+    { id: "ret", fs: ["XIX","XX","XXI","XXII"], src: "ours" },
+    { id: "end", fs: ["XXIII","XXIV","XXV","XXVI","XXVII","XXVIII","XXIX","XXX","XXXI"], src: "ours" }];
+  const GROUP_OF = {}; GROUPS.forEach(g => g.fs.forEach(f => (GROUP_OF[f] = g))); GROUP_OF.VIIIa = GROUP_OF.VIII;
+
+  // Pairs, each with Propp's own words: ru from the 1928 text (FEB), en from the 1968 translation, pg its page (ch. III). "pair": he calls them a pair; "corr": he says the forms correspond.
+  // at: the function under which he says it, or "sum" for his summary at the end of ch. III.
+  const PAIRS = [
+    { a: "II", b: "III", k: "pair", at: "III", pg: 27, ru: "Функции II и III составляют парный элемент.", en: "Functions II and III form a paired element." },
+    { a: "IV", b: "V", k: "pair", at: "V", pg: 29, ru: "Здесь перед нами опять парные функции.", en: "Once again we are confronted with paired functions." },
+    { a: "VI", b: "VII", k: "corr", at: "VII", pg: 30, ru: "…запреты всегда нарушаются, обманные предложения, наоборот, всегда принимаются и выполняются.", en: "…interdictions are always broken and, conversely, deceitful proposals are always accepted and fulfilled." },
+    { a: "VIII", b: "XIX", k: "pair", at: "XIX", pg: 53, ru: "Данная функция образует пару с вредительством (A).", en: "This function, together with villainy (A), constitutes a pair." },
+    { a: "XVI", b: "XVIII", k: "pair", at: "sum", ru: "…борьба-победа…", en: "struggle–victory, among the pairs of his summary" },
+    { a: "XVII", b: "XXVII", k: "corr", at: "XXVII", pg: 62, ru: "…узнавание представляет собою функцию, корреспондирующую с клеймением, с отметкой.", en: "…recognition serves as a function corresponding to branding and marking." },
+    { a: "XXI", b: "XXII", k: "pair", at: "sum", ru: "…преследование — спасение…", en: "pursuit–rescue, among the pairs of his summary" },
+    { a: "XXV", b: "XXVI", k: "corr", at: "XXVI", pg: 62, ru: "Формы решения, конечно, в точности соответствуют формам задач.", en: "Forms of solution correspond exactly, of course, to the forms of tasks." }];
+  const MATE = {}; PAIRS.forEach(p => { MATE[p.a] = { f: p.b, p }; MATE[p.b] = { f: p.a, p }; }); MATE.VIIIa = MATE.VIII;
+  const mateCols = f => { const m = f && MATE[f]; return m ? [col(m.f)] : []; };
+  const mateCards = f => { const m = f && MATE[f]; if (!m) return []; return m.f === "VIII" ? ["VIII", "VIIIa"] : [m.f]; };
+  const ROLES = ["hero", "villain", "donor", "helper", "princess", "dispatcher", "false_hero"];
+  const OURS = ["word", "fixed", "undefined", "subscript_only"];
+  const SRCS = ["analysis", "table1928", "table1969"];
+
+  // Notation: 1968 symbols on the English page, Propp's 1928 symbols on the Russian page.
+  const clean = s => { const m = /\(read ([^)]*)\)/.exec(s); return (m ? m[1] : s.replace(/\s*\([^)]*\)\s*$/, "")).trim(); };
+  const notation = s => s.replace(/[´′]/g, "<sup>1</sup>").replace(/\^\{([^}]*)\}/g, "<sup>$1</sup>").replace(/_\{([^}]*)\}/g, "<sub>$1</sub>");
+  const sym = s => notation(esc(clean(s)));
+  const symNoSub = s => sym(s).replace(/<sub>.*?<\/sub>/g, "");
+  const kSym = k => (lang === "en" ? k[6] : k[2]);
+  const fs_ = f => F[f].sym[lang];
+  const nm = f => F[f].short[lang];
+  const syms = (...ids) => ids.map(fs_).join(" ");
+
+  // ===== the page's own words =====
+  const T = {
+    en: {
+      title: "Propp's Tale Schema", author: "V. Propp", spine1: "Questions of poetics", spine2: "State Institute of Art History, Leningrad 1928",
+      h1: "Morphology of the Folktale",
+      q: s => `“${s}”`, pg: p => `(1968, p. ${p})`, pgs: p => `(1968, pp. ${p})`,
+      lede: C => `In 1928 Vladimir Propp took one hundred Russian wonder tales from Afanasyev's collection and found that all of them are built from the same 31 functions. “${esc(C.fdef[0])}” <span class="pg">(1968, p. ${C.fdef[1]})</span> Each function has a symbol, so a whole tale can be written as one line. This is his analysis of “The Swan-Geese” (No. 113), split into its parts.`,
+      proto: "Design prototype of propp-morphology.github.io, built from the page's own data.",
+      key: ["Propp: a pair", "Propp: the forms correspond", "⤺ earlier in his scheme than a function before it", "negative"],
+      theses: "Propp's four theses",
+      vocabH: "Thirty-one functions",
+      vocabP: "Each function is an act of a character, named by its meaning for the course of the action. Propp sets some of them in pairs and some in groups. Select a function to read its entry: it is filled in every diagram on the page and its pair is outlined. Select it again to close the entry.",
+      vocabNotes: () => `<p>Propp writes that “a large number of functions are arranged in pairs” and names four: interdiction–violation, reconnaissance–delivery, struggle–victory, pursuit–rescue, “etc.” <span class="pg">(1968, p. 64)</span> Under the definitions he names one more pair, villainy–liquidation, and three correspondences: trickery–complicity, branding–recognition, difficult task–solution. A solid frame and ⇄ mark a pair; a dashed frame and ≈ mark a correspondence.</p>
+        <p>Departure and return are not a pair in Propp: he compares the return with the arrival (${fs_("XV")}). Nor are unfounded claims and exposure: he ties the exposure to the recognition before it. A and a hold one place, since a move opens with a villainy or a lack.</p>`,
+      groups: {
+        prep: ["Preparatory part", "preparation", "Propp's group: the first seven functions, which prepare the villainy"],
+        compl: ["Complication", "complication", () => `Propp's group: ${syms("VIII", "IX", "X", "XI")} “constitute the complication” (1968, pp. 64–65)`],
+        donor: ["The donor", "donor", () => `Propp's group: ${syms("XII", "XIII", "XIV")} “also form something of a whole” (1968, p. 65)`],
+        strug: ["Transference and struggle", "struggle", "this page's grouping"],
+        ret: ["Liquidation and return", "return", "this page's grouping"],
+        end: ["Arrival, recognition, ending", "ending", "this page's grouping"] },
+      or: "or", zero: "not a function",
+      roles: { hero: "hero", villain: "villain", donor: "donor", helper: "helper", princess: "princess", dispatcher: "dispatcher", false_hero: "false hero" },
+      fn: "function", pair: "Pair", corr: "Corresponds to", noPair: "No pair", noRole: "no dramatis persona",
+      said: at => `Propp, under function ${at}:`,
+      sumSaid: p => `Propp lists ${esc(nm(p.a))}–${esc(nm(p.b))} among the pairs at the end of ch. III <span class="pg">(1968, p. 64)</span>.`,
+      more: "Group, subtypes, counts", dGroup: "group", dOther: "1928 symbol", dSub: "subtypes", dFound: "found in", none: "none",
+      gProp: "Propp's", gOurs: "this page's",
+      counts: (x, prep) => `${x.an} of Propp's 13 analyses` + (prep ? ". The tables begin with the villainy, so they leave out the preparatory part" : `; ${x.t28} of the 45 tales of the 1928 table`)
+        + (x.agree !== "" ? `. The 1928 and 1969 tables agree on ${x.both} tales; ${x.only28} only in 1928, ${x.only69} only in 1969` : "") + ".",
+      tNeg: " (negative)", tInv: " · earlier in Propp's scheme than a function before it", tOurs: " · our reading",
+      seqH: "The sequence, and who acts where",
+      seqP: "Propp holds the order of functions to be constant (thesis III), and that is the most disputed of his claims; the formulas on this page mark every place where a tale departs from it. Here the scheme is one line. Arcs join the pairs; bars give how many of the 45 tales in his 1928 table contain the function; the lanes place each dramatis persona at the functions of its sphere of action.",
+      seqNotes: (c, C) => `<p>Propp classes moves by whether they develop through struggle–victory (${syms("XVI")}–${syms("XVIII")}), through a difficult task and its solution (${syms("XXV")}–${syms("XXVI")}), through both, or through neither (ch. IX). In the 13 tales on this page the two meet in one move ${c.table1928[0]} times in ${c.table1928[1]} moves of the 1928 table, ${c.table1969[0]} in ${c.table1969[1]} of the 1969 table, and ${c.analysis[0]} in ${c.analysis[1]} of his analyses${c.ex.length ? ` (${c.ex.map(([t, m]) => `No. ${t}, move ${m}`).join("; ")})` : ""}.</p>
+        <p>The lanes follow the spheres of action <span class="pg">(1968, pp. ${C.pages.spheres})</span>. Select a lane to follow one character.</p>`,
+      bar: ["1928 table,", "tales of 45"], fork: () => `${syms("XVI")}–${syms("XVIII")} or ${syms("XXV")}–${syms("XXVI")}: almost never both in one move`,
+      ofTales: v => `${v} of 45 tales`, schemeLabel: "The 31 functions in Propp's order, with pairs, frequencies and the dramatis personae who perform them",
+      movesH: "Each new villainy or lack opens a new move",
+      movesP: () => `A move runs from a villainy (A) or a lack (a) to its liquidation (${fs_("XIX")}) or another ending: the A–${fs_("XIX")} arc in the formulas. Propp names six ways in which moves combine.`,
+      moveNames: ["One move follows another", "A move is interrupted by an episode", "The episode is itself interrupted", "Two villainies at once", "Two moves share one ending", "Two seekers part at the road marker"],
+      svg: { res: "I resumes", end: "ending", b1: "first brother", b2: "second brother" },
+      talesH: "Thirteen tales Propp analysed",
+      talesP: "Choose a tale to read its formula, move by move, split into the same parts as above. Select a symbol to see Propp's passage, and for “The Swan-Geese” the place in the tale.",
+      talesNote: "The formulas follow Propp's analyses in the 1928 edition (FEB text); Nos. 113 and 123 were checked by hand. A dotted underline marks our reading, where Propp names a function only in words or a symbol is misprinted.",
+      taleName: t => t.en || t.title, taleSub: t => `Afanasyev No. ${t.no} · <span lang="ru">${esc(t.title)}</span>`, move: "Move",
+      inTale: "In the tale (Russian text)", clause: p => `Propp's analysis · 1928, p. ${p} (Russian)`,
+      wordOnly: "Propp names this function in words only; no passage of his analysis is linked to it.",
+      tablesS: "Propp's tables", tablesSub: "1928 and 1969: every move on one grid",
+      tablesP: "At the end of his book Propp tabulated the tales: one row per move, one column per function, in the order of the scheme. The grid below follows that layout for the 13 tales on this page. Choose a row to open the tale above.",
+      tablesNote: "1928 table: our transcription from the scan of the 1928 edition, faded cells after the 1968 edition. 1969 table: collated with the 2001–2023 reprints. ×n: the function occurs n times in the move; struck through: negative.",
+      srcL: "Source", src: { analysis: "Propp's analyses", table1928: "1928 table", table1969: "1969 table" }, notIn: "not in this source",
+      footer: "Quotations and the English names of functions and roles: V. Propp, Morphology of the Folktale, 2nd ed., trans. L. Scott, rev. L. A. Wagner (Austin: University of Texas Press, 1968), with pages. Propp's remarks on pairs: the Russian text, ch. III. Tale texts: Afanasyev (FEB text). Codings: Propp's worked analyses (1928, FEB text; Nos. 113 and 123 checked by hand); his 1928 table (our transcription from the scan); his 1969 table (collated with the 2001–2023 reprints). Symbols in 1968 notation through the project's crosswalk."
+    },
+    ru: {
+      title: "Схема сказки по Проппу", author: "В. Я. Пропп", spine1: "Вопросы поэтики", spine2: "Государственный институт истории искусств, Ленинград 1928",
+      h1: "Морфология сказки",
+      q: s => `«${s}»`, pg: p => `(с. ${p})`, pgs: p => `(с. ${p})`,
+      lede: C => `В 1928 году В. Я. Пропп взял сто волшебных сказок из сборника Афанасьева и показал, что все они строятся из 31 функции. «${esc(C.fdef[0])}» <span class="pg">(с. ${C.fdef[1]})</span> У каждой функции есть условное обозначение, поэтому всю сказку можно записать одной строкой. Вот разбор Проппа сказки «Гуси-лебеди» (№ 113), разбитый на части.`,
+      proto: "Прототип нового оформления propp-morphology.github.io на данных этой страницы.",
+      key: ["Пропп: пара", "Пропп: формы соответствуют", "⤺ раньше по схеме, чем функция перед ней", "отрицательная форма"],
+      theses: "Четыре тезиса Проппа",
+      vocabH: "Тридцать одна функция",
+      vocabP: "Функция — поступок действующего лица, названный по его значению для хода действия. Одни функции Пропп ставит парами, другие объединяет в группы. Нажмите на функцию, чтобы открыть ее описание: она выделится на всех схемах страницы, а ее пара будет обведена. Повторное нажатие закрывает описание.",
+      vocabNotes: () => `<p>Пропп пишет, что «очень большое количество функций расположено попарно», и называет четыре пары: запрет — нарушение, выведывание — выдача, борьба — победа, преследование — спасение, «и т. д.» При определениях функций он называет еще одну пару, вредительство — ликвидацию, и три соответствия: подвох — пособничество, клеймение — узнавание, трудная задача — решение. Сплошная рамка и ⇄ обозначают пару, пунктирная рамка и ≈ — соответствие.</p>
+        <p>Отправка и возвращение у Проппа не пара: возвращение он сравнивает с прибытием (${fs_("XV")}). Необоснованные притязания и обличение тоже: обличение он связывает с предшествующим узнаванием. A и a занимают одно место: ход открывается вредительством или недостачей.</p>`,
+      groups: {
+        prep: ["Подготовительная часть", "подготовка", "группа Проппа: первые семь функций, подготовляющие вредительство"],
+        compl: ["Завязка", "завязка", () => `группа Проппа: ${syms("VIII", "IX", "X", "XI")} «составляют завязку»`],
+        donor: ["Даритель", "даритель", () => `группа Проппа: ${syms("XII", "XIII", "XIV")} «также составляют некоторое целое»`],
+        strug: ["Перемещение и борьба", "борьба", "деление этой страницы"],
+        ret: ["Ликвидация и возвращение", "возвращение", "деление этой страницы"],
+        end: ["Прибытие, узнавание, развязка", "развязка", "деление этой страницы"] },
+      or: "или", zero: "не функция",
+      roles: { hero: "герой", villain: "вредитель", donor: "даритель", helper: "помощник", princess: "царевна", dispatcher: "отправитель", false_hero: "ложный герой" },
+      fn: "функция", pair: "Пара", corr: "Соответствует", noPair: "Пары нет", noRole: "вне кругов действий",
+      said: at => `Пропп, при функции ${at}:`,
+      sumSaid: p => `Пропп называет эту пару в выводах главы III: «${esc(p.ru)}»`,
+      more: "Группа, разряды, подсчеты", dGroup: "группа", dOther: "обозначение 1968 г.", dSub: "разряды", dFound: "встречается", none: "нет",
+      gProp: "группа Проппа", gOurs: "деление этой страницы",
+      counts: (x, prep) => `в ${x.an} из 13 разборов Проппа` + (prep ? ". Таблицы начинаются с вредительства, поэтому подготовительной части в них нет" : `; в ${x.t28} из 45 сказок таблицы 1928 г.`)
+        + (x.agree !== "" ? `. Таблицы 1928 и 1969 гг. совпадают в ${x.both} сказках; только в 1928 г. — ${x.only28}, только в 1969 г. — ${x.only69}` : "") + ".",
+      tNeg: " (отрицательная форма)", tInv: " · раньше по схеме Проппа, чем функция перед ней", tOurs: " · наше прочтение",
+      seqH: "Последовательность и действующие лица",
+      seqP: "Пропп считает порядок функций постоянным (тезис III), и это самое спорное его утверждение; формулы на этой странице отмечают каждое место, где сказка от него отступает. Здесь схема вытянута в одну линию. Дуги соединяют пары; столбики показывают, в скольких из 45 сказок таблицы 1928 г. есть функция; дорожки ставят каждое действующее лицо у функций его круга действий.",
+      seqNotes: (c, C) => `<p>Пропп различает ходы, которые развиваются через борьбу — победу (${syms("XVI")}–${syms("XVIII")}), через трудную задачу и ее решение (${syms("XXV")}–${syms("XXVI")}), через то и другое или ни через то, ни через другое (гл. IX). В 13 сказках этой страницы обе пары встречаются в одном ходе ${c.table1928[0]} раз из ${c.table1928[1]} ходов таблицы 1928 г., ${c.table1969[0]} из ${c.table1969[1]} в таблице 1969 г. и ${c.analysis[0]} из ${c.analysis[1]} в разборах Проппа${c.ex.length ? ` (${c.ex.map(([t, m]) => `№ ${t}, ход ${m}`).join("; ")})` : ""}.</p>
+        <p>Дорожки следуют кругам действий <span class="pg">(с. ${C.pages.spheres})</span>. Нажмите на дорожку, чтобы проследить одно действующее лицо.</p>`,
+      bar: ["таблица 1928 г.,", "сказок из 45"], fork: () => `${syms("XVI")}–${syms("XVIII")} или ${syms("XXV")}–${syms("XXVI")}: почти никогда в одном ходе`,
+      ofTales: v => `${v} из 45 сказок`, schemeLabel: "31 функция в порядке Проппа: пары, частота и действующие лица",
+      movesH: "Каждое новое вредительство или недостача открывает новый ход",
+      movesP: () => `Ход ведет от вредительства (A) или недостачи (a) к ликвидации (${fs_("XIX")}) или иной развязке: это дуга A–${fs_("XIX")} в формулах. Пропп называет шесть способов соединения ходов.`,
+      moveNames: ["Один ход следует за другим", "Ход прерывается эпизодом", "Эпизод сам прерывается", "Два вредительства сразу", "Два хода с общим концом", "Два искателя расстаются у столба"],
+      svg: { res: "I продолжается", end: "конец", b1: "первый брат", b2: "второй брат" },
+      talesH: "Тринадцать сказок, разобранных Проппом",
+      talesP: "Выберите сказку, чтобы прочесть ее формулу по ходам, разбитую на те же части, что и выше. Нажмите на обозначение, чтобы увидеть фразу разбора Проппа, а для «Гусей-лебедей» — и место в тексте сказки.",
+      talesNote: "Формулы следуют подробным разборам Проппа в издании 1928 г. (текст ФЭБ); № 113 и № 123 сверены вручную. Пунктиром подчеркнуты наши прочтения: функции, которые Пропп называет только словами, и исправленные опечатки.",
+      taleName: t => t.title, taleSub: t => `Афанасьев, № ${t.no}`, move: "Ход",
+      inTale: "В тексте сказки", clause: p => `Разбор Проппа · 1928, с. ${p}`,
+      wordOnly: "Пропп называет эту функцию только словами; фраза его разбора к ней не привязана.",
+      tablesS: "Таблицы Проппа", tablesSub: "1928 и 1969 гг.: все ходы на одной сетке",
+      tablesP: "В конце книги Пропп свел сказки в таблицы: строка на ход, столбец на функцию, в порядке схемы. Сетка ниже повторяет это устройство для 13 сказок этой страницы. Нажмите на строку, чтобы открыть сказку выше.",
+      tablesNote: "Таблица 1928 г.: наша расшифровка по скану издания 1928 г., выцветшие места — по изданию 1968 г. Таблица 1969 г.: сверена с переизданиями 2001–2023 гг. ×n — функция встречается в ходе n раз; зачеркнуто — отрицательная форма.",
+      srcL: "Источник", src: { analysis: "Разборы Проппа", table1928: "Таблица 1928", table1969: "Таблица 1969" }, notIn: "нет в этом источнике",
+      footer: "Цитаты и названия функций: В. Я. Пропп, «Морфология сказки» (Л.: Academia, 1928; текст ФЭБ), со страницами. Замечания Проппа о парах функций — по тексту главы III. Тексты сказок: Афанасьев (текст ФЭБ). Источники разметки, у каждого свой статус: таблица 1928 г. (наша расшифровка по скану издания 1928 г.; выцветшие места — по изданию 1968 г.), таблица 1969 г. (сверена с переизданиями 2001–2023 гг.), подробные разборы (1928, текст ФЭБ; № 113 и № 123 сверены вручную)."
+    }
+  };
+  let L = T[lang], C = D.cite[lang];
+  const gName = g => L.groups[g.id][0], gShort = g => L.groups[g.id][1];
+  const gNote = g => { const n = L.groups[g.id][2]; return typeof n === "function" ? n() : n; };
+
+  const state = { sel: "VIII", role: null, tale: "113", src: "table1928", clause: null };
+
+  // ===== static text =====
+  function renderStatic() {
+    document.documentElement.lang = lang;
+    if (!PAGE) document.title = L.title;   // the site pages keep the title in their head
+    const set = (id, v) => { $(id).innerHTML = v; };
+    set("t-spine1", esc(L.spine1)); set("t-spine2", esc(L.spine2)); set("t-author", esc(L.author)); set("t-h1", esc(L.h1));
+    set("t-proto", esc(L.proto)); set("t-theses", esc(L.theses));
+    set("t-vocab-h", esc(L.vocabH)); set("t-vocab-p", esc(L.vocabP)); set("t-seq-h", esc(L.seqH)); set("t-seq-p", esc(L.seqP));
+    set("t-moves-h", esc(L.movesH)); set("t-moves-p", esc(L.movesP())); set("t-tales-h", esc(L.talesH)); set("t-tales-p", esc(L.talesP));
+    set("t-tales-note", esc(L.talesNote)); set("t-tables-s", esc(L.tablesS)); set("t-tables-sub", esc(L.tablesSub));
+    set("t-tables-p", esc(L.tablesP)); set("t-tables-note", esc(L.tablesNote)); set("t-src-l", esc(L.srcL)); set("foot", esc(L.footer));
+    const href = l => (PAGE ? document.documentElement.dataset[l] : "#" + l);
+    $("lang").innerHTML = lang === "en"
+      ? `<b>English</b> · <a href="${href("ru")}" lang="ru" style="color:inherit">Русский</a>`
+      : `<a href="${href("en")}" lang="en" style="color:inherit">English</a> · <b>Русский</b>`;
+  }
+
+  // ===== formulas =====
+  function formula(rows) {
+    const items = rows.map((k, i) => ({ k, i, f: k[1], s: clean(kSym(k)) }));
+    const units = []; let i = 0;
+    while (i < items.length) {
+      let done = false;
+      for (const w of [5, 3]) {
+        const blk = items.slice(i, i + w), key = blk.map(x => x.s).join("|"); let n = 1;
+        while (blk.length === w && items.slice(i + n * w, i + (n + 1) * w).map(x => x.s).join("|") === key) n++;
+        if (n > 1) { units.push({ rep: n, items: blk }); i += n * w; done = true; break; }
+      }
+      if (!done) { units.push({ rep: 1, items: [items[i]] }); i++; }
+    }
+    const seen = new Set(); let maxIdx = -1;
+    units.forEach(u => u.items.forEach(x => {
+      const ix = IDX[x.f]; x.inv = ix !== undefined && !seen.has(col(x.f)) && ix < maxIdx;
+      seen.add(col(x.f)); if (ix !== undefined) maxIdx = Math.max(maxIdx, ix);
+    }));
+    const segs = [];
+    units.forEach(u => {
+      const g = GROUP_OF[u.items[0].f] || null, last = segs[segs.length - 1];
+      if (last && last.g === g) last.units.push(u); else segs.push({ g, units: [u] });
+    });
+    const tok = x => {
+      const neg = x.k[3] === "neg", ours = OURS.includes(x.k[7]);
+      return `<button class="tk${neg ? " neg" : ""}${ours ? " ours" : ""}${x.inv ? " inv" : ""}" data-f="${x.f}" data-i="${x.i}" data-m="${esc(x.k[0])}"
+        title="${esc(nm(x.f))}${neg ? L.tNeg : ""}${x.inv ? L.tInv : ""}${ours ? L.tOurs : ""}"><span class="s">${sym(kSym(x.k))}</span></button>`;
+    };
+    const html = segs.map(s => `<div class="seg"><div class="row">${s.units.map(u => u.rep > 1
+      ? `<span class="rep"><span class="br">{</span>${u.items.map(tok).join("")}<span class="br">}</span><span class="n">×${u.rep}</span></span>`
+      : tok(u.items[0])).join("")}</div><div class="lab">${s.g ? esc(gShort(s.g)) : ""}</div></div>`).join("");
+    return `<svg class="arcs" aria-hidden="true"></svg><div class="toks">${html}</div>`;
+  }
+  function drawArcs(box) {
+    const svg = box.querySelector("svg.arcs"); if (!svg) return;
+    const toks = [...box.querySelectorAll(".tk")], b = box.getBoundingClientRect();
+    svg.setAttribute("width", b.width); svg.setAttribute("height", b.height);
+    const used = new Set(), paths = [], sc = state.sel ? col(state.sel) : null;
+    toks.forEach((t, ti) => {
+      const p = PAIRS.find(q => q.a === col(t.dataset.f)); if (!p) return;
+      const j = toks.findIndex((u, uj) => uj > ti && col(u.dataset.f) === p.b && !used.has(uj));
+      if (j < 0) return; used.add(j);
+      const r1 = t.getBoundingClientRect(), r2 = toks[j].getBoundingClientRect();
+      const x1 = r1.left + r1.width / 2 - b.left, x2 = r2.left + r2.width / 2 - b.left, y = r1.top - b.top - 2;
+      const h = Math.min(12 + (x2 - x1) * 0.16, 52), on = sc === p.a || sc === p.b;
+      paths.push(`<path class="${p.k === "corr" ? "corr" : ""}${on ? " on" : ""}" d="M${x1} ${y}C${x1} ${y - h} ${x2} ${y - h} ${x2} ${y}"/>`);
+    });
+    svg.innerHTML = paths.join("");
+  }
+  const redrawAll = () => document.querySelectorAll(".fml").forEach(drawArcs);
+
+  // ===== opening band =====
+  function renderHero() {
+    $("lede").innerHTML = L.lede(C);
+    $("hero-fml").innerHTML = formula(D.tales.find(x => x.no === "113").src.analysis);
+    const arc = d => `<svg width="34" height="14"><path d="M3 12C3 1 31 1 31 12" ${d ? 'stroke-dasharray="3 3.5"' : ""}/></svg>`;
+    $("hero-key").innerHTML = `<span>${arc(false)}${esc(L.key[0])}</span><span>${arc(true)}${esc(L.key[1])}</span><span>${esc(L.key[2])}</span><span><s>${esc(fs_("XIV"))}</s> ${esc(L.key[3])}</span>`;
+    $("theses").innerHTML = C.theses.map(([q, p], i) => `<li><b>${ROMAN[i]}</b><span>${esc(L.q(q))} <span class="pg">${L.pg(p)}</span></span></li>`).join("");
+  }
+
+  // ===== the table of functions =====
+  function card(f) {
+    const m = MATE[f];
+    return `<button class="card" data-f="${f}" aria-pressed="false"><span class="r">${f}</span><span class="s">${esc(fs_(f))}</span><span class="nm">${esc(nm(f))}</span>${m ? `<span class="pt">${m.p.k === "pair" ? "⇄" : "≈"} ${esc(fs_(m.f))}</span>` : ""}</button>`;
+  }
+  function renderVocab() {
+    const adj = new Set(PAIRS.filter(p => IDX[p.b] - IDX[p.a] === 1).map(p => p.a));
+    const vocab = document.querySelector(".vocab");
+    if ($("entry").parentNode !== vocab) vocab.appendChild($("entry"));   // placeEntry may have moved it among the cards
+    $("groups").innerHTML = GROUPS.map(g => {
+      const units = []; let i = 0;
+      const fs = g.id === "compl" ? ["VIII", "VIIIa", "IX", "X", "XI"] : g.fs;
+      while (i < fs.length) {
+        const f = fs[i];
+        if (adj.has(f) && fs[i + 1] === MATE[f].f) { units.push(`<div class="unit ${MATE[f].p.k}">${card(f)}<span class="join" aria-hidden="true">→</span>${card(fs[i + 1])}</div>`); i += 2; }
+        else if (f === "VIIIa") { units.push(`<span class="or">${esc(L.or)}</span><div class="unit">${card(f)}</div>`); i++; }
+        else { units.push(`<div class="unit">${card(f)}</div>`); i++; }
+      }
+      const head = g.id === "prep" ? `<div class="unit card zero"><span class="r">0</span><span class="s">${esc(fs_("0"))}</span><span class="nm">${esc(nm("0"))}</span><span class="pt">${esc(L.zero)}</span></div>` : "";
+      return `<div class="grp"><h3>${esc(gName(g))}<span class="meta">${esc(gNote(g))}</span></h3><div class="cards">${head}${units.join("")}</div></div>`;
+    }).join("");
+    $("vocab-notes").innerHTML = L.vocabNotes();
+  }
+  const wide = window.matchMedia("(min-width: 1060px)");
+  function renderEntry() {
+    const f = state.sel, el = $("entry");
+    document.querySelector(".vocab").classList.toggle("has-entry", !!f);
+    if (!f) { el.hidden = true; return; }
+    el.hidden = false;
+    const x = F[f], m = MATE[f], g = GROUP_OF[f], other = lang === "en" ? "ru" : "en";
+    const roles = x.roles.length ? x.roles.map(r => `<button class="linkbtn" data-role="${r}">${esc(L.roles[r])}</button>`).join(", ") : `<span class="meta">${esc(L.noRole)}</span>`;
+    el.innerHTML = `<div class="hd"><span class="big">${esc(fs_(f))}</span><div><div class="meta">${esc(L.fn)} ${f}</div><h3>${esc(x.name[lang])}</h3></div></div>
+      <blockquote>${esc(L.q(x.quote[lang][0]))} <span class="pg">${L.pg(x.quote[lang][1])}</span></blockquote>
+      <div class="line"><span>${m ? `${esc(m.p.k === "pair" ? L.pair : L.corr)}: <button class="linkbtn" data-go="${m.f}">${esc(fs_(m.f))} ${esc(nm(m.f))}</button>` : `<span class="meta">${esc(L.noPair)}</span>`}</span><span>${roles}</span></div>
+      ${!m ? "" : m.p.at === "sum" ? `<p class="why">${L.sumSaid(m.p)}</p>` : `<p class="why">${esc(L.said(m.p.at))} ${lang === "en" ? `“${esc(m.p.en)}” <span class="pg">${L.pg(m.p.pg)}</span> <span class="ru" lang="ru">${esc(m.p.ru)}</span>` : esc(L.q(m.p.ru))}</p>`}
+      <details id="entry-more"${wide.matches ? " open" : ""}><summary>${esc(L.more)}</summary><dl>
+        <dt>${esc(L.dGroup)}</dt><dd>${g ? esc(gName(g)) + ", " + esc(g.src === "propp" ? L.gProp : L.gOurs) : ""}</dd>
+        <dt>${esc(L.dOther)}</dt><dd>${sym(x.sym[other])}</dd>
+        <dt>${esc(L.dSub)}</dt><dd>${x.nsub || esc(L.none)}</dd>
+        <dt>${esc(L.dFound)}</dt><dd>${esc(L.counts(x, g && g.id === "prep"))}</dd></dl></details>`;
+  }
+  function placeEntry() {
+    const el = $("entry"), vocab = document.querySelector(".vocab");
+    if (wide.matches || !state.sel) { if (el.parentNode !== vocab) vocab.appendChild(el); return; }
+    const c = document.querySelector(`.card[data-f="${state.sel}"]`), g = c && c.closest(".grp");
+    if (g && g.nextSibling !== el) g.after(el);
+  }
+  wide.addEventListener("change", () => { placeEntry(); const d = $("entry-more"); if (d) d.open = wide.matches; });
+
+  // ===== the sequence diagram =====
+  function gapsBefore(i) { let n = 0; for (const g of GROUPS) if (IDX[g.fs[0]] <= i && IDX[g.fs[0]] > 0) n++; return n; }
+  function renderScheme() { const box = $("scheme"); box.innerHTML = box.clientWidth >= 720 ? schemeH() : schemeV(box.clientWidth); highlight(); }
+  const stSym = f => (f === "VIII" ? "A" : esc(fs_(f)));
+  function schemeH() {
+    const LW = 112, STEP = 30, GAP = 14, TOP = 30, LINE = 160, LANE0 = 262, LH = 24;
+    const x = i => LW + i * STEP + gapsBefore(i) * GAP + STEP / 2;
+    const W = x(30) + STEP / 2 + 8, H = LANE0 + 7 * LH + 62;
+    let s = "";
+    GROUPS.forEach(g => {
+      const a = x(IDX[g.fs[0]]) - STEP / 2 + 3, b = x(IDX[g.fs[g.fs.length - 1]]) + STEP / 2 - 3, o = g.src === "ours";
+      s += `<path class="br${o ? " ours" : ""}" d="M${a} ${TOP + 8}V${TOP}H${b}V${TOP + 8}"/><text x="${a}" y="${TOP - 8}" font-size="13" class="${o ? "mut" : ""}">${esc(gShort(g))}</text>`;
+    });
+    PAIRS.forEach(p => {
+      const x1 = x(IDX[p.a]), x2 = x(IDX[p.b]), h = Math.min(14 + (x2 - x1) * 0.3, LINE - TOP - 34);
+      s += `<path class="arc${p.k === "corr" ? " corr" : ""}" data-pair="${p.a} ${p.b}" d="M${x1} ${LINE - 8}C${x1} ${LINE - 8 - h * 1.3} ${x2} ${LINE - 8 - h * 1.3} ${x2} ${LINE - 8}"/>`;
+    });
+    GROUPS.forEach(g => { s += `<path class="ln" d="M${x(IDX[g.fs[0]]) - 6} ${LINE}H${x(IDX[g.fs[g.fs.length - 1]]) + 6}"/>`; });
+    s += `<text x="0" y="${LINE + 54}" font-size="13" class="mut">${esc(L.bar[0])}</text><text x="0" y="${LINE + 70}" font-size="13" class="mut">${esc(L.bar[1])}</text>`;
+    ROLES.forEach((k, r) => {
+      const y = LANE0 + r * LH;
+      s += `<g class="lane" data-role="${k}" tabindex="0" role="button" aria-pressed="false" aria-label="${esc(L.roles[k])}"><rect class="hit" x="0" y="${y - LH / 2}" width="${W}" height="${LH}"/><path class="hair" d="M${LW - 6} ${y}H${W - 4}"/><text x="0" y="${y + 4.5}" font-size="13">${esc(L.roles[k])}</text></g>`;
+    });
+    SEQ.forEach((f, i) => {
+      const cx = x(i), v = F[f].t28, bh = v ? Math.max(2, (v / 45) * 46) : 0;
+      let g = `<g class="col" data-f="${f}" tabindex="0" role="button" aria-pressed="false" aria-label="${f} ${esc(nm(f))}"><rect class="hit" x="${cx - STEP / 2}" y="${TOP + 14}" width="${STEP}" height="${LANE0 - LH / 2 - TOP - 16}"/><title>${f} ${esc(nm(f))}${v ? " · " + esc(L.ofTales(v)) : ""}</title>`;
+      g += `<circle class="st" cx="${cx}" cy="${LINE}" r="4.5"/><text class="sym" x="${cx}" y="${LINE + 26}" font-size="16" text-anchor="middle">${stSym(f)}</text>`;
+      g += v ? `<rect class="bar" x="${cx - 5}" y="${LINE + 82 - bh}" width="10" height="${bh}"/>` : `<text x="${cx}" y="${LINE + 80}" font-size="13" text-anchor="middle" class="mut">·</text>`;
+      ROLES.forEach((k, r) => { if (F[f].roles.includes(k)) g += `<circle class="dot" data-role="${k}" cx="${cx}" cy="${LANE0 + r * LH}" r="5"/>`; });
+      s += g + "</g>";
+    });
+    const yF = LANE0 + 7 * LH + 14, h1 = x(IDX.XVI), h2 = x(IDX.XVIII), m1 = x(IDX.XXV), m2 = x(IDX.XXVI);
+    s += `<path class="br" d="M${h1} ${yF - 8}V${yF}H${h2}V${yF - 8}"/><path class="br" d="M${m1} ${yF - 8}V${yF}H${m2}V${yF - 8}"/>`;
+    s += `<path class="fork" d="M${(h1 + h2) / 2} ${yF}V${yF + 14}H${(m1 + m2) / 2}V${yF}"/>`;
+    s += `<text x="${(h1 + h2) / 2 + 10}" y="${yF + 34}" font-size="13">${esc(L.fork())}</text>`;
+    return `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(L.schemeLabel)}">${s}</svg>`;
+  }
+  function schemeV(W) {
+    W = Math.max(W, 330);
+    const LANEW = 17, LX = W - 7 * LANEW, TOP = 104, STEP = 30, GAP = 28, SX = 56;
+    const y = i => TOP + i * STEP + gapsBefore(i) * GAP + STEP / 2;
+    const H = y(30) + STEP;
+    let s = "";
+    ROLES.forEach((k, r) => {
+      const cx = LX + r * LANEW + LANEW / 2;
+      s += `<g class="lane" data-role="${k}" tabindex="0" role="button" aria-pressed="false" aria-label="${esc(L.roles[k])}"><rect class="hit" x="${cx - LANEW / 2}" y="0" width="${LANEW}" height="${H}"/><path class="hair" d="M${cx} ${TOP - 6}V${H - 8}"/><text transform="translate(${cx + 4} ${TOP - 12}) rotate(-90)" font-size="13">${esc(L.roles[k])}</text></g>`;
+    });
+    GROUPS.forEach(g => {
+      const a = y(IDX[g.fs[0]]) - STEP / 2, o = g.src === "ours";
+      s += `<text x="0" y="${a - 8}" font-size="13" class="${o ? "mut" : ""}">${esc(gShort(g))}</text><path class="${o ? "br ours" : "br"}" d="M0 ${a - 2}H${LX - 8}"/>`;
+      s += `<path class="ln" d="M${SX} ${y(IDX[g.fs[0]]) - 6}V${y(IDX[g.fs[g.fs.length - 1]]) + 6}"/>`;
+    });
+    PAIRS.forEach(p => {
+      const y1 = y(IDX[p.a]), y2 = y(IDX[p.b]), h = Math.min(10 + (y2 - y1) * 0.09, SX - 6);
+      s += `<path class="arc${p.k === "corr" ? " corr" : ""}" data-pair="${p.a} ${p.b}" d="M${SX - 6} ${y1}C${SX - 6 - h} ${y1} ${SX - 6 - h} ${y2} ${SX - 6} ${y2}"/>`;
+    });
+    const room = Math.max(12, Math.floor((LX - SX - 52) / 7.2));
+    SEQ.forEach((f, i) => {
+      const cy = y(i), name = nm(f), cut = name.length > room ? name.slice(0, Math.max(name.lastIndexOf(" ", room), 8)) + "…" : name;
+      let g = `<g class="col" data-f="${f}" tabindex="0" role="button" aria-pressed="false" aria-label="${f} ${esc(name)}"><rect class="hit" x="0" y="${cy - STEP / 2}" width="${LX - 4}" height="${STEP}"/><title>${esc(name)}</title>`;
+      g += `<circle class="st" cx="${SX}" cy="${cy}" r="4.5"/><text class="sym" x="${SX + 12}" y="${cy + 5.5}" font-size="16">${stSym(f)}</text>`;
+      g += `<text x="${SX + 44}" y="${cy + 4.5}" font-size="13">${esc(cut)}</text>`;
+      ROLES.forEach((k, r) => { if (F[f].roles.includes(k)) g += `<circle class="dot" data-role="${k}" cx="${LX + r * LANEW + LANEW / 2}" cy="${cy}" r="4.5"/>`; });
+      s += g + "</g>";
+    });
+    return `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(L.schemeLabel)}">${s}</svg>`;
+  }
+  function renderSeqNotes() {
+    const cnt = {}, ex = [];
+    for (const src of SRCS) {
+      let n = 0, both = 0;
+      D.tales.forEach(t => { const rows = t.src[src]; if (!rows) return; const mv = {};
+        rows.forEach(r => (mv[r[0]] = mv[r[0]] || new Set()).add(r[1]));
+        Object.entries(mv).forEach(([m, fs]) => { n++; if ((fs.has("XVI") || fs.has("XVIII")) && (fs.has("XXV") || fs.has("XXVI"))) { both++; if (src === "analysis") ex.push([t.no, m]); } }); });
+      cnt[src] = [both, n];
+    }
+    cnt.ex = ex;
+    $("seq-notes").innerHTML = L.seqNotes(cnt, C);
+  }
+
+  // ===== tales =====
+  function movesOf(rows) {
+    const order = [], by = {};
+    rows.forEach(k => { if (!by[k[0]]) { by[k[0]] = []; order.push(k[0]); } by[k[0]].push(k); });
+    return order.map(id => ({ id, rows: by[id] }));
+  }
+  function renderTaleList() {
+    $("talelist").innerHTML = D.tales.map(t => `<button data-tale="${t.no}" aria-pressed="${t.no === state.tale}"><span class="no">${t.no}</span>${esc(L.taleName(t))}</button>`).join("");
+  }
+  function renderReader() {
+    const t = D.tales.find(x => x.no === state.tale), rows = t.src.analysis || [];
+    $("reader").innerHTML = `<h3>${esc(L.taleName(t))}<span class="meta">${L.taleSub(t)}</span></h3>` +
+      movesOf(rows).map(m => `<div class="move"><h4>${esc(L.move)} ${esc(m.id)}</h4><div class="scroll"><div class="fml">${formula(m.rows)}</div></div>
+        ${state.clause && state.clause.m === m.id ? clauseHTML(t, m.rows[state.clause.i]) : ""}</div>`).join("");
+    $("reader").querySelectorAll(".fml").forEach(drawArcs);
+    highlight();
+  }
+  function clauseHTML(t, k) {
+    if (!k) return "";
+    const c = t.cl && t.cl[k[5]];
+    let tale = "";
+    if (t.text && k[9]) {
+      const [s, e] = k[9]; let a = Math.max(0, s - 160), b = Math.min(t.text.length, e + 160);
+      if (a > 0) a = t.text.indexOf(" ", a) + 1; if (b < t.text.length) b = Math.max(e, t.text.lastIndexOf(" ", b));
+      tale = `<div class="lab">${esc(L.inTale)}</div><p class="tale" lang="ru">${a > 0 ? "… " : ""}${esc(t.text.slice(a, s))}<mark>${esc(t.text.slice(s, e))}</mark>${esc(t.text.slice(e, b))}${b < t.text.length ? " …" : ""}</p>`;
+    }
+    return `<div class="clause" aria-live="polite"><div><b>${sym(kSym(k))}</b> ${esc(nm(k[1]))}</div>${tale}
+      ${c ? `<div class="lab">${esc(L.clause(c[0]))}</div><p lang="ru">«${esc(c[1])}»${c[2] ? ` <span class="meta">— ${notation(esc(c[2]))}</span>` : ""}</p>` : `<p class="meta">${esc(L.wordOnly)}</p>`}</div>`;
+  }
+
+  // ===== Propp's tables =====
+  function cellsHTML(rows) {
+    const by = {};
+    rows.forEach(k => (by[col(k[1])] = by[col(k[1])] || []).push(k));
+    return SEQ.map(f => {
+      const gs = GROUPS.some(g => g.fs[0] === f) ? " gs" : "", ks = by[f];
+      if (!ks) return `<td class="c${gs}" data-col="${f}"><span class="e"></span></td>`;
+      const neg = ks.every(k => k[3] === "neg"), ours = ks.some(k => OURS.includes(k[7]));
+      return `<td class="c${gs}${neg ? " neg" : ""}${ours ? " ours" : ""}" data-col="${f}" title="${esc(nm(ks[0][1]))}: ${esc(ks.map(k => clean(kSym(k))).join(", "))}"><span class="v">${symNoSub(kSym(ks[0]))}</span>${ks.length > 1 ? `<span class="x">×${ks.length}</span>` : ""}</td>`;
+    }).join("");
+  }
+  function renderMatrix() {
+    $("src").innerHTML = SRCS.map(k => `<button data-s="${k}" aria-pressed="${k === state.src}">${esc(L.src[k])}</button>`).join("");
+    const head = `<thead><tr class="g"><th class="rl"></th>${GROUPS.map(g => `<th colspan="${g.fs.length}">${esc(gShort(g))}</th>`).join("")}</tr>
+      <tr class="f"><th class="rl"></th>${SEQ.map(f => `<th class="${GROUPS.some(g => g.fs[0] === f) ? "gs" : ""}" data-col="${f}">${f === "VIII" ? "A/a" : esc(fs_(f))}</th>`).join("")}</tr></thead>`;
+    const body = D.tales.map(t => {
+      const rows = t.src[state.src];
+      if (!rows) return `<tr class="first"><th class="rl"><button data-tale="${t.no}"><span class="no">${t.no}</span>${esc(L.taleName(t))}</button></th><td colspan="31" class="meta" style="text-align:left;padding-left:8px">${esc(L.notIn)}</td></tr>`;
+      return movesOf(rows).map((m, j) => `<tr class="${j === 0 ? "first" : ""}"><th class="rl"><button data-tale="${t.no}">${j === 0 ? `<span class="no">${t.no}</span>${esc(L.taleName(t))}` : ""}<span class="mv">${esc(m.id)}</span></button></th>${cellsHTML(m.rows)}</tr>`).join("");
+    }).join("");
+    $("matrix").innerHTML = `<table class="grid">${head}<tbody>${body}</tbody></table>`;
+    highlight();
+  }
+
+  // ===== moves =====
+  function renderMoves() {
+    const Ln = (a, b, y) => `<path class="ln" d="M${a} ${y}H${b}"/>`, J = (x, a, b) => `<path class="dash" d="M${x} ${a}V${b}"/>`;
+    const Tx = (x, y, s, c = "") => `<text x="${x}" y="${y}" class="${c}">${esc(s)}</text>`;
+    const s = L.svg, K = fs_("XIX");
+    const svgs = [
+      Ln(14, 140, 40) + Ln(156, 286, 40) + Tx(14, 28, "I", "lab") + Tx(156, 28, "II", "lab") + Tx(14, 62, `A … ${K}`) + Tx(156, 62, `A … ${K}`),
+      Ln(14, 96, 30) + J(96, 30, 62) + Ln(96, 196, 62) + J(196, 62, 30) + Ln(196, 286, 30) + Tx(14, 20, "I", "lab") + Tx(100, 80, "II", "lab") + Tx(200, 20, s.res),
+      Ln(14, 66, 22) + J(66, 22, 46) + Ln(66, 112, 46) + J(112, 46, 70) + Ln(112, 186, 70) + J(186, 70, 46) + Ln(186, 232, 46) + J(232, 46, 22) + Ln(232, 286, 22) + Tx(14, 14, "I", "lab") + Tx(70, 38, "II", "lab") + Tx(116, 86, "III", "lab"),
+      Ln(14, 150, 30) + `<path class="dash" d="M14 62H150"/>` + Ln(150, 286, 62) + `<circle class="dot" cx="14" cy="62" r="4"/>` + Tx(14, 20, `I: A … ${K}`, "lab") + Tx(160, 82, `II: … ${K}`, "lab") + Tx(22, 80, "A"),
+      Ln(14, 286, 22) + Ln(126, 216, 62) + `<path class="dash" d="M216 62L246 22"/>` + `<circle class="dot" cx="286" cy="22" r="4"/>` + Tx(14, 14, "I", "lab") + Tx(126, 82, "II", "lab") + Tx(250, 46, s.end),
+      Ln(14, 96, 44) + `<path class="ln" d="M96 44L118 22H236L258 44"/><path class="ln" d="M96 44L118 66H236L258 44"/>` + Ln(258, 286, 44) + Tx(126, 14, s.b1) + Tx(126, 86, s.b2)];
+    $("mvs").innerHTML = svgs.map((v, i) => `<figure><svg viewBox="0 0 300 92" role="img" aria-label="${esc(L.moveNames[i])}">${v}</svg>
+      <figcaption><b>${i + 1}</b>${esc(L.moveNames[i])}</figcaption><div class="q">${esc(L.q(C.moves[i][0]))} <span class="pg">${L.pg(C.moves[i][1])}</span></div></figure>`).join("");
+  }
+
+  // ===== one selection, shown everywhere: the function filled, its pair outlined =====
+  function highlight() {
+    const s = state.sel, sc = s ? col(s) : null, mc = mateCols(s), mcards = mateCards(s);
+    document.querySelectorAll(".card[data-f]").forEach(c => {
+      c.classList.toggle("is-sel", c.dataset.f === s); c.setAttribute("aria-pressed", String(c.dataset.f === s));
+      c.classList.toggle("is-mate", mcards.includes(c.dataset.f));
+      c.classList.toggle("dim", !!state.role && !F[c.dataset.f].roles.includes(state.role));
+    });
+    document.querySelectorAll(".tk").forEach(t => { t.classList.toggle("is-sel", col(t.dataset.f) === sc); t.classList.toggle("is-mate", mc.includes(col(t.dataset.f))); });
+    document.querySelectorAll(".diagram .col").forEach(g => { g.classList.toggle("is-sel", g.dataset.f === sc); g.classList.toggle("is-mate", mc.includes(g.dataset.f)); g.setAttribute("aria-pressed", String(g.dataset.f === sc)); });
+    document.querySelectorAll(".diagram .arc").forEach(a => a.classList.toggle("on", !!sc && a.dataset.pair.split(" ").includes(sc)));
+    document.querySelectorAll(".diagram .lane").forEach(l => { l.classList.toggle("is-role", l.dataset.role === state.role); l.setAttribute("aria-pressed", String(l.dataset.role === state.role)); });
+    document.querySelectorAll(".diagram .dot").forEach(d => d.classList.toggle("is-role", d.dataset.role === state.role));
+    document.querySelectorAll(".grid [data-col]").forEach(c => { c.classList.toggle("is-sel", c.dataset.col === sc); c.classList.toggle("is-mate", mc.includes(c.dataset.col)); });
+    document.querySelectorAll(".talelist button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.tale === state.tale)));
+    redrawAll();
+  }
+  function select(f) { state.sel = f; renderEntry(); placeEntry(); highlight(); }
+  const toggle = f => select(state.sel === f ? null : f);   // select a function again to close its entry
+
+  document.addEventListener("click", e => {
+    const t = e.target.closest("button, g.col, g.lane");
+    if (!t) return;
+    if (t.matches("g.lane")) { state.role = state.role === t.dataset.role ? null : t.dataset.role; highlight(); return; }
+    if (t.matches("g.col")) { toggle(t.dataset.f); return; }
+    if (t.dataset.role) { state.role = state.role === t.dataset.role ? null : t.dataset.role; highlight(); $("scheme").scrollIntoView({ behavior: "smooth", block: "center" }); return; }
+    if (t.dataset.go) { select(t.dataset.go); return; }
+    if (t.dataset.s) { state.src = t.dataset.s; renderMatrix(); return; }
+    if (t.dataset.tale) { state.tale = t.dataset.tale; state.clause = null; renderReader(); if (t.closest("#matrix")) $("tales").scrollIntoView({ behavior: "smooth", block: "start" }); return; }
+    if (t.classList.contains("tk") && t.closest("#reader")) {
+      const next = { m: t.dataset.m, i: +t.dataset.i };
+      state.clause = state.clause && state.clause.m === next.m && state.clause.i === next.i ? null : next;
+      state.sel = t.dataset.f; renderEntry(); placeEntry(); renderReader(); return;
+    }
+    if (t.dataset.f) toggle(t.dataset.f);
+  });
+
+  document.addEventListener("keydown", e => {
+    if ((e.key === "Enter" || e.key === " ") && e.target.matches && e.target.matches(".diagram g.col, .diagram g.lane")) {
+      e.preventDefault(); e.target.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+    }
+  });
+
+  function renderAll() {
+    renderStatic(); renderHero(); renderVocab(); renderEntry(); placeEntry(); renderSeqNotes(); renderScheme();
+    renderMoves(); renderTaleList(); renderReader(); renderMatrix();
+  }
+  window.addEventListener("hashchange", () => {
+    if (PAGE) return;
+    const l = location.hash === "#ru" ? "ru" : "en";
+    if (l !== lang) { lang = l; L = T[lang]; C = D.cite[lang]; renderAll(); }
+  });
+  renderAll();
+  let raf = 0, lastW = $("scheme").clientWidth;
+  window.addEventListener("resize", () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(() => {
+    const w = $("scheme").clientWidth; if (Math.abs(w - lastW) > 4) { lastW = w; renderScheme(); } redrawAll(); }); });
+  $("tables").addEventListener("toggle", highlight);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(redrawAll);
+})();
+</script>
