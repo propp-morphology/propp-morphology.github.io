@@ -53,8 +53,8 @@ button { font: inherit; color: inherit; }
 .band .inner { display: grid; grid-template-columns: 112px minmax(0, 1fr); }
 .spine { background: var(--spine); color: var(--spine-ink); padding: 36px 14px 36px max(14px, env(safe-area-inset-left, 0px));
   display: flex; flex-direction: column; justify-content: space-between; gap: 40px; font-size: var(--s1); font-weight: 700; line-height: 1.35;
-  hyphens: manual; overflow-wrap: anywhere; }   /* break between words; the address before a dot or after the hyphen */
-.spine span:last-child { font-weight: 400; }
+  hyphens: manual; overflow-wrap: anywhere; }   /* break between words; the address after the hyphen or a dot */
+.spine span:last-child { font-weight: 400; margin-right: -8px; }   /* "https://propp-" needs 90px of the 84 */
 .cover { padding-block: 40px 36px; display: grid; gap: 26px; min-width: 0; }
 .topline { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: var(--s2); font-weight: 700; }
 .topline nav { font-weight: 400; color: var(--band-muted); }
@@ -270,7 +270,7 @@ footer p { max-width: 90ch; }
 <body>
 <header class="band">
   <div class="inner">
-    <div class="spine" aria-hidden="true"><span id="t-spine1">Propp's Tale Schema, 2026</span><span id="t-spine2">propp-morphology<wbr>.github<wbr>.io</span></div>
+    <div class="spine" aria-hidden="true"><span id="t-spine1">Propp's Tale Schema, 2026</span><span id="t-spine2">https://<wbr>propp-morphology.<wbr>github.<wbr>io</span></div>
     <div class="cover gut">
       <div class="topline"><span id="t-author">Vladimir Propp</span><nav id="lang" aria-label="Language / Язык"><b>English</b> · <a href="/ru/" lang="ru" style="color:inherit">Русский</a></nav></div>
       <h1 id="t-h1">Morphology of the Folktale</h1>
@@ -424,7 +424,7 @@ footer p { max-width: 90ch; }
   // ===== the page's own words =====
   const T = {
     en: {
-      title: "Propp's Tale Schema", author: "Vladimir Propp", spine1: "Propp's Tale Schema, 2026", spine2: "propp-morphology.github.io",
+      title: "Propp's Tale Schema", author: "Vladimir Propp", spine1: "Propp's Tale Schema, 2026", spine2: "https://propp-morphology.github.io",
       h1: "Morphology of the Folktale",
       q: s => `“${s}”`, pg: p => `(1968, p. ${p})`, pgs: p => `(1968, pp. ${p})`,
       lede: C => `In <i>Morphology of the Folktale</i> (1928), Vladimir Propp analysed one hundred Russian wonder tales from Afanasyev's collection and identified 31 functions through which their structure could be described. ${qp(C.fdef[0], `(1968, p. ${C.fdef[1]})`)} Propp developed a system of symbols for representing the structure of a tale as a formula. Below is his analysis of “The Swan-Geese” (No. 113), arranged by functional group.`,
@@ -486,7 +486,7 @@ footer p { max-width: 90ch; }
         ["Editorial decisions.", "Symbols are given in the 1968 notation, through a mapping between the notation systems of 1928 and 1968. A dotted underline in the formulas marks an editorial reading."]]
     },
     ru: {
-      title: "Схема сказки по Проппу", author: "Владимир Пропп", spine1: "Схема сказки по Проппу, 2026", spine2: "propp-morphology.github.io",
+      title: "Схема сказки по Проппу", author: "Владимир Пропп", spine1: "Схема сказки по Проппу, 2026", spine2: "https://propp-morphology.github.io",
       h1: "Морфология сказки",
       q: s => `«${s}»`, pg: p => `(с. ${p})`, pgs: p => `(с. ${p})`,
       lede: C => `В «Морфологии сказки» (1928) В. Я. Пропп исследовал сто волшебных сказок из сборника Афанасьева и выделил 31 функцию, через которые можно описать их строение. ${qp(C.fdef[0], `(с. ${C.fdef[1]})`)} Пропп разработал систему условных обозначений, позволяющую представить структуру сказки в виде формулы. Ниже — его разбор «Гусей-лебедей» (№ 113), разделенный на функциональные группы.`,
@@ -560,7 +560,7 @@ footer p { max-width: 90ch; }
     document.documentElement.lang = lang;
     if (!PAGE) document.title = L.title;   // the site pages keep the title in their head
     const set = (id, v) => { $(id).innerHTML = v; };
-    set("t-spine1", esc(L.spine1)); set("t-spine2", esc(L.spine2).replace(/(?=\.)/g, "<wbr>")); set("t-author", esc(L.author)); set("t-h1", esc(L.h1));
+    set("t-spine1", esc(L.spine1)); set("t-spine2", esc(L.spine2).replace(/\/\/|\./g, "$&<wbr>")); set("t-author", esc(L.author)); set("t-h1", esc(L.h1));
     set("t-theses", esc(L.theses));
     set("t-vocab-h", esc(L.vocabH)); set("t-vocab-p", esc(L.vocabP)); set("t-seq-h", esc(L.seqH)); set("t-seq-p", esc(L.seqP));
     set("t-moves-h", esc(L.movesH)); set("t-moves-p", esc(L.movesP())); set("t-tales-h", esc(L.talesH)); set("t-tales-p", esc(L.talesP));
