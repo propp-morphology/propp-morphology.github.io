@@ -110,8 +110,7 @@ main { padding-block: 56px 72px; }
 .apparatus { display: grid; gap: 12px; }
 .apparatus:empty { display: none; }
 .theses { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px 36px; }
-.theses li { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 8px; }
-.theses b { font-weight: 800; }
+.theses li { display: grid; grid-template-columns: minmax(0, 1fr); gap: 4px; align-content: start; }
 
 /* ---------- the periodic table of functions ---------- */
 .vocab { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; align-items: start; }
@@ -291,9 +290,8 @@ footer p { max-width: 90ch; }
 
 <main class="gut"><div class="inner flow">
 
-  <section class="sec" aria-labelledby="t-theses">
-    <h2 id="t-theses" class="meta" style="font-size:var(--s1);font-weight:400">Четыре тезиса Проппа</h2>
-    <ol class="theses" id="theses"><li><b>I</b><span>«Постоянными, устойчивыми элементами сказки служат функции действующих лиц».</span></li><li><b>II</b><span>«Число функций, известных волшебной сказке, — ограничено».</span></li><li><b>III</b><span>«Последовательность функций всегда одинакова».</span></li><li><b>IV</b><span>«Все волшебные сказки однотипны по своему строению».</span></li></ol>
+  <section class="sec" id="theses-sec" aria-label="Четыре тезиса Проппа">
+    <ol class="theses" id="theses"><li><span class="meta">тезис I</span><span>«Постоянными, устойчивыми элементами сказки служат функции действующих лиц».</span></li><li><span class="meta">тезис II</span><span>«Число функций, известных волшебной сказке, — ограничено».</span></li><li><span class="meta">тезис III</span><span>«Последовательность функций всегда одинакова».</span></li><li><span class="meta">тезис IV</span><span>«Все волшебные сказки однотипны по своему строению».</span></li></ol>
   </section>
 
   <section class="sec" id="vocabulary" aria-labelledby="t-vocab-h">
@@ -308,9 +306,10 @@ footer p { max-width: 90ch; }
       <p class="why">Пропп о функции XIX: «Данная функция образует пару с вредительством (A)» <span class="pg">(с. 61)</span>.</p>
       <details id="entry-more"><summary>Классификация и частотность</summary><dl>
         <dt>группа</dt><dd>Завязка, группировка Проппа</dd>
+        <dt>разряды</dt><dd><ul class="forms"><li><span class="s">A<sup>1</sup></span> <span>похищение человека</span></li><li><span class="s">A<sup>2</sup></span> <span>похищение волшебого средства или помощника</span></li><li><span class="s">A<sup>II</sup></span> <span>насильственное отнятие помощника</span></li><li><span class="s">A<sup>3</sup></span> <span>порча посева</span></li><li><span class="s">A<sup>4</sup></span> <span>похищение света</span></li><li><span class="s">A<sup>5</sup></span> <span>хищения в разных формах</span></li><li><span class="s">A<sup>6</sup></span> <span>членовредительство</span></li><li><span class="s">A<sup>7</sup></span> <span>вызывание исчезновения</span></li><li><span class="s">A<sup>VII</sup></span> <span>забвение невесты (125)</span></li><li><span class="s">A<sup>8</sup></span> <span>требование выдачи или выманивание, увод</span></li><li><span class="s">A<sup>9</sup></span> <span>изгнание</span></li><li><span class="s">A<sup>10</sup></span> <span>спуск на воду</span></li><li><span class="s">A<sup>11</sup></span> <span>околдование, превращение</span></li><li><span class="s">A<sup>12</sup></span> <span>подмена</span></li><li><span class="s">A<sup>13</sup></span> <span>приказание убить</span></li><li><span class="s">A<sup>14</sup></span> <span>убиение</span></li><li><span class="s">A<sup>15</sup></span> <span>заточение</span></li><li><span class="s">A<sup>16</sup></span> <span>угроза насильственного супружества</span></li><li><span class="s">A<sup>XVI</sup></span> <span>то же меж родственниками</span></li><li><span class="s">A<sup>17</sup></span> <span>угроза каннибализма</span></li><li><span class="s">A<sup>XVII</sup></span> <span>то же меж родственниками</span></li><li><span class="s">A<sup>18</sup></span> <span>вампиризм (болезнь)</span></li><li><span class="s">A<sup>19</sup></span> <span>объявление войны</span></li></ul></dd>
         <dt>встречается</dt><dd>11/13</dd>
         <dt>таблица 1928&nbsp;г.</dt><dd>39/45</dd>
-        <dt>разряды</dt><dd><ul class="forms"><li><span class="s">A<sup>1</sup></span> <span>похищение человека</span></li><li><span class="s">A<sup>2</sup></span> <span>похищение волшебого средства или помощника</span></li><li><span class="s">A<sup>II</sup></span> <span>насильственное отнятие помощника</span></li><li><span class="s">A<sup>3</sup></span> <span>порча посева</span></li><li><span class="s">A<sup>4</sup></span> <span>похищение света</span></li><li><span class="s">A<sup>5</sup></span> <span>хищения в разных формах</span></li><li><span class="s">A<sup>6</sup></span> <span>членовредительство</span></li><li><span class="s">A<sup>7</sup></span> <span>вызывание исчезновения</span></li><li><span class="s">A<sup>VII</sup></span> <span>забвение невесты (125)</span></li><li><span class="s">A<sup>8</sup></span> <span>требование выдачи или выманивание, увод</span></li><li><span class="s">A<sup>9</sup></span> <span>изгнание</span></li><li><span class="s">A<sup>10</sup></span> <span>спуск на воду</span></li><li><span class="s">A<sup>11</sup></span> <span>околдование, превращение</span></li><li><span class="s">A<sup>12</sup></span> <span>подмена</span></li><li><span class="s">A<sup>13</sup></span> <span>приказание убить</span></li><li><span class="s">A<sup>14</sup></span> <span>убиение</span></li><li><span class="s">A<sup>15</sup></span> <span>заточение</span></li><li><span class="s">A<sup>16</sup></span> <span>угроза насильственного супружества</span></li><li><span class="s">A<sup>XVI</sup></span> <span>то же меж родственниками</span></li><li><span class="s">A<sup>17</sup></span> <span>угроза каннибализма</span></li><li><span class="s">A<sup>XVII</sup></span> <span>то же меж родственниками</span></li><li><span class="s">A<sup>18</sup></span> <span>вампиризм (болезнь)</span></li><li><span class="s">A<sup>19</sup></span> <span>объявление войны</span></li></ul></dd></dl></details></article>
+        </dl></details></article>
     </div>
   </section>
 
@@ -439,7 +438,7 @@ footer p { max-width: 90ch; }
       q: s => `“${s}”`, pg: p => `(1968, p. ${p})`, pgs: p => `(1968, pp. ${p})`,
       lede: C => `In <i>Morphology of the Folktale</i> (1928), Vladimir Propp analysed one hundred Russian wonder tales from Afanasyev's collection and identified 31 functions through which their structure could be described. ${qp(C.fdef[0], `(1968, p. ${C.fdef[1]})`)} Propp developed a system of symbols for representing the structure of a tale as a formula. Below is his analysis of “The Swan-Geese” (No. 113), arranged by functional group.`,
       key: ["pair", "⤺ out of sequence", "negative"],
-      theses: "Propp's four theses",
+      theses: "Propp's four theses", thesis: "thesis",
       vocabH: "Thirty-one functions",
       vocabP: () => `For each function, Propp provides ${qp("(1) a brief summary of its essence, (2) an abbreviated definition in one word, and (3) its conventional sign", "(1968, p. 25)")}. Superscripts distinguish variants of the same function: A¹ — kidnapping of a person; A¹⁰ — casting into the sea.`,
       groups: {
@@ -485,7 +484,7 @@ footer p { max-width: 90ch; }
       q: s => `«${s}»`, pg: p => `(с. ${p})`, pgs: p => `(с. ${p})`,
       lede: C => `В «Морфологии сказки» (1928) В. Я. Пропп исследовал сто волшебных сказок из сборника Афанасьева и выделил 31 функцию как основу структурного описания волшебной сказки. ${qp(C.fdef[0], `(с. ${C.fdef[1]})`)} Пропп разработал систему условных обозначений, позволяющую представить структуру сказки в виде формулы. Ниже — его разбор «Гусей-лебедей» (№ 113), разделенный на функциональные группы.`,
       key: ["пара", "⤺ нарушение порядка", "отрицательная форма"],
-      theses: "Четыре тезиса Проппа",
+      theses: "Четыре тезиса Проппа", thesis: "тезис",
       vocabH: "Тридцать одна функция",
       vocabP: () => `Для каждой функции Пропп дает ${qp("1) краткое изложение ее сущности, 2) сокращенное определение одним словом, 3) условный знак ее", "(с. 35)")}. Разновидности функции обозначаются верхними индексами: A¹ — похищение человека, A¹⁰ — спуск на воду.`,
       groups: {
@@ -538,7 +537,7 @@ footer p { max-width: 90ch; }
     if (!PAGE) document.title = L.title;   // the site pages keep the title in their head
     const set = (id, v) => { $(id).innerHTML = v; };
     set("t-spine1", esc(L.spine1)); set("t-spine2", esc(L.spine2).replace(/\/\/|\./g, "$&<wbr>")); set("t-author", esc(L.author)); set("t-h1", esc(L.h1));
-    set("t-theses", esc(L.theses));
+    $("theses-sec").setAttribute("aria-label", L.theses);
     set("t-vocab-h", esc(L.vocabH)); set("t-vocab-p", L.vocabP()); set("t-seq-h", esc(L.seqH)); set("t-seq-p", esc(L.seqP));
     set("t-moves-h", esc(L.movesH)); set("t-moves-p", esc(L.movesP())); set("t-tales-h", esc(L.talesH));
     set("t-tables-s", esc(L.tablesS)); set("t-tables-sub", esc(L.tablesSub));
@@ -612,7 +611,7 @@ footer p { max-width: 90ch; }
     $("hero-fml").innerHTML = formula(D.tales.find(x => x.no === "113").src.analysis);
     const arc = d => `<svg width="34" height="14"><path d="M3 12C3 1 31 1 31 12" ${d ? 'stroke-dasharray="3 3.5"' : ""}/></svg>`;
     $("hero-key").innerHTML = `<span>${arc(false)}${esc(L.key[0])}</span><span>${esc(L.key[1])}</span><span><s>${esc(fs_("XIV"))}</s> ${esc(L.key[2])}</span>`;
-    $("theses").innerHTML = C.theses.map(([q], i) => `<li><b>${ROMAN[i]}</b><span>${esc(L.q(q.replace(/\.$/, "")))}.</span></li>`).join("");
+    $("theses").innerHTML = C.theses.map(([q], i) => `<li><span class="meta">${esc(L.thesis)} ${ROMAN[i]}</span><span>${esc(L.q(q.replace(/\.$/, "")))}.</span></li>`).join("");
   }
 
   // ===== the table of functions =====
@@ -651,9 +650,10 @@ footer p { max-width: 90ch; }
       ${!m ? "" : m.p.say.map(w => `<p class="why">${esc(L.said(w.at))} ${lang === "en" ? qp(w.en, L.pg(w.pg[0])) : qp(w.ru, L.pg(w.pg[1]))}</p>`).join("")}
       <details id="entry-more"><summary>${esc(L.more)}</summary><dl>
         <dt>${esc(L.dGroup)}</dt><dd>${g ? esc(gName(g)) + ", " + esc(g.src === "propp" ? L.gProp : L.gOurs) : ""}</dd>
+        <dt>${esc(L.dSub)}</dt><dd>${forms.length ? `<ul class="forms">${forms.map(([s, n, note]) => `<li${note ? ` class="ours" title="${esc(note)}"` : ""}><span class="s">${sym(s)}</span> <span>${esc(n)}</span></li>`).join("")}</ul>` : esc(L.none)}</dd>
         ${zero ? "" : `<dt>${esc(L.dFound)}</dt><dd>${x.an}/13</dd>`}
         ${g && g.id === "prep" ? "" : `<dt>${esc(L.dT28)}</dt><dd>${x.t28}/45</dd>`}
-        <dt>${esc(L.dSub)}</dt><dd>${forms.length ? `<ul class="forms">${forms.map(([s, n, note]) => `<li${note ? ` class="ours" title="${esc(note)}"` : ""}><span class="s">${sym(s)}</span> <span>${esc(n)}</span></li>`).join("")}</ul>` : esc(L.none)}</dd></dl></details>`;
+        </dl></details>`;
   }
   function placeEntry() {
     const el = $("entry"), vocab = document.querySelector(".vocab");
