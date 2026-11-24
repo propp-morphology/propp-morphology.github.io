@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>«Иван Сученко и Белый Полянин» (Афанасьев, № 139): разбор Проппа на тексте сказки</title>
+<meta name="description" content="Полный текст сказки «Иван Сученко и Белый Полянин» (Афанасьев, № 139); каждое обозначение разбора Проппа (1928) стоит на своем фрагменте.">
+<link rel="canonical" href="https://propp-morphology.github.io/ru/tales/139/">
+<link rel="alternate" hreflang="en" href="https://propp-morphology.github.io/tales/139/">
+<link rel="alternate" hreflang="ru" href="https://propp-morphology.github.io/ru/tales/139/">
+<link rel="alternate" hreflang="x-default" href="https://propp-morphology.github.io/tales/139/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Схема сказки по Проппу">
+<meta property="og:title" content="«Иван Сученко и Белый Полянин» (Афанасьев, № 139): разбор Проппа на тексте сказки">
+<meta property="og:description" content="Полный текст сказки «Иван Сученко и Белый Полянин» (Афанасьев, № 139); каждое обозначение разбора Проппа (1928) стоит на своем фрагменте.">
+<meta property="og:url" content="https://propp-morphology.github.io/ru/tales/139/">
+<meta property="og:image" content="https://propp-morphology.github.io/images/og-ru.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;700;800&display=swap">
+<style>
+/* Layout: a periodic table of the tale. One grotesk (it carries Latin, Cyrillic, Greek and Propp's arrows), five sizes,
+   no italics; hierarchy comes from weight, position and the grid. The opening band takes its colours from the 1928
+   Academia cover. Form carries the meaning: a solid line is a pair Propp names, a dashed line is a correspondence
+   he states; the selected function is filled, its pair is outlined. */
+:root {
+  --paper: #f5f5f1; --ink: #1e2230; --muted: #5b606d; --rule: #d4d3cb; --faint: #e8e7e1;
+  --accent: #2c51c9; --wash: #dde4f8;
+  --band: #1f2330; --band-ink: #ece4cf; --band-muted: #a8a492; --spine: #e6dcc3; --spine-ink: #1f2330;
+  --font: "Geologica", "Segoe UI", system-ui, sans-serif;
+  --s1: 13px; --s2: 16px; --s3: 22px; --s4: 28px; --s5: clamp(34px, 5.4vw, 60px);
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --paper: #15181f; --ink: #e8e3d5; --muted: #a2a39b; --rule: #363a46; --faint: #22262f;
+  --accent: #93a8ff; --wash: #28325c; --band: #0d0f14; --band-ink: #ece4cf; --band-muted: #9c9887;
+  --spine: #d9cfb5; --spine-ink: #1f2330; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --paper: #15181f; --ink: #e8e3d5; --muted: #a2a39b; --rule: #363a46; --faint: #22262f;
+  --accent: #93a8ff; --wash: #28325c; --band: #0d0f14; --band-ink: #ece4cf; --band-muted: #9c9887;
+  --spine: #d9cfb5; --spine-ink: #1f2330; color-scheme: dark }
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; }
+body { background: var(--paper); color: var(--ink); font-family: var(--font); font-size: var(--s2); line-height: 1.55; font-weight: 400; }
+.gut { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.inner { max-width: 1180px; margin: 0 auto; }
+p { margin: 0; }
+h1, h2, h3, h4 { margin: 0; text-wrap: balance; }
+h2 { font-size: var(--s4); line-height: 1.2; font-weight: 700; letter-spacing: -0.01em; }
+h3, h4 { font-size: var(--s2); font-weight: 700; }
+.meta { font-size: var(--s1); color: var(--muted); }
+.pg { color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+sup, sub { font-size: 0.66em; line-height: 0; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.linkbtn { appearance: none; border: 0; background: none; padding: 0; cursor: pointer; text-decoration: underline;
+  text-decoration-color: var(--rule); text-underline-offset: 3px; }
+.linkbtn:hover { text-decoration-color: currentColor; }
+
+/* ---------- the cover band ---------- */
+.band { background: var(--band); color: var(--band-ink); margin-top: calc(-1 * env(safe-area-inset-top, 0px)); padding-top: env(safe-area-inset-top, 0px); }
+.band .inner { display: grid; grid-template-columns: 112px minmax(0, 1fr); }
+.spine { background: var(--spine); color: var(--spine-ink); padding: 36px 14px 36px max(14px, env(safe-area-inset-left, 0px));
+  display: flex; flex-direction: column; justify-content: space-between; gap: 40px; font-size: var(--s1); font-weight: 700; line-height: 1.35;
+  hyphens: manual; overflow-wrap: anywhere; }   /* break between words; the address after the hyphen or a dot */
+.spine span:last-child { font-weight: 400; margin-right: -8px; }   /* "https://propp-" needs 90px of the 84 */
+.cover { padding-block: 40px 36px; display: grid; gap: 26px; min-width: 0; }
+.topline { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: var(--s2); font-weight: 700; }
+.topline nav { font-weight: 400; color: var(--band-muted); }
+.topline nav b { color: var(--band-ink); }
+h1 { font-size: var(--s5); line-height: 1.02; font-weight: 800; letter-spacing: -0.02em; max-width: 14ch; }
+.lede { max-width: 62ch; }
+.lede .pg, .band .meta { color: var(--band-muted); }
+
+/* ---------- formulas: tokens on one line, pairs drawn as arcs ---------- */
+.fml { position: relative; padding-top: 58px; width: max-content; min-width: 100%; font-size: var(--s3); }
+.fml svg.arcs { position: absolute; left: 0; top: 0; overflow: visible; pointer-events: none; }
+.fml svg.arcs path { fill: none; stroke: currentColor; stroke-width: 1.3; }
+.fml svg.arcs path.corr { stroke-dasharray: 3 3.5; }
+.fml svg.arcs path.on { stroke: var(--accent); stroke-width: 2.4; }
+.band .fml svg.arcs path.on { stroke: var(--band-ink); }
+.toks { display: flex; align-items: flex-start; white-space: nowrap; }
+.seg { display: grid; gap: 8px; padding-right: 12px; }
+.seg:last-child { padding-right: 0; }   /* no trailing space: the formula fits its box (Firefox drew a scrollbar for 2px) */
+.seg + .seg { padding-left: 12px; border-left: 1px solid color-mix(in oklab, currentColor 28%, transparent); }
+.seg .row { display: flex; align-items: baseline; gap: 2px; justify-content: center; }   /* under a wider label (R⁴ above «transference») the space falls on both sides */
+.seg .lab { font-size: var(--s1); opacity: 0.72; }
+.tk { appearance: none; background: none; border: 0; padding: 1px 4px; cursor: pointer; font-size: inherit; line-height: 1.2; border-radius: 2px; position: relative; }
+.tk:hover { background: color-mix(in oklab, currentColor 12%, transparent); }
+.tk.neg .s { text-decoration: line-through; text-decoration-thickness: 1px; }
+.tk.ours .s { text-decoration: underline dotted; text-underline-offset: 4px; }
+.tk[data-hint]:hover::before, .tk[data-hint]:focus-visible::before { content: attr(data-hint); position: absolute; left: 50%; bottom: calc(100% + 6px);
+  transform: translateX(-50%); z-index: 3; pointer-events: none; white-space: nowrap; font-size: var(--s1); font-weight: 400; line-height: 1.3;
+  padding: 3px 8px; border-radius: 2px; background: var(--ink); color: var(--paper); }
+.band .tk[data-hint]:hover::before, .band .tk[data-hint]:focus-visible::before { background: var(--band-ink); color: var(--band); }
+.tk.inv::after { content: "⤺"; position: absolute; left: 50%; transform: translateX(-50%); top: -14px; font-size: var(--s1); }
+.tk.is-sel { background: var(--wash); color: var(--ink); box-shadow: inset 0 0 0 2px var(--accent); }
+.tk.is-mate { box-shadow: inset 0 0 0 1.5px var(--accent); }
+.band .tk.is-sel { background: var(--band-ink); color: var(--band); box-shadow: none; }
+.band .tk.is-mate { box-shadow: inset 0 0 0 1.5px var(--band-ink); }
+.rep { display: inline-flex; align-items: baseline; gap: 2px; }
+.rep .br { opacity: 0.55; }
+.rep .n { font-size: var(--s1); opacity: 0.75; margin-left: 1px; }
+.key { display: flex; flex-wrap: wrap; gap: 6px 24px; font-size: var(--s1); align-items: center; }
+.band .key { color: var(--band-muted); }
+.key svg { vertical-align: middle; margin-right: 6px; }
+.key path { fill: none; stroke: currentColor; stroke-width: 1.3; }
+.key .box { display: inline-block; width: 14px; height: 14px; vertical-align: -2px; margin-right: 6px; }
+
+/* ---------- page body ---------- */
+main { padding-block: 56px 72px; }
+.flow { display: grid; gap: 80px; }
+.sec { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; }
+.sec > * { min-width: 0; }
+.intro { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px 48px; }
+.intro > * { min-width: 0; }
+.intro > div:first-child { display: grid; gap: 12px; align-content: start; }
+.intro p { max-width: 68ch; }
+.apparatus { display: grid; gap: 12px; }
+.apparatus:empty { display: none; }
+.theses { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px 36px; }
+.theses li { display: grid; grid-template-columns: minmax(0, 1fr); gap: 4px; align-content: start; }
+
+/* ---------- the periodic table of functions ---------- */
+.vocab { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; align-items: start; }
+@media (min-width: 1060px) { .vocab.has-entry { grid-template-columns: minmax(0, 1fr) 360px; } .vocab.has-entry .entry { grid-column: 2; grid-row: 1; } .entry { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 16px); } }
+.groups { display: grid; gap: 24px; min-width: 0; }
+.grp { display: grid; gap: 8px; }
+.grp h3 { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+.grp h3 .meta { font-weight: 400; }
+.cards { display: flex; flex-wrap: wrap; gap: 6px; align-items: stretch; }
+.unit { display: flex; border: 1px solid var(--rule); background: var(--paper); }
+.unit.pair { border: 1.5px solid var(--ink); }
+.unit.corr { border: 1.5px dashed var(--ink); }
+.unit .join { align-self: center; color: var(--muted); padding: 0 1px; font-size: var(--s1); }
+.or { align-self: center; font-size: var(--s1); color: var(--muted); }
+.card { appearance: none; border: 0; background: none; cursor: pointer; text-align: left; width: 108px; min-height: 100px;
+  padding: 7px 9px 9px; display: grid; grid-template-rows: auto auto 1fr auto; gap: 0; position: relative; }
+.card .r { font-size: var(--s1); color: var(--muted); font-variant-numeric: tabular-nums; line-height: 1.2; }
+.card .s { font-size: var(--s4); line-height: 1.15; font-weight: 700; }
+.card .nm { font-size: var(--s1); line-height: 1.3; hyphens: auto; overflow-wrap: break-word; }
+.card .pt { font-size: var(--s1); color: var(--muted); margin-top: 4px; }
+.card:hover { background: var(--faint); }
+.card.is-sel { background: var(--wash); box-shadow: inset 0 0 0 2px var(--accent); }
+.card.is-mate { box-shadow: inset 0 0 0 2px var(--accent); }
+.card.is-mate .pt, .card.is-sel .pt { color: var(--accent); }
+.card.dim { opacity: 0.3; }
+.card.zero { border: 1px dashed var(--rule); }
+.entry { border-top: 3px solid var(--ink); padding-top: 16px; display: grid; gap: 12px; min-width: 0; }
+.entry .hd { display: flex; gap: 16px; align-items: center; }
+.entry .big { font-size: var(--s5); line-height: 1; font-weight: 800; min-width: 1ch; }
+.entry h3 { font-size: var(--s3); line-height: 1.2; }
+.entry blockquote { margin: 0; }
+.entry .line { display: grid; gap: 4px; }   /* the pair, then the sphere of action, each on its own line */
+.entry details summary { cursor: pointer; font-size: var(--s1); color: var(--muted); }
+.entry dl { margin: 8px 0 0; display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 6px 12px; }
+.entry dt { color: var(--muted); }
+.entry dd { margin: 0; }
+.entry .forms { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.entry .forms li { display: grid; grid-template-columns: 3.4em minmax(0, 1fr); column-gap: 6px; }
+.entry .forms .ours { text-decoration: underline dotted; text-underline-offset: 4px; }
+
+/* ---------- the sequence diagram ---------- */
+.diagram svg { display: block; }
+.diagram text { fill: var(--ink); font-family: var(--font); }
+.diagram .mut { fill: var(--muted); }
+.diagram .ln { stroke: var(--ink); stroke-width: 2; fill: none; }
+.diagram .hair { stroke: var(--rule); stroke-width: 1; fill: none; }
+.diagram .arc { stroke: var(--ink); stroke-width: 1.3; fill: none; }
+.diagram .arc.corr { stroke-dasharray: 3 3.5; }
+.diagram .br { stroke: var(--ink); stroke-width: 1; fill: none; }
+.diagram .br.ours { stroke: var(--muted); stroke-dasharray: 2 3; }
+.diagram .st { fill: var(--paper); stroke: var(--ink); stroke-width: 1.6; }
+.diagram .bar { fill: var(--muted); }
+.diagram .dot { fill: var(--ink); pointer-events: none; }
+.diagram g:focus-visible { outline: none; }
+.diagram .col:focus-visible .hit, .diagram .lane:focus-visible .hit { stroke: var(--accent); stroke-width: 2; }
+.diagram .hit { fill: transparent; cursor: pointer; }
+.diagram .col.is-sel .st { fill: var(--accent); stroke: var(--accent); }
+.diagram .col.is-mate .st { stroke: var(--accent); stroke-width: 2.6; }
+.diagram .col.is-sel text.sym, .diagram .col.is-mate text.sym { fill: var(--accent); font-weight: 700; }
+.diagram .col.is-sel .bar { fill: var(--accent); }
+.diagram .col.is-mate .bar { fill: color-mix(in oklab, var(--accent) 55%, var(--paper)); }
+.diagram .arc.on { stroke: var(--accent); stroke-width: 2.4; }
+.diagram .lane { cursor: pointer; }
+.diagram .lane.is-role text { fill: var(--accent); font-weight: 700; }
+.diagram .dot.is-role { fill: var(--accent); }
+.fork { stroke: var(--ink); stroke-width: 1; fill: none; stroke-dasharray: 4 3; }
+
+/* ---------- tales ---------- */
+.talelist { display: flex; flex-wrap: wrap; gap: 6px 8px; }
+.talelist button { appearance: none; border: 1px solid var(--rule); background: none; cursor: pointer; padding: 5px 10px; font-size: var(--s1); text-align: left; }
+.talelist button .no { color: var(--muted); margin-right: 6px; font-variant-numeric: tabular-nums; }
+.talelist button[aria-pressed="true"] { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+.reader { display: grid; gap: 28px; }
+.reader h3 { font-size: var(--s3); }
+.reader h3 .meta { font-weight: 400; margin-left: 8px; }
+.reader .full { font-size: var(--s1); color: inherit; }
+.move { display: grid; gap: 6px; }
+.clause { background: var(--faint); padding: 14px 16px; display: grid; gap: 8px; max-width: 78ch; }
+.clause .lab { color: var(--muted); font-size: var(--s1); }
+.clause mark { background: var(--wash); color: var(--ink); }
+.clause .tale { white-space: pre-line; }
+
+/* ---------- moves ---------- */
+.mvs { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 32px 36px; }
+.mvs figure { margin: 0; display: grid; gap: 8px; align-content: start; }
+.mvs svg { width: 100%; height: auto; display: block; }
+.mvs .ln { stroke: var(--ink); stroke-width: 2.2; stroke-linecap: round; fill: none; }
+.mvs .dash { stroke: var(--muted); stroke-width: 1.2; stroke-dasharray: 3 4; fill: none; }
+.mvs text { font-family: var(--font); font-size: 13px; fill: var(--muted); }
+.mvs text.lab { fill: var(--ink); font-weight: 700; }
+.mvs .dot { fill: var(--ink); }
+.mvs figcaption b { font-weight: 800; margin-right: 4px; }
+.mvs .q { color: var(--muted); }
+
+/* ---------- Propp's tables (collapsed, at the end) ---------- */
+details.tables { border-top: 1px solid var(--rule); padding-top: 18px; }
+details.tables > summary { cursor: pointer; font-size: var(--s3); font-weight: 700; list-style-position: outside; }
+details.tables > summary .meta { font-weight: 400; margin-left: 8px; }
+details.tables[open] > summary { margin-bottom: 20px; }
+.tables-body { display: grid; gap: 18px; }
+.ctl { display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: baseline; }
+.ctl .opts { display: flex; flex-wrap: wrap; gap: 4px 16px; }
+.ctl button { appearance: none; border: 0; background: none; padding: 2px 0; cursor: pointer; color: var(--muted); border-bottom: 2px solid transparent; }
+.ctl button[aria-pressed="true"] { color: var(--ink); border-bottom-color: var(--ink); }
+table.grid { border-collapse: separate; border-spacing: 0; font-size: var(--s1); }
+.grid th, .grid td { padding: 0; text-align: center; font-weight: 400; }
+.grid thead th { color: var(--muted); padding-bottom: 4px; }
+.grid thead tr.g th { text-align: left; padding-left: 4px; border-left: 1px solid var(--rule); white-space: nowrap; }
+.grid thead tr.f th { font-size: var(--s2); color: var(--ink); }
+.grid .rl { position: sticky; left: 0; z-index: 1; background: var(--paper); text-align: left; padding: 0 10px 0 0; min-width: 180px; max-width: 220px; }
+.grid .rl button { appearance: none; border: 0; background: none; cursor: pointer; text-align: left; padding: 4px 0; line-height: 1.3; width: 100%; }
+.grid .rl .no { color: var(--muted); margin-right: 4px; }
+.grid .rl .mv { font-weight: 700; margin-left: 4px; }
+.grid td.c { width: 32px; min-width: 32px; height: 30px; border-top: 1px solid var(--faint); font-size: var(--s2); }
+.grid td.c.gs, .grid th.gs { border-left: 1px solid var(--rule); }
+.grid td.c .e { display: inline-block; width: 4px; height: 4px; border-radius: 50%; background: var(--rule); vertical-align: middle; }
+.grid td.c .x { font-size: 0.62em; color: var(--muted); vertical-align: sub; margin-left: 1px; }
+.grid td.c.neg .v { text-decoration: line-through; }
+.grid td.c.ours .v { text-decoration: underline dotted; text-underline-offset: 3px; }
+.grid tr.first td, .grid tr.first th { border-top: 1px solid var(--rule); }
+.grid .is-sel { background: var(--wash) !important; }
+.grid .is-mate { background: color-mix(in oklab, var(--wash) 50%, transparent) !important; }
+
+footer { border-top: 1px solid var(--rule); padding-block: 20px 48px; color: var(--muted); }
+footer p { max-width: 90ch; }
+#foot { display: grid; gap: 8px; }
+
+@media (max-width: 720px) {
+  .band .inner { grid-template-columns: minmax(0, 1fr); }
+  .spine { flex-direction: row; padding: 10px 16px; gap: 12px; }
+  .spine span:last-child { display: none; }
+  .cover { padding-block: 26px 28px; }
+  .card { width: 96px; }
+  .grid .rl { min-width: 118px; max-width: 140px; }
+  .entry .big { font-size: var(--s4); }
+  .entry dl { grid-template-columns: 1fr; gap: 0; }
+  .entry dd { margin-bottom: 6px; }
+}
+@media (min-width: 721px) { .cover { padding-left: 40px; } }
+@media (prefers-reduced-motion: no-preference) { .card, .tk { transition: background-color .15s, opacity .15s, box-shadow .15s; } }
+</style>
+<style>
+.tp-top { display: flex; justify-content: space-between; gap: 16px; padding-block: 14px; font-size: var(--s1); border-bottom: 1px solid var(--rule); }
+.tp-top a { color: inherit; }
+.tp-head { padding-block: 32px 24px; display: grid; gap: 8px; }
+.tp-head h1 { font-size: var(--s4); line-height: 1.15; font-weight: 800; }
+.tp-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; padding-bottom: 72px; }
+.tp-side { display: grid; gap: 16px; align-content: start; }
+.tp-moves { display: grid; gap: 10px; }
+.tp-moves .mv { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 4px; }
+.tp-moves .mvl { font-size: var(--s1); color: var(--muted); margin-right: 6px; }
+.tp-moves .tk.on { background: var(--ink); color: var(--paper); }
+.tp-moves .tk.nospan .s { opacity: .5; }
+.tale-text { white-space: pre-wrap; font-size: 17px; line-height: 1.8; max-width: 68ch; overflow-wrap: break-word; }
+.tale-text .m { background: var(--faint); cursor: pointer; }
+.tale-text .m.on { background: var(--wash); box-shadow: inset 0 -2px var(--accent); }
+.tale-text .lab { font-size: 11px; line-height: 0; vertical-align: super; color: var(--accent); font-weight: 700; margin: 0 2px; cursor: pointer; }
+.tale-text .lab.on { background: var(--accent); color: var(--paper); border-radius: 2px; padding: 0 2px; }
+.detail { background: var(--faint); padding: 14px 16px; display: grid; gap: 8px; }
+.detail .dh { font-weight: 700; display: flex; justify-content: space-between; gap: 12px; }
+.detail .x { appearance: none; border: 0; background: none; cursor: pointer; color: var(--muted); font-size: 18px; line-height: 1; }
+.detail .lab { color: var(--muted); font-size: var(--s1); }
+.tp-foot { border-top: 1px solid var(--rule); padding-block: 20px 40px; font-size: var(--s1); color: var(--muted); max-width: 90ch; }
+@media (min-width: 1000px) {
+  .tp-grid { grid-template-columns: minmax(0, 68ch) minmax(280px, 1fr); }
+  .tp-side { position: sticky; top: 16px; align-self: start; max-height: calc(100vh - 32px); overflow: auto; }
+  .detail .x { display: none; }
+}
+@media (max-width: 999px) {
+  .detail { position: fixed; left: 0; right: 0; bottom: 0; z-index: 5; max-height: 45vh; overflow: auto;
+            border-top: 2px solid var(--ink); padding-bottom: max(14px, env(safe-area-inset-bottom, 0px)); }
+}
+</style>
+</head>
+<body>
+<div class="gut"><div class="inner">
+<div class="tp-top"><a href="/ru/">← Морфология сказки</a><a href="https://propp-morphology.github.io/tales/139/" hreflang="en" lang="en">EN</a></div>
+<header class="tp-head"><h1>Иван Сученко и Белый Полянин</h1><p class="meta">Афанасьев, № 139 · разбор Проппа: 1928, с. 136–137</p></header>
+<main class="tp-grid">
+<div class="tale-text" lang="ru">Начинается сказка от сивки, от бурки, от вещей каурки. На море, на океане, на острове на Буяне стоит бык печеный, возле него лук толченый; и шли три мо́лодца, зашли да позавтракали, а дальше идут — похваляются, сами собой забавляются: были мы, братцы, у такого-то места, наедались пуще, чем деревенская баба теста! Это присказка, сказка будет впереди.
+В некотором царстве, в некотором государстве жил-был царь на гладком месте, словно на скатерти, сроду не имел у себя детей. Пришел до него нищий. Царь его пытает: «Не знаешь ли ты, что́ мне такое сделать, чтоб были у меня дети?» Он ему отвечает: «Собери-ка ты мальчиков да девочек — семилеток, чтоб девочки напряли, а мальчики выплели за одну ночь невод; тем неводом вели изловить в море леща златоперого и дай его царице съесть».
+Вот поймали леща златоперого, отдали в кухню изжарить; поварка вычистила, вымыла леща, кишки собаке бросила, помои отдала трем кобылам выпить, сама оглодала косточки, а рыбу царица скушала. Вот разом родили: царица сына, и поварка сына, и собака сына, а три кобылы ожеребились тремя жеребятами. Царь дал им всем имена: Царенко Иван, Поваренко Иван и Сученко Иван.
+Растут они, добрые молодцы, не по дням, не по часам, а по минутам, выросли большие, и посылает Иван Сученко Ивана-царевича до царя: «Поди попроси, чтоб позволил нам царь оседлать тех трех коней, что кобыли принесли, да поехать по городу погулять-покататься». Царь позволил; они поседлали коней, выехали за город и начали меж собой говорить: «<span class="lab" data-s="0">↑</span><span class="m" data-s="0">Чем нам у батюшки у царя жить, лучше в чужие земли поедем!» Вот они взяли купили железа, сделали себе по булаве — каждая булава в девять пудов, и погнали коней</span>.
+Немного погодя говорит Иван Сученко: «Как нам, братцы, будет путь держать, когда нет у нас ни старшего, ни младшего? Надо так сделать, чтоб был у нас старший брат». Царенко говорит, что меня отец старшим поставил, а Сученко — свое, что надо силу попробовать — по стрелке бросить. Кидают стрелки один за другим; сначала Царенко Иван, за Царенком Поваренко, за Поваренком Сученко. Едут не далеко, не близко — аж лежит Царенкова стрелка, немного подальше того упала Поваренкова стрелка, а Сученковой нигде не видать! Едут всё вперед да вперед — и заехали за тридевять земель в тридесятое царство, в иншее государство — аж там лежит Сученкова стрелка.
+Тут и порешили: Царенко будет меньшой брат, Поваренко — подстарший, а Сученко — самый наистарший, и пустились опять в путь-дорогу. Смотрят — перед ними степь расстилается, на той степи палатка разбита, у палатки конь стоит, ярую пшеницу ест, медовой сытой запивает. Посылает Иван Сученко Ивана-царевича: «Пойди узнай: кто в палатке?» <span class="lab" data-s="1">Д<sup>9</sup></span><span class="m" data-s="1">Вот Царенко приходит в палатку, а там на кровати Белый Полянин лежит</span>. И ударил его Белый Полянин мизинцем по́ лбу — Царенко упал; он взял его да под кровать и бросил. Посылает Сученко Ивана Поваренка; Белый Полянин и этого ударил мизинцем по́ лбу и бросил под кровать. Сученко ждал, ждал, не дождался; <span class="lab" data-s="2">Г<sup>9</sup></span><span class="m" data-s="2">прибегает туда сам, как ударит Белого Полянина раз — он и глаза под лоб!</span> После вынес его из палатки, свежий ветерок пахнул, <span class="lab" data-s="3">Z<sup>9</sup></span><span class="m" data-s="3">Белый Полянин ожил и просит: «Не убивай меня! Прими за самого меньшого брата!» Иван Сученко его помиловал</span>.
+Вот все четыре брата поседлали своих коней и поехали пущами да рощами; долго ли, коротко ли ехали — стоит перед ними дом в два этажа под золотой крышею. Зашли в этот дом — везде чисто, везде убрано, напитков, наедков вдоволь запасено, а живых людей нет никого; подумали-подумали и положили пока здесь проживать — дни коротать. Утром три брата на охоту поехали, а Ивана-царевича дома оставили за хозяйством смотреть. Он наварил, нажарил к обеду всякой всячины, сел на лавке да трубку покуривает. Вдруг едет старый дед в ступе, толкачом подпирается, под ним ковета на семь саженей лита, и просит милостыни. <span class="lab" data-s="4">Д<sup>9</sup></span><span class="m" data-s="4">Царенко дает ему целый хлеб; дед не за хлеб, за него берется, крючком да в ступу, толк-толк, снял у него со спины полосу до самых плечей</span>, взял половою натер да по́д пол бросил... Вернулись братья с охоты, спрашивают Царенка: «Никого у тебя не было?» — «Я никого не видал; разве вы кого?» — «Нет, и мы не видали!»
+На другой день дома остался Иван Поваренко, а те на охоту поехали. Наварил обедать, сел на лавке и курит трубку — аж едет дед в ступе, толкачом подпирается, под ним ковета на семь саженей лита, и просит милостыни. Поваренко дает ему булку; он не за булку, а за него, крючком да в ступу, толк-толк, снял кожу до самых плечей, половою натер да под пол бросил... Вернулись братья с охоты и спрашивают: «Никого у тебя не было?» — «Нет, никого! А вы разве видели?» — «Нет, и мы не видали!»
+На третий день дома остался Белый Полянин. Наварил обедать, сел на лавке и курит трубку — аж едет дед в ступе, толкачом подпирается, под ним ковета на семь саженей лита, и просит милостыни. Белый Полянин дает ему булку; он не за булку, а за него, крючком да в ступу, толк-толк, снял кожу до самых плечей, половою натер да под пол бросил... Приехали братья с охоты: «Ты никого не видал?» — «Нет, никого; а вы?» — «И мы тож!»
+На четвертый день остался дома Иван Сученко. Наварил обедать, сел на лавке и курит трубку — аж опять едет старый дед в ступе, толкачом подпирается, под ним ковета на семь саженей лита, и просит милостыни. Сученко дает ему булку; он не за булку, а за него, крючком да в ступу — <span class="lab" data-s="5">Г<sup>9</sup></span><span class="m" data-s="5">ступа и разбилась. Иван Сученко ухватил деда за́ голову, притащил до вербового пня, расколол пень надвое да всадил дедову бороду в расщелину</span>, а сам — в горницу. Вот едут его братья, меж собой разговаривают. «Что, братцы, вам ничего не случилось? — спрашивает Царенко. — А у меня так рубаха совсем к телу присохла!» — «Ну, и нам досталось! До спины доторкнуться нельзя. Проклятый дед! Верно, он и Сученку содрал». Приехали домой: «А что, Сученко Иван, никого у тебя не было?» — «Был один нахаба, так я ему по-своему задал!» — «Что ж ты ему сделал?» — «Пень расколол да бороду всадил». — «Пойдем посмотрим!» Пришли на деда смотреть, а его и след простыл! Как попал он в тиски, начал биться, рваться и таки выворотил весь пень с корнем и унес с собой на тот свет; а с того света он приходил до своего дома под золотою крышею.
+<span class="lab" data-s="6">R<sup>5</sup></span><span class="m" data-s="6">Братья пошли по его следам, шли-шли — стоит гора: в той горе ляда; взяли ее отворили</span>, привязали до каната камень и опустили в нору; как достали камнем дно, вытянули его назад и привязали до каната Ивана Сученка. Говорит Сученко: «Через три дня как встряхну канат — сейчас меня вытягайте!» <span class="lab" data-s="7">R<sup>6</sup></span><span class="m" data-s="7">Вот опустили его на тот свет</span>. <span class="lab" data-s="8">A<sup>1</sup></span><span class="lab" data-s="9">B<sup>1</sup></span><span class="m" data-s="8 9">Он вспомнил про царевен, что́ покрали на тот свет три змия</span>: «<span class="lab" data-s="10">C</span><span class="lab" data-s="11">↑</span><span class="m" data-s="10 11">Пойду их шукать!</span>»
+Шел-шел — стоит двухэтажный дом; вышла оттуда девка. «Чего, русский человек, коло нашего двора ходишь?» — «А ты что за спрос? Дай-ка мне наперед воды — глаза промыть, накорми меня, напой, да тогда и спрашивай». Она принесла ему воды, накормила, напоила и повела к царевне. «Здравствуй, прекрасная царевна!» — «Здравствуй, добрый молодец! Чего сюда зашел?» — «За тобою; хочу с твоим мужем воевать». — «Ох, не отымешь ты меня! Мой муж дюже сильный, с шестью головами!» — «Я и с одною, да буду воевать, как мне бог поможет!» Царевна его за двери спрятала — аж летит змий. «Фу, русска кость воня́!» — «Ты, душечка, на Руси летал, русской кости напахал!» — говорит царевна, подает ему ужинать, а сама тяжело вздохнула. «Чего, голубка, так тяжело вздыхаешь?» — «Как мне не вздыхать! Четвертый год за тобою, не видела ни отца, ни матери. Ну что, если бы кто-нибудь из моих родных да сюда пришел, что б ты ему сделал?» — «Что сделал? Пил да гулял бы с ним». На те речи выходит из-за дверей Иван Сученко. «А Сученко! Здравствуй; зачем пришел: биться или мириться?» — «<span class="lab" data-s="12">Б<sup>1</sup></span><span class="m" data-s="12">Давай биться! Дми точок!» Змий дунул — у него стал чугунный точок с серебряными пругами, а Сученко дунул — у него серебряный с золотыми пругами</span>. <span class="lab" data-s="13">П<sup>1</sup></span><span class="m" data-s="13">Ударил он змия раз и убил до смерти, в пепел перепалил, на ветер перепустил</span>; <span class="lab" data-s="15">К<sup>2</sup></span><span class="m" data-s="15">царевна дала ему кольцо, он взял и пошел дальше</span>.
+Шел-шел — опять двухэтажный дом; вышла ему навстречу девка и спрашивает: «Чего ты, русский человек, коло нашего двора ходишь?» — «А ты что за спрос? Дай наперед мне воды — глаза промыть, накорми, напои, да тогда и спрашивай!» Вот она принесла ему воды, накормила его, напоила и к царевне проводила. «Чего ты пришел?» — говорит царевна. «За тобою; хочу с твоим мужем воевать». — «Куда тебе воевать с моим мужем! Мой муж дюже сильный, с девятью головами!» — «Я и с одною, да буду с ним воевать, как мне бог поможет!» Царевна спрятала гостя за двери — аж летит змий. «Фу, как русска кость воня́!» — «Это ты по Руси летал, русской кости напахал!» — говорит царевна, стала подавать ужинать и тяжело вздохнула. «Чего ты, душечка, вздыхаешь?» — «Как мне не вздыхать, когда я ни отца, ни матери не вижу. Что б ты сделал, если бы кто-нибудь из моих родных сюда пришел?» — «Пил да гулял бы с ним». Иван Сученко выходит из-за дверей. «А, Сученко! Здравствуй, — говорит змий. — Чего ты пришел сюда: биться или мириться?» — «Станем биться! Дми точок!» Змий дунул — у него стал чугунный точок с серебряными пругами, а Иван Сученко дунул — у него серебряный с золотыми пругами; ударил он змия и убил до смерти, в пепел перепалил, на ветер перепустил. Царевна ему дала кольцо; он взял и пошел дальше.
+Шел-шел — опять такой же дом с двумя этажами. Вышла навстречу девка: «Чего, русский человек, коло нашего двора ходишь?» — «Ты прежде воды дай — глаза промыть, накорми, напои, да тогда и спрашивай!» Она принесла ему воды, накормила, напоила и к царевне проводила. «Здравствуй, Иван Сученко! Чего ты пришел?» — «За тобою; хочу тебя у змия отнять». — «Куда тебе отнять! Мой муж дюже сильный, с двенадцатью головами!» — «Я и с одною, а его повоюю, коли бог поможет!» Входит в горницу, а там двенадцатиглавый змий дрыхнет: как змий вздохнет, так весь потолок ходоном заходит! А его сорокапудовая булава в кутку стоит. Иван Сученко свою булаву в куток поставил, а змиеву взял; размахнулся, как ударит змия — пошел гул по всему двору! С дому крышу сорвало! Убил Иван Сученко двенадцатиглавого змия, в пепел перепалил, на ветер перепустил. Царевна дает ему кольцо и говорит: «Будем со мною жить!» А он зовет ее с собою. «Как же я свое богатство брошу?» Взяла все свое богатство, в золотое яйцо своротила и отдала Ивану Сученку; <span class="lab" data-s="14">Л<sup>4</sup></span><span class="m" data-s="14">он положил то яйцо в карман и вместе с нею пошел назад до ее сестер</span>. Подстаршая царевна своротила свое богатство в серебряное яйцо, а самая меньшая — в медное, и ему ж отдали.
+<span class="lab" data-s="17">↓</span><span class="m" data-s="17">Приходят они вчетвером до норы</span>; Иван Сученко привязал меньшую царевну и встряхнул канат. «Как тебя, — говорит, — вытянут наверх, то покличь: Царенко! Он отзовется: га! А ты скажи: я твоя!» После привязал другую царевну и опять встряхнул канат, чтоб наверх тянули: «Как тебя вытянут, то покличь: Поваренко! Он отзовется: га! А ты скажи: я твоя!» Стал третью царевну до каната привязывать и говорит ей: «<span class="lab" data-s="16">с<sup>1</sup></span><span class="m" data-s="16">Как тебя вытянут, ты молчи — моя будешь!</span>» Вытянули эту царевну, она молчит; вот <span class="lab" data-s="18">*A<sup>1</sup></span><span class="m" data-s="18">Белый Полянин рассердился и, как стали тянуть Ивана Сученко, взял да и перерезал канат</span>.
+Сученко упал, <span class="lab" data-s="19">C</span><span class="lab" data-s="20">↑</span><span class="m" data-s="19 20">приподнялся и пошел до старого деда</span>. Дед его пытает: «Чего ты пришел?» — «Биться!» <span class="lab" data-s="21">Д<sup>9</sup></span><span class="m" data-s="21">Начали воевать; бились-бились, устали и бросились до воды</span>. Дед ошибся, дал Сученку сильной воды напиться, а сам простой выпил. <span class="lab" data-s="22">Г<sup>9</sup></span><span class="m" data-s="22">Стал Иван Сученко осиливать</span>; дед ему и говорит: «Не добивай меня! <span class="lab" data-s="23">Z<sup>1</sup><sub>7</sub></span><span class="m" data-s="23">Возьми себе в погребе кремень, кресало да трех сортов шерсть — в беде пригодится</span>». Иван Сученко взял кремень, кресало и трех сортов шерсть; вырубил огонь и припалил серую шерсть — бежит до него серый конь, из-под копыт шматья летят, изо рта пар пышет, из ушей дым столбом. «Много ль нужно времени, пока ты меня на тот свет вынесешь?» — «А столько, сколько нужно людям, чтоб обед наварить!» Сученко припалил вороную шерсть — бежит вороной конь, из-под копыт шматья летят, изо рта пар пышет, из ушей дым валит. «Скоро ль ты меня на тот свет вынесешь?» — «Люди пообедать не успеют!» Припалил рыжую шерсть — бежит рыжий конь, из-под копыт шматья летят, изо рта пар пышет, из ушей дым валит. «Скоро ль ты меня на тот свет вынесешь?» — «Плюнуть не успеешь!» <span class="lab" data-s="24">R<sup>1</sup></span><span class="m" data-s="24">Сел на того коня и очутился на своей земле</span>.
+<span class="lab" data-s="25">«*»</span><span class="m" data-s="25">Приходит до золотаря. «Я, — говорит, — буду твоим помощником!»</span> <span class="lab" data-s="27">З</span><span class="m" data-s="27">Меньшая царевна приказывает золотарю: «Сделай мне к свадьбе золотой перстень!»</span> Он взялся за ту работу, а Иван Сученко говорит: «Постой, я тебе перстень сделаю, а ты мне мешок орехов дай». Золотарь принес ему мешок орехов; <span class="lab" data-s="28">Р</span><span class="m" data-s="28">Иван Сученко орехи поел, золото молотком разбил, вынул царевнино колечко, вычистил и отдал хозяину</span>. Царевна приходит в субботу за кольцом; глянула: «<span class="lab" data-s="29">У</span><span class="m" data-s="29">Ах, какое прекрасное колечко! Я такое отдала Ивану Сученку, да его нет на этом свете!</span>» И просит золотаря к себе на свадьбу. На другой день золотарь пошел на свадьбу, а Иван Сученко дома остался, припалил серую шерсть — бежит до него серый конь. «Чего ты меня требуешь?» — «Надо на весильном доме трубу сорвать!» — «Садись на меня, заглянь в левое ухо, выглянь в правое!» <span class="lab" data-s="30">Г<sup>1</sup></span><span class="m" data-s="30">Он заглянул в левое ухо, а в правое выглянул — и стал такой молодец, что ни в сказке сказать, ни пером написать</span>. <span class="lab" data-s="31">N</span><span class="m" data-s="31">Поскакал и снял трубу с дома; тут все закричали, перепугались, свадьба разъехалась</span>.
+Другая царевна принесла золото, просит кольцо сделать. Иван Сученко говорит золотарю: «Дай мне два мешка орехов, я тебе кольцо сделаю». — «Ну что ж? Сделай». Сученко орехи поел, золото молотком разбил, вынул царевнино кольцо, вычистил и отдал. Царевна увидала кольцо: «Ах, какое славное! Я точно такое отдала Ивану Сученку, да его теперь нет на этом свете!» Взяла кольцо и зовет золотаря на свадьбу. Тот пошел на свадьбу, а Иван Сученко припалил вороную шерсть — бежит вороной конь. «Чего ты от меня требуешь?» — «Надо сорвать с весильного дома крышу». — «Сядь на меня; в левое ухо заглянь, в правое выглянь!» Он заглянул в левое ухо, выглянул в правое — стал молодец молодцом! Конь понес его так шибко, что сорвал с дома крышу; все закричали, принялись стрелять в коня, только не попали; свадьба опять разъехалась.
+Вот и старшая царевна просит, чтобы ей колечко сделали. «Не хотела я, — говорит, — за Белого Полянина замуж идти, да, видно, бог так судил!» Иван Сученко говорит золотарю: «Дай мне три мешка орехов, я тебе кольцо сделаю». Опять орехи поел, золото молотком разбил, вынул царевнино кольцо, вычистил и отдал. В субботу приходит царевна за кольцом, глянула: «Ах, какое славное колечко! Боже мой! Где ты достал этот перстень? Я точно такой отдала тому, кого любила». И просит золотаря: «Приходи завтра на свадьбу ко мне!»
+На другой день золотарь пошел на свадьбу, а Иван Сученко дома остался, припалил рыжую шерстину — бежит рыжий конь. «Чего ты от меня требуешь?» — «Неси меня как хочешь, только бы нам вперед ехать — потолок на весильном доме сорвать, а назад ехать — Белого Полянина за чуб взять!» — «Сядь на меня, в левое ухо заглянь, в правое выглянь!» Понес его рыжий конь шибко-шибко. Туда едучи — Сученко потолок с дома снял, а назад едучи — <span class="lab" data-s="32">Н</span><span class="m" data-s="32">ухватил Белого Полянина за чуб, поднялся высоко вверх и бросил его наземь: Белый Полянин на кусочки разбился</span>. <span class="lab" data-s="33">У</span><span class="m" data-s="33">А Иван Сученко опустился вниз, обнялся, поцеловался с своею невестою</span>; Иван-царевич и Поваренко ему обрадовались; <span class="lab" data-s="34">С*</span><span class="m" data-s="34">все они обвенчались на прекрасных царевнах и стали жить вместе богато и счастливо</span>.
+</div>
+<aside class="tp-side"><div class="tp-moves"><div class="mv"><span class="mvl">Ход I</span><button class="tk" data-s="0" title="отправка"><span class="s">↑</span></button><button class="tk" data-s="1" title="первая функция дарителя"><span class="s">Д<sup>9</sup></span></button><button class="tk" data-s="2" title="реакция героя"><span class="s">Г<sup>9</sup></span></button><button class="tk" data-s="3" title="снабжение, получение волшебного средства"><span class="s">Z<sup>9</sup></span></button><button class="tk" data-s="4" title="первая функция дарителя"><span class="s">Д<sup>9</sup></span></button><button class="tk" data-s="5" title="реакция героя"><span class="s">Г<sup>9</sup></span></button><button class="tk" data-s="6" title="пространственное перемещение"><span class="s">R<sup>5</sup></span></button><button class="tk" data-s="7" title="пространственное перемещение"><span class="s">R<sup>6</sup></span></button><button class="tk" data-s="8" title="вредительство"><span class="s">A<sup>1</sup></span></button><button class="tk" data-s="9" title="посредничество, соединительный момент"><span class="s">B<sup>1</sup></span></button><button class="tk" data-s="10" title="начинающееся противодействие"><span class="s">C</span></button><button class="tk" data-s="11" title="отправка"><span class="s">↑</span></button><button class="tk" data-s="12" title="борьба"><span class="s">Б<sup>1</sup></span></button><button class="tk" data-s="13" title="победа"><span class="s">П<sup>1</sup></span></button><button class="tk" data-s="14" title="ликвидация беды или недостачи"><span class="s">Л<sup>4</sup></span></button><button class="tk" data-s="15" title="клеймение, отметка"><span class="s">К<sup>2</sup></span></button><button class="tk" data-s="16" title="свадьба"><span class="s">с<sup>1</sup></span></button><button class="tk" data-s="17" title="возвращение"><span class="s">↓</span></button></div><div class="mv"><span class="mvl">Ход II</span><button class="tk" data-s="18" title="вредительство"><span class="s">*A<sup>1</sup></span></button><button class="tk" data-s="19" title="начинающееся противодействие"><span class="s">C</span></button><button class="tk" data-s="20" title="отправка"><span class="s">↑</span></button><button class="tk" data-s="21" title="первая функция дарителя"><span class="s">Д<sup>9</sup></span></button><button class="tk" data-s="22" title="реакция героя"><span class="s">Г<sup>9</sup></span></button><button class="tk" data-s="23" title="снабжение, получение волшебного средства"><span class="s">Z<sup>1</sup><sub>7</sub></span></button><button class="tk" data-s="24" title="пространственное перемещение"><span class="s">R<sup>1</sup></span></button><button class="tk" data-s="25" title="неузнанное прибытие"><span class="s">«*»</span></button><button class="tk nospan" data-s="26" title="необоснованные притязания"><span class="s">Ф</span></button><button class="tk" data-s="27" title="трудная задача"><span class="s">З</span></button><button class="tk" data-s="28" title="решение"><span class="s">Р</span></button><button class="tk" data-s="29" title="узнавание"><span class="s">У</span></button><button class="tk" data-s="30" title="реакция героя"><span class="s">Г<sup>1</sup></span></button><button class="tk" data-s="31" title="неясные или заносные формы"><span class="s">N</span></button><button class="tk" data-s="32" title="наказание"><span class="s">Н</span></button><button class="tk" data-s="33" title="узнавание"><span class="s">У</span></button><button class="tk" data-s="34" title="свадьба"><span class="s">С*</span></button></div></div><div class="detail" id="detail" aria-live="polite" hidden></div></aside>
+</main>
+<footer class="tp-foot"><p>Текст сказки: А. Н. Афанасьев, «Народные русские сказки» (текст ФЭБ). Разбор: В. Я. Пропп, «Морфология сказки» (Л.: Academia, 1928; текст ФЭБ). Каждое обозначение поставлено нами на фрагмент, который Пропп называет или пересказывает.</p></footer>
+</div></div>
+<script type="application/json" id="d">["<div class=\"dh\"><span><span class=\"s\">↑<\/span> отправка<\/span><button class=\"x\" aria-label=\"Закрыть\">×<\/button><\/div><div class=\"lab\">Разбор Проппа · 1928, с. 136<\/div><p lang=\"ru\">«79. I. Бездетный царь, чудесное рождение трех сыновей и трех коней. Братья уходят из дома» <span class=\"meta\">— ↑<\/span><\/p>", "<div class=\"dh\"><span><span class=\"s\">Д<sup>9<\/sup><\/span> первая функция дарителя<\/span><button class=\"x\" aria-label=\"Закрыть\">×<\/button><\/div><div class=\"lab\">Разбор Проппа · 1928, с. 136<\/div><p lang=\"ru\">«встречают Белого Полянина в палатке, бьются» <span class=\"meta\">— Д<sup>9<\/sup><\/span><\/p>", "<div class=\"dh\"><span><span class=\"s\">Г<sup>9<\/sup><\/span> реакция героя<\/span><button class=\"x\" aria-label=\"Закрыть\">×<\/button><\/div><div class=\"lab\">Разбор Проппа · 1928, с. 136<\/div><p lang=\"ru\">«Два брата побеждены и брошены под кровать, третий побеждает» <span class=\"meta\">— Г<sup>9<\/sup><\/span><\/p>", "<div class=\"dh\"><span><span class=\"s\">Z<sup>9<\/sup><\/span> снабжение, получение волшебного средства<\/span><button class=\"x\" aria-label=\"Закрыть\">×<\/button><\/div><div class=\"lab\">Разбор Проппа · 1928, с. 136<\/div><p lang=\"ru\">«„Не убивай меня“ — он принимается за меньшего брата» <span class=\"meta\">— т. е. помощника Z<sup>9<\/sup><\/span><\/p>", "<div class=\"dh\"><span><span class=\"s\">Д<sup>9<\/sup><\/span> первая функция дарителя<\/span><button class=\"x\" aria-label=\"Закрыть\">×<\/button><\/div><div class=\"lab\">Разбор Проппа · 1928, с. 136<\/div><p lang=\"ru\">«На дальнейшем пути они бьются с обитателем лесной избушки» <span class=\"meta\">— Д<sup>9<\/sup> Г<sup>9<\/sup><\/span><\/p>", "<div class=\"dh\"><span><span class=\"s\">Г<sup>9<\/sup><\/span> реакция героя<\/span><button class=\"x\" aria-label=\"Закрыть\">×<\/button><\/div><div class=\"lab\">Разбор Проппа · 1928, с. 136<\/div><p lang=\"ru\">«На дальнейшем пути они бьются с обитателем лесной избушки» <span class=\"meta\">— Д<sup>9<\/sup> Г<sup>9<\/sup><\/span><\/p>", "<div class=\"dh\"><span><span class=\"s\">R<sup>5<\/sup><\/span> пространственное перемещение<\/span><button class=\"x\" aria-label=\"Закрыть\">×<\/button><\/div><div class=\"lab\">Разбор Проппа · 1928, с. 136<\/div><p lang=\"ru\">«он бежит, по его следам найден вход в иное царство» <span class=\"meta\">— R<sup>5<\/sup><\/span><\/p>", "<div class=\"dh\"><span><span class=\"s\">R<sup>6<\/sup><\/span> пространственное перемещение<\/span><button class=\"x\" aria-label=\"Закрыть\">×<\/button><\/div><div class=\"lab\">Разбор Проппа · 1928, с. 136<\/div><p lang=\"ru\">«Сученко спускается на канате» <span class=\"meta\">— R<sup>6<\/sup><\/span><\/p>", "<div class=\"dh\"><span><span class=\"s\">A<sup>1<\/sup><\/span> вредительство<\/span><button class=\"x\" aria-label=\"Закрыть\">×<\/button><\/div><div class=\"lab\">Разбор Проппа · 1928, с. 136<\/div><p lang=\"ru\">«„Он вспомнил про царевен, что покрали на тот свет три змия. Пойду их шукать“.» <span class=\"meta\">— A<sup>1<\/sup> B<sup>1<\/sup> C ↑. Воспоминание использовано не особенно удачно в качестве соединительного момента<\/span><\/p>", "<div class=\"dh\"><span><span class=\"s\">B<sup>1<\/sup><\/span> посредничество, соединительный момент<\/span><button class=\"x\" aria-label=\"Закрыть\">×<\/button><\/div><div class=\"lab\">Разбор Проппа · 1928, с. 136<\/div><p lang=\"ru\">«„Он вспомнил про царевен, что покрали на тот свет три змия. Пойду их шукать“.» <span class=\"meta\">— A<sup>1<\/sup> B<sup>1<\/sup> C ↑. Воспоминание использовано не особенно удачно в качестве соединительного момента<\/span><\/p>", "<div class=\"dh\"><span><span class=\"s\">C<\/span> начинающееся противодействие<\/span><button class=\"x\" aria-label=\"Закрыть\">×<\/button><\/div><div class=\"lab\">Разбор Проппа · 1928, с. 136<\/div><p lang=\"ru\">«„Он вспомнил про царевен, что покрали на тот свет три змия. Пойду их шукать“.» <span class=\"meta\">— A<sup>1<\/sup> B<sup>1<\/sup> C ↑. Воспоминание использовано не особенно удачно в качестве соединительного момента<\/span><\/p>", "<div class=\"dh\"><span><span class=\"s\">↑<\/span> отправка<\/span><button class=\"x\" aria-label=\"Закрыть\">×<\/button><\/div><div class=\"lab\">Разбор Проппа · 1928, с. 136<\/div><p lang=\"ru\">«„Он вспомнил про царевен, что покрали на тот свет три змия. Пойду их шукать“.» <span class=\"meta\">— A<sup>1<\/sup> B<sup>1<\/sup> C ↑. Воспоминание использовано не особенно удачно в качестве соединительного момента<\/span><\/p>", "<div class=\"dh\"><span><span class=\"s\">Б<sup>1<\/sup><\/span> борьба<\/span><button class=\"x\" aria-label=\"Закрыть\">×<\/button><\/div><div class=\"lab\">Разбор Проппа · 1928, с. 136<\/div><p lang=\"ru\">«Три боя» <span class=\"meta\">— Б<sup>1<\/sup>—П<sup>1<\/sup><\/span><\/p>", "<div class=\"dh\"><span><span class=\"s\">П<sup>1<\/sup><\/span> победа<\/span><button class=\"x\" aria-label=\"Закрыть\">×<\/button><\/div><div class=\"lab\">Разбор Проппа · 1928, с. 136<\/div><p lang=\"ru\">«Три боя» <span class=\"meta\">— Б<sup>1<\/sup>—П<sup>1<\/sup><\/span><\/p>", "<div class=\"dh\"><span><span class=\"s\">Л<sup>4<\/sup><\/span> ликвидация беды или недостачи<\/span><button class=\"x\" aria-label=\"Закрыть\">×<\/button><\/div><div class=\"lab\">Разбор Проппа · 1928, с. 136<\/div><p lang=\"ru\">«Освобождение» <span class=\"meta\">— Л<sup>4<\/sup><\/span><\/p>", "<div class=\"dh\"><span><span class=\"s\">К<sup>2<\/sup><\/span> клеймение, отметка<\/span><button class=\"x\" aria-label=\"Закрыть\">×<\/button><\/div><div class=\"lab\">Разбор Проппа · 1928, с. 136<\/div><p lang=\"ru\">«Передача кольца» <span class=\"meta\">— К<sup>2<\/sup><\/span><\/p>", "<div class=\"dh\"><span><span class=\"s\">с<sup>1<\/sup><\/span> свадьба<\/span><button class=\"x\" aria-label=\"Закрыть\">×<\/button><\/div><div class=\"lab\">Разбор Проппа · 1928, с. 136<\/div><p lang=\"ru\">«третья девица — невеста Сученки» <span class=\"meta\">— с<sup>1<\/sup><\/span><\/p>", "<div class=\"dh\"><span><span class=\"s\">↓<\/span> возвращение<\/span><button class=\"x\" aria-label=\"Закрыть\">×<\/button><\/div><div class=\"lab\">Разбор Проппа · 1928, с. 136<\/div><p lang=\"ru\">«Возвращение» <span class=\"meta\">— ↓<\/span><\/p>", "<div class=\"dh\"><span><span class=\"s\">*A<sup>1<\/sup><\/span> вредительство<\/span><button class=\"x\" aria-label=\"Закрыть\">×<\/button><\/div><div class=\"lab\">Разбор Проппа · 1928, с. 136<\/div><p lang=\"ru\">«II. Братья и Полянин похищают девиц, сбрасывают Сученко» <span class=\"meta\">— *A<sup>1<\/sup><\/span><\/p>", "<div class=\"dh\"><span><span class=\"s\">C<\/span> начинающееся противодействие<\/span><button class=\"x\" aria-label=\"Закрыть\">×<\/button><\/div><div class=\"lab\">Разбор Проппа · 1928, с. 136<\/div><p lang=\"ru\">«Поиски» <span class=\"meta\">— C ↑<\/span><\/p>", "<div class=\"dh\"><span><span class=\"s\">↑<\/span> отправка<\/span><button class=\"x\" aria-label=\"Закрыть\">×<\/button><\/div><div class=\"lab\">Разбор Проппа · 1928, с. 136<\/div><p lang=\"ru\">«Поиски» <span class=\"meta\">— C ↑<\/span><\/p>", "<div class=\"dh\"><span><span class=\"s\">Д<sup>9<\/sup><\/span> первая функция дарителя<\/span><button class=\"x\" aria-label=\"Закрыть\">×<\/button><\/div><div class=\"lab\">Разбор Проппа · 1928, с. 136<\/div><p lang=\"ru\">«Схватка с дедом, Сученко получает сильную воду и коня» <span class=\"meta\">— Д<sup>9<\/sup> Г<sup>9<\/sup> Z<sup>1<\/sup><sub>7<\/sub><\/span><\/p>", "<div class=\"dh\"><span><span class=\"s\">Г<sup>9<\/sup><\/span> реакция героя<\/span><button class=\"x\" aria-label=\"Закрыть\">×<\/button><\/div><div class=\"lab\">Разбор Проппа · 1928, с. 136<\/div><p lang=\"ru\">«Схватка с дедом, Сученко получает сильную воду и коня» <span class=\"meta\">— Д<sup>9<\/sup> Г<sup>9<\/sup> Z<sup>1<\/sup><sub>7<\/sub><\/span><\/p>", "<div class=\"dh\"><span><span class=\"s\">Z<sup>1<\/sup><sub>7<\/sub><\/span> снабжение, получение волшебного средства<\/span><button class=\"x\" aria-label=\"Закрыть\">×<\/button><\/div><div class=\"lab\">Разбор Проппа · 1928, с. 136<\/div><p lang=\"ru\">«Схватка с дедом, Сученко получает сильную воду и коня» <span class=\"meta\">— Д<sup>9<\/sup> Г<sup>9<\/sup> Z<sup>1<\/sup><sub>7<\/sub><\/span><\/p>", "<div class=\"dh\"><span><span class=\"s\">R<sup>1<\/sup><\/span> пространственное перемещение<\/span><button class=\"x\" aria-label=\"Закрыть\">×<\/button><\/div><div class=\"lab\">Разбор Проппа · 1928, с. 136<\/div><p lang=\"ru\">«Полет» <span class=\"meta\">— R<sup>1<\/sup><\/span><\/p>", "<div class=\"dh\"><span><span class=\"s\">«*»<\/span> неузнанное прибытие<\/span><button class=\"x\" aria-label=\"Закрыть\">×<\/button><\/div><div class=\"lab\">Разбор Проппа · 1928, с. 136<\/div><p lang=\"ru\">«Неузнанное прибытие, служба у золотаря» <span class=\"meta\">— *<\/span><\/p>", "<div class=\"dh\"><span><span class=\"s\">Ф<\/span> необоснованные притязания<\/span><button class=\"x\" aria-label=\"Закрыть\">×<\/button><\/div><div class=\"lab\">Разбор Проппа · 1928, с. 137<\/div><p lang=\"ru\">«Притязания ложных героев» <span class=\"meta\">— Ф<\/span><\/p><p class=\"meta\">В тексте сказки не рассказано.<\/p>", "<div class=\"dh\"><span><span class=\"s\">З<\/span> трудная задача<\/span><button class=\"x\" aria-label=\"Закрыть\">×<\/button><\/div><div class=\"lab\">Разбор Проппа · 1928, с. 137<\/div><p lang=\"ru\">«Царевны требуют колец» <span class=\"meta\">— З<\/span><\/p>", "<div class=\"dh\"><span><span class=\"s\">Р<\/span> решение<\/span><button class=\"x\" aria-label=\"Закрыть\">×<\/button><\/div><div class=\"lab\">Разбор Проппа · 1928, с. 137<\/div><p lang=\"ru\">«Иван посылает полученные кольца» <span class=\"meta\">— Р<\/span><\/p>", "<div class=\"dh\"><span><span class=\"s\">У<\/span> узнавание<\/span><button class=\"x\" aria-label=\"Закрыть\">×<\/button><\/div><div class=\"lab\">Разбор Проппа · 1928, с. 137<\/div><p lang=\"ru\">«Царевны все же не узнают героя» <span class=\"meta\">— У neg.<\/span><\/p>", "<div class=\"dh\"><span><span class=\"s\">Г<sup>1<\/sup><\/span> реакция героя<\/span><button class=\"x\" aria-label=\"Закрыть\">×<\/button><\/div><div class=\"lab\">Разбор Проппа · 1928, с. 137<\/div><p lang=\"ru\">«Он пролезает через уши коня» <span class=\"meta\">— Г<sup>1<\/sup><\/span><\/p>", "<div class=\"dh\"><span><span class=\"s\">N<\/span> неясные или заносные формы<\/span><button class=\"x\" aria-label=\"Закрыть\">×<\/button><\/div><div class=\"lab\">Разбор Проппа · 1928, с. 137<\/div><p lang=\"ru\">«срывает с дома крышу» <span class=\"meta\">— N — вызвано тем, что герой не узнан<\/span><\/p>", "<div class=\"dh\"><span><span class=\"s\">Н<\/span> наказание<\/span><button class=\"x\" aria-label=\"Закрыть\">×<\/button><\/div><div class=\"lab\">Разбор Проппа · 1928, с. 137<\/div><p lang=\"ru\">«Все трижды. После третьего раза Сученко накидывается на Полянина и бросает его с полета об земь» <span class=\"meta\">— Н<\/span><\/p>", "<div class=\"dh\"><span><span class=\"s\">У<\/span> узнавание<\/span><button class=\"x\" aria-label=\"Закрыть\">×<\/button><\/div><div class=\"lab\">Разбор Проппа · 1928, с. 137<\/div><p lang=\"ru\">«Невеста узнает жениха» <span class=\"meta\">— У<\/span><\/p>", "<div class=\"dh\"><span><span class=\"s\">С*<\/span> свадьба<\/span><button class=\"x\" aria-label=\"Закрыть\">×<\/button><\/div><div class=\"lab\">Разбор Проппа · 1928, с. 137<\/div><p lang=\"ru\">«Тройная свадьба» <span class=\"meta\">— С*<\/span><\/p>"]</script>
+<script>
+(() => {
+  const D = JSON.parse(document.getElementById("d").textContent), det = document.getElementById("detail");
+  let cur = null;
+  function sel(i, scroll) {
+    cur = i === cur ? null : i;
+    document.querySelectorAll(".on").forEach(e => e.classList.remove("on"));
+    if (cur === null) { det.hidden = true; history.replaceState(null, "", location.pathname); return; }
+    document.querySelectorAll('[data-s~="' + cur + '"]').forEach(e => e.classList.add("on"));
+    det.innerHTML = D[cur]; det.hidden = false;
+    const lab = document.querySelector('.tale-text .lab[data-s="' + cur + '"]');
+    if (scroll && lab) lab.scrollIntoView({ behavior: "smooth", block: "center" });
+    history.replaceState(null, "", "#s" + cur);
+  }
+  document.addEventListener("click", e => {
+    if (e.target.closest(".detail .x")) { sel(cur); return; }
+    const t = e.target.closest("[data-s]");
+    if (t) sel(+t.dataset.s.split(" ")[0], !t.closest(".tale-text"));
+  });
+  const h = /^#s(\d+)$/.exec(location.hash);
+  if (h && D[+h[1]] !== undefined) sel(+h[1], true);
+})();
+</script>
+</body>
+</html>

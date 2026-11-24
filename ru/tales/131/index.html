@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>«Фролка-сидень» (Афанасьев, № 131): разбор Проппа на тексте сказки</title>
+<meta name="description" content="Полный текст сказки «Фролка-сидень» (Афанасьев, № 131); каждое обозначение разбора Проппа (1928) стоит на своем фрагменте.">
+<link rel="canonical" href="https://propp-morphology.github.io/ru/tales/131/">
+<link rel="alternate" hreflang="en" href="https://propp-morphology.github.io/tales/131/">
+<link rel="alternate" hreflang="ru" href="https://propp-morphology.github.io/ru/tales/131/">
+<link rel="alternate" hreflang="x-default" href="https://propp-morphology.github.io/tales/131/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Схема сказки по Проппу">
+<meta property="og:title" content="«Фролка-сидень» (Афанасьев, № 131): разбор Проппа на тексте сказки">
+<meta property="og:description" content="Полный текст сказки «Фролка-сидень» (Афанасьев, № 131); каждое обозначение разбора Проппа (1928) стоит на своем фрагменте.">
+<meta property="og:url" content="https://propp-morphology.github.io/ru/tales/131/">
+<meta property="og:image" content="https://propp-morphology.github.io/images/og-ru.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;700;800&display=swap">
+<style>
+/* Layout: a periodic table of the tale. One grotesk (it carries Latin, Cyrillic, Greek and Propp's arrows), five sizes,
+   no italics; hierarchy comes from weight, position and the grid. The opening band takes its colours from the 1928
+   Academia cover. Form carries the meaning: a solid line is a pair Propp names, a dashed line is a correspondence
+   he states; the selected function is filled, its pair is outlined. */
+:root {
+  --paper: #f5f5f1; --ink: #1e2230; --muted: #5b606d; --rule: #d4d3cb; --faint: #e8e7e1;
+  --accent: #2c51c9; --wash: #dde4f8;
+  --band: #1f2330; --band-ink: #ece4cf; --band-muted: #a8a492; --spine: #e6dcc3; --spine-ink: #1f2330;
+  --font: "Geologica", "Segoe UI", system-ui, sans-serif;
+  --s1: 13px; --s2: 16px; --s3: 22px; --s4: 28px; --s5: clamp(34px, 5.4vw, 60px);
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --paper: #15181f; --ink: #e8e3d5; --muted: #a2a39b; --rule: #363a46; --faint: #22262f;
+  --accent: #93a8ff; --wash: #28325c; --band: #0d0f14; --band-ink: #ece4cf; --band-muted: #9c9887;
+  --spine: #d9cfb5; --spine-ink: #1f2330; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --paper: #15181f; --ink: #e8e3d5; --muted: #a2a39b; --rule: #363a46; --faint: #22262f;
+  --accent: #93a8ff; --wash: #28325c; --band: #0d0f14; --band-ink: #ece4cf; --band-muted: #9c9887;
+  --spine: #d9cfb5; --spine-ink: #1f2330; color-scheme: dark }
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; }
+body { background: var(--paper); color: var(--ink); font-family: var(--font); font-size: var(--s2); line-height: 1.55; font-weight: 400; }
+.gut { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.inner { max-width: 1180px; margin: 0 auto; }
+p { margin: 0; }
+h1, h2, h3, h4 { margin: 0; text-wrap: balance; }
+h2 { font-size: var(--s4); line-height: 1.2; font-weight: 700; letter-spacing: -0.01em; }
+h3, h4 { font-size: var(--s2); font-weight: 700; }
+.meta { font-size: var(--s1); color: var(--muted); }
+.pg { color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+sup, sub { font-size: 0.66em; line-height: 0; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.linkbtn { appearance: none; border: 0; background: none; padding: 0; cursor: pointer; text-decoration: underline;
+  text-decoration-color: var(--rule); text-underline-offset: 3px; }
+.linkbtn:hover { text-decoration-color: currentColor; }
+
+/* ---------- the cover band ---------- */
+.band { background: var(--band); color: var(--band-ink); margin-top: calc(-1 * env(safe-area-inset-top, 0px)); padding-top: env(safe-area-inset-top, 0px); }
+.band .inner { display: grid; grid-template-columns: 112px minmax(0, 1fr); }
+.spine { background: var(--spine); color: var(--spine-ink); padding: 36px 14px 36px max(14px, env(safe-area-inset-left, 0px));
+  display: flex; flex-direction: column; justify-content: space-between; gap: 40px; font-size: var(--s1); font-weight: 700; line-height: 1.35;
+  hyphens: manual; overflow-wrap: anywhere; }   /* break between words; the address after the hyphen or a dot */
+.spine span:last-child { font-weight: 400; margin-right: -8px; }   /* "https://propp-" needs 90px of the 84 */
+.cover { padding-block: 40px 36px; display: grid; gap: 26px; min-width: 0; }
+.topline { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: var(--s2); font-weight: 700; }
+.topline nav { font-weight: 400; color: var(--band-muted); }
+.topline nav b { color: var(--band-ink); }
+h1 { font-size: var(--s5); line-height: 1.02; font-weight: 800; letter-spacing: -0.02em; max-width: 14ch; }
+.lede { max-width: 62ch; }
+.lede .pg, .band .meta { color: var(--band-muted); }
+
+/* ---------- formulas: tokens on one line, pairs drawn as arcs ---------- */
+.fml { position: relative; padding-top: 58px; width: max-content; min-width: 100%; font-size: var(--s3); }
+.fml svg.arcs { position: absolute; left: 0; top: 0; overflow: visible; pointer-events: none; }
+.fml svg.arcs path { fill: none; stroke: currentColor; stroke-width: 1.3; }
+.fml svg.arcs path.corr { stroke-dasharray: 3 3.5; }
+.fml svg.arcs path.on { stroke: var(--accent); stroke-width: 2.4; }
+.band .fml svg.arcs path.on { stroke: var(--band-ink); }
+.toks { display: flex; align-items: flex-start; white-space: nowrap; }
+.seg { display: grid; gap: 8px; padding-right: 12px; }
+.seg:last-child { padding-right: 0; }   /* no trailing space: the formula fits its box (Firefox drew a scrollbar for 2px) */
+.seg + .seg { padding-left: 12px; border-left: 1px solid color-mix(in oklab, currentColor 28%, transparent); }
+.seg .row { display: flex; align-items: baseline; gap: 2px; justify-content: center; }   /* under a wider label (R⁴ above «transference») the space falls on both sides */
+.seg .lab { font-size: var(--s1); opacity: 0.72; }
+.tk { appearance: none; background: none; border: 0; padding: 1px 4px; cursor: pointer; font-size: inherit; line-height: 1.2; border-radius: 2px; position: relative; }
+.tk:hover { background: color-mix(in oklab, currentColor 12%, transparent); }
+.tk.neg .s { text-decoration: line-through; text-decoration-thickness: 1px; }
+.tk.ours .s { text-decoration: underline dotted; text-underline-offset: 4px; }
+.tk[data-hint]:hover::before, .tk[data-hint]:focus-visible::before { content: attr(data-hint); position: absolute; left: 50%; bottom: calc(100% + 6px);
+  transform: translateX(-50%); z-index: 3; pointer-events: none; white-space: nowrap; font-size: var(--s1); font-weight: 400; line-height: 1.3;
+  padding: 3px 8px; border-radius: 2px; background: var(--ink); color: var(--paper); }
+.band .tk[data-hint]:hover::before, .band .tk[data-hint]:focus-visible::before { background: var(--band-ink); color: var(--band); }
+.tk.inv::after { content: "⤺"; position: absolute; left: 50%; transform: translateX(-50%); top: -14px; font-size: var(--s1); }
+.tk.is-sel { background: var(--wash); color: var(--ink); box-shadow: inset 0 0 0 2px var(--accent); }
+.tk.is-mate { box-shadow: inset 0 0 0 1.5px var(--accent); }
+.band .tk.is-sel { background: var(--band-ink); color: var(--band); box-shadow: none; }
+.band .tk.is-mate { box-shadow: inset 0 0 0 1.5px var(--band-ink); }
+.rep { display: inline-flex; align-items: baseline; gap: 2px; }
+.rep .br { opacity: 0.55; }
+.rep .n { font-size: var(--s1); opacity: 0.75; margin-left: 1px; }
+.key { display: flex; flex-wrap: wrap; gap: 6px 24px; font-size: var(--s1); align-items: center; }
+.band .key { color: var(--band-muted); }
+.key svg { vertical-align: middle; margin-right: 6px; }
+.key path { fill: none; stroke: currentColor; stroke-width: 1.3; }
+.key .box { display: inline-block; width: 14px; height: 14px; vertical-align: -2px; margin-right: 6px; }
+
+/* ---------- page body ---------- */
+main { padding-block: 56px 72px; }
+.flow { display: grid; gap: 80px; }
+.sec { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; }
+.sec > * { min-width: 0; }
+.intro { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px 48px; }
+.intro > * { min-width: 0; }
+.intro > div:first-child { display: grid; gap: 12px; align-content: start; }
+.intro p { max-width: 68ch; }
+.apparatus { display: grid; gap: 12px; }
+.apparatus:empty { display: none; }
+.theses { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px 36px; }
+.theses li { display: grid; grid-template-columns: minmax(0, 1fr); gap: 4px; align-content: start; }
+
+/* ---------- the periodic table of functions ---------- */
+.vocab { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; align-items: start; }
+@media (min-width: 1060px) { .vocab.has-entry { grid-template-columns: minmax(0, 1fr) 360px; } .vocab.has-entry .entry { grid-column: 2; grid-row: 1; } .entry { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 16px); } }
+.groups { display: grid; gap: 24px; min-width: 0; }
+.grp { display: grid; gap: 8px; }
+.grp h3 { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+.grp h3 .meta { font-weight: 400; }
+.cards { display: flex; flex-wrap: wrap; gap: 6px; align-items: stretch; }
+.unit { display: flex; border: 1px solid var(--rule); background: var(--paper); }
+.unit.pair { border: 1.5px solid var(--ink); }
+.unit.corr { border: 1.5px dashed var(--ink); }
+.unit .join { align-self: center; color: var(--muted); padding: 0 1px; font-size: var(--s1); }
+.or { align-self: center; font-size: var(--s1); color: var(--muted); }
+.card { appearance: none; border: 0; background: none; cursor: pointer; text-align: left; width: 108px; min-height: 100px;
+  padding: 7px 9px 9px; display: grid; grid-template-rows: auto auto 1fr auto; gap: 0; position: relative; }
+.card .r { font-size: var(--s1); color: var(--muted); font-variant-numeric: tabular-nums; line-height: 1.2; }
+.card .s { font-size: var(--s4); line-height: 1.15; font-weight: 700; }
+.card .nm { font-size: var(--s1); line-height: 1.3; hyphens: auto; overflow-wrap: break-word; }
+.card .pt { font-size: var(--s1); color: var(--muted); margin-top: 4px; }
+.card:hover { background: var(--faint); }
+.card.is-sel { background: var(--wash); box-shadow: inset 0 0 0 2px var(--accent); }
+.card.is-mate { box-shadow: inset 0 0 0 2px var(--accent); }
+.card.is-mate .pt, .card.is-sel .pt { color: var(--accent); }
+.card.dim { opacity: 0.3; }
+.card.zero { border: 1px dashed var(--rule); }
+.entry { border-top: 3px solid var(--ink); padding-top: 16px; display: grid; gap: 12px; min-width: 0; }
+.entry .hd { display: flex; gap: 16px; align-items: center; }
+.entry .big { font-size: var(--s5); line-height: 1; font-weight: 800; min-width: 1ch; }
+.entry h3 { font-size: var(--s3); line-height: 1.2; }
+.entry blockquote { margin: 0; }
+.entry .line { display: grid; gap: 4px; }   /* the pair, then the sphere of action, each on its own line */
+.entry details summary { cursor: pointer; font-size: var(--s1); color: var(--muted); }
+.entry dl { margin: 8px 0 0; display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 6px 12px; }
+.entry dt { color: var(--muted); }
+.entry dd { margin: 0; }
+.entry .forms { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.entry .forms li { display: grid; grid-template-columns: 3.4em minmax(0, 1fr); column-gap: 6px; }
+.entry .forms .ours { text-decoration: underline dotted; text-underline-offset: 4px; }
+
+/* ---------- the sequence diagram ---------- */
+.diagram svg { display: block; }
+.diagram text { fill: var(--ink); font-family: var(--font); }
+.diagram .mut { fill: var(--muted); }
+.diagram .ln { stroke: var(--ink); stroke-width: 2; fill: none; }
+.diagram .hair { stroke: var(--rule); stroke-width: 1; fill: none; }
+.diagram .arc { stroke: var(--ink); stroke-width: 1.3; fill: none; }
+.diagram .arc.corr { stroke-dasharray: 3 3.5; }
+.diagram .br { stroke: var(--ink); stroke-width: 1; fill: none; }
+.diagram .br.ours { stroke: var(--muted); stroke-dasharray: 2 3; }
+.diagram .st { fill: var(--paper); stroke: var(--ink); stroke-width: 1.6; }
+.diagram .bar { fill: var(--muted); }
+.diagram .dot { fill: var(--ink); pointer-events: none; }
+.diagram g:focus-visible { outline: none; }
+.diagram .col:focus-visible .hit, .diagram .lane:focus-visible .hit { stroke: var(--accent); stroke-width: 2; }
+.diagram .hit { fill: transparent; cursor: pointer; }
+.diagram .col.is-sel .st { fill: var(--accent); stroke: var(--accent); }
+.diagram .col.is-mate .st { stroke: var(--accent); stroke-width: 2.6; }
+.diagram .col.is-sel text.sym, .diagram .col.is-mate text.sym { fill: var(--accent); font-weight: 700; }
+.diagram .col.is-sel .bar { fill: var(--accent); }
+.diagram .col.is-mate .bar { fill: color-mix(in oklab, var(--accent) 55%, var(--paper)); }
+.diagram .arc.on { stroke: var(--accent); stroke-width: 2.4; }
+.diagram .lane { cursor: pointer; }
+.diagram .lane.is-role text { fill: var(--accent); font-weight: 700; }
+.diagram .dot.is-role { fill: var(--accent); }
+.fork { stroke: var(--ink); stroke-width: 1; fill: none; stroke-dasharray: 4 3; }
+
+/* ---------- tales ---------- */
+.talelist { display: flex; flex-wrap: wrap; gap: 6px 8px; }
+.talelist button { appearance: none; border: 1px solid var(--rule); background: none; cursor: pointer; padding: 5px 10px; font-size: var(--s1); text-align: left; }
+.talelist button .no { color: var(--muted); margin-right: 6px; font-variant-numeric: tabular-nums; }
+.talelist button[aria-pressed="true"] { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+.reader { display: grid; gap: 28px; }
+.reader h3 { font-size: var(--s3); }
+.reader h3 .meta { font-weight: 400; margin-left: 8px; }
+.reader .full { font-size: var(--s1); color: inherit; }
+.move { display: grid; gap: 6px; }
+.clause { background: var(--faint); padding: 14px 16px; display: grid; gap: 8px; max-width: 78ch; }
+.clause .lab { color: var(--muted); font-size: var(--s1); }
+.clause mark { background: var(--wash); color: var(--ink); }
+.clause .tale { white-space: pre-line; }
+
+/* ---------- moves ---------- */
+.mvs { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 32px 36px; }
+.mvs figure { margin: 0; display: grid; gap: 8px; align-content: start; }
+.mvs svg { width: 100%; height: auto; display: block; }
+.mvs .ln { stroke: var(--ink); stroke-width: 2.2; stroke-linecap: round; fill: none; }
+.mvs .dash { stroke: var(--muted); stroke-width: 1.2; stroke-dasharray: 3 4; fill: none; }
+.mvs text { font-family: var(--font); font-size: 13px; fill: var(--muted); }
+.mvs text.lab { fill: var(--ink); font-weight: 700; }
+.mvs .dot { fill: var(--ink); }
+.mvs figcaption b { font-weight: 800; margin-right: 4px; }
+.mvs .q { color: var(--muted); }
+
+/* ---------- Propp's tables (collapsed, at the end) ---------- */
+details.tables { border-top: 1px solid var(--rule); padding-top: 18px; }
+details.tables > summary { cursor: pointer; font-size: var(--s3); font-weight: 700; list-style-position: outside; }
+details.tables > summary .meta { font-weight: 400; margin-left: 8px; }
+details.tables[open] > summary { margin-bottom: 20px; }
+.tables-body { display: grid; gap: 18px; }
+.ctl { display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: baseline; }
+.ctl .opts { display: flex; flex-wrap: wrap; gap: 4px 16px; }
+.ctl button { appearance: none; border: 0; background: none; padding: 2px 0; cursor: pointer; color: var(--muted); border-bottom: 2px solid transparent; }
+.ctl button[aria-pressed="true"] { color: var(--ink); border-bottom-color: var(--ink); }
+table.grid { border-collapse: separate; border-spacing: 0; font-size: var(--s1); }
+.grid th, .grid td { padding: 0; text-align: center; font-weight: 400; }
+.grid thead th { color: var(--muted); padding-bottom: 4px; }
+.grid thead tr.g th { text-align: left; padding-left: 4px; border-left: 1px solid var(--rule); white-space: nowrap; }
+.grid thead tr.f th { font-size: var(--s2); color: var(--ink); }
+.grid .rl { position: sticky; left: 0; z-index: 1; background: var(--paper); text-align: left; padding: 0 10px 0 0; min-width: 180px; max-width: 220px; }
+.grid .rl button { appearance: none; border: 0; background: none; cursor: pointer; text-align: left; padding: 4px 0; line-height: 1.3; width: 100%; }
+.grid .rl .no { color: var(--muted); margin-right: 4px; }
+.grid .rl .mv { font-weight: 700; margin-left: 4px; }
+.grid td.c { width: 32px; min-width: 32px; height: 30px; border-top: 1px solid var(--faint); font-size: var(--s2); }
+.grid td.c.gs, .grid th.gs { border-left: 1px solid var(--rule); }
+.grid td.c .e { display: inline-block; width: 4px; height: 4px; border-radius: 50%; background: var(--rule); vertical-align: middle; }
+.grid td.c .x { font-size: 0.62em; color: var(--muted); vertical-align: sub; margin-left: 1px; }
+.grid td.c.neg .v { text-decoration: line-through; }
+.grid td.c.ours .v { text-decoration: underline dotted; text-underline-offset: 3px; }
+.grid tr.first td, .grid tr.first th { border-top: 1px solid var(--rule); }
+.grid .is-sel { background: var(--wash) !important; }
+.grid .is-mate { background: color-mix(in oklab, var(--wash) 50%, transparent) !important; }
+
+footer { border-top: 1px solid var(--rule); padding-block: 20px 48px; color: var(--muted); }
+footer p { max-width: 90ch; }
+#foot { display: grid; gap: 8px; }
+
+@media (max-width: 720px) {
+  .band .inner { grid-template-columns: minmax(0, 1fr); }
+  .spine { flex-direction: row; padding: 10px 16px; gap: 12px; }
+  .spine span:last-child { display: none; }
+  .cover { padding-block: 26px 28px; }
+  .card { width: 96px; }
+  .grid .rl { min-width: 118px; max-width: 140px; }
+  .entry .big { font-size: var(--s4); }
+  .entry dl { grid-template-columns: 1fr; gap: 0; }
+  .entry dd { margin-bottom: 6px; }
+}
+@media (min-width: 721px) { .cover { padding-left: 40px; } }
+@media (prefers-reduced-motion: no-preference) { .card, .tk { transition: background-color .15s, opacity .15s, box-shadow .15s; } }
+</style>
+<style>
+.tp-top { display: flex; justify-content: space-between; gap: 16px; padding-block: 14px; font-size: var(--s1); border-bottom: 1px solid var(--rule); }
+.tp-top a { color: inherit; }
+.tp-head { padding-block: 32px 24px; display: grid; gap: 8px; }
+.tp-head h1 { font-size: var(--s4); line-height: 1.15; font-weight: 800; }
+.tp-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; padding-bottom: 72px; }
+.tp-side { display: grid; gap: 16px; align-content: start; }
+.tp-moves { display: grid; gap: 10px; }
+.tp-moves .mv { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 4px; }
+.tp-moves .mvl { font-size: var(--s1); color: var(--muted); margin-right: 6px; }
+.tp-moves .tk.on { background: var(--ink); color: var(--paper); }
+.tp-moves .tk.nospan .s { opacity: .5; }
+.tale-text { white-space: pre-wrap; font-size: 17px; line-height: 1.8; max-width: 68ch; overflow-wrap: break-word; }
+.tale-text .m { background: var(--faint); cursor: pointer; }
+.tale-text .m.on { background: var(--wash); box-shadow: inset 0 -2px var(--accent); }
+.tale-text .lab { font-size: 11px; line-height: 0; vertical-align: super; color: var(--accent); font-weight: 700; margin: 0 2px; cursor: pointer; }
+.tale-text .lab.on { background: var(--accent); color: var(--paper); border-radius: 2px; padding: 0 2px; }
+.detail { background: var(--faint); padding: 14px 16px; display: grid; gap: 8px; }
+.detail .dh { font-weight: 700; display: flex; justify-content: space-between; gap: 12px; }
+.detail .x { appearance: none; border: 0; background: none; cursor: pointer; color: var(--muted); font-size: 18px; line-height: 1; }
+.detail .lab { color: var(--muted); font-size: var(--s1); }
+.tp-foot { border-top: 1px solid var(--rule); padding-block: 20px 40px; font-size: var(--s1); color: var(--muted); max-width: 90ch; }
+@media (min-width: 1000px) {
+  .tp-grid { grid-template-columns: minmax(0, 68ch) minmax(280px, 1fr); }
+  .tp-side { position: sticky; top: 16px; align-self: start; max-height: calc(100vh - 32px); overflow: auto; }
+  .detail .x { display: none; }
+}
+@media (max-width: 999px) {
+  .detail { position: fixed; left: 0; right: 0; bottom: 0; z-index: 5; max-height: 45vh; overflow: auto;
+            border-top: 2px solid var(--ink); padding-bottom: max(14px, env(safe-area-inset-bottom, 0px)); }
+}
+</style>
+</head>
+<body>
+<div class="gut"><div class="inner">
+<div class="tp-top"><a href="/ru/">← Морфология сказки</a><a href="https://propp-morphology.github.io/tales/131/" hreflang="en" lang="en">EN</a></div>
+<header class="tp-head"><h1>Фролка-сидень</h1><p class="meta">Афанасьев, № 131 · разбор Проппа: 1928, с. 135</p></header>
+<main class="tp-grid">
+<div class="tale-text" lang="ru">Жил-был царь, у него было три дочери, да такие красавицы, что ни в сказке сказать, ни пером написать; <span class="lab" data-s="0">е<sup>3</sup></span><span class="m" data-s="0">любили они по вечерам гулять в своем саде</span>, а сад был большой и славный. Вот змий черноморский и повадился туда летать. <span class="lab" data-s="1">b<sup>1</sup></span><span class="m" data-s="1">Однажды дочери царские припоздали в саду, засмотрелись на цветы</span>; <span class="lab" data-s="2">A<sup>1</sup></span><span class="m" data-s="2">вдруг откуда ни взялся змий черноморский и унес их на своих огненных крыльях</span>. Царь ждать-пождать — нет дочерей! Послал служанок искать их в саду, но все было напрасно; служанки не нашли царевен. <span class="lab" data-s="3">B<sup>1</sup></span><span class="m" data-s="3">Утром царь сделал тревогу, народу собралось множество. Тут царь и говорит: «Кто разыщет моих дочерей, тому сколько угодно дам денег»</span>.
+<span class="lab" data-s="4">C</span><span class="m" data-s="4">Вот и избрались трое: солдат-пьяница, Фролка-сидень и Ерема; уговорились с царем</span> и <span class="lab" data-s="5">↑</span><span class="m" data-s="5">пустились искать царевен</span>. Шли они, шли и пришли в дремучий, густой лес. Только взошли в него, сильный сон стал одолевать их. Фролка-сидень вытащил из кармана табакерку, постукал, открыл ее и пхнул в нос охапку табаку; потом зашумел: «Эй, братцы, не уснем, не воздремлем! Идите дальше».
+Вот и пошли; шли-шли и приходят, наконец, к огромному дому, а дом этот был пятиглавого змия. Долго они стучали в ворота и не могли достучаться. Вот Фролка-сидень оттолкнул солдата и Ерему: «Пустите-ка, братцы!» Понюхал табаку и стукнул в двери так сильно, что расшиб их. Тут вошли они на двор, сели в кружок и собираются закусить чем бог послал. А из дома выходит девица, собою такая красавица; вышла и говорит: «Зачем вы, голубчики, сюда зашли? Ведь здесь живет прелихой змий; он вас съест! Счастливы вы, что его теперь дома нет». Фролка отвечает ей: «Мы сами его съедим!» Не успел вымолвить эти слова, вот и летит змий, летит и рычит: «Кто мое царство разорил? Ужель в свете есть мне противники? Есть у меня один противник, да его и костей сюда ворон не занесет!» — «Ворон меня не занесет, — сказал Фролка, — а добрый конь завезет!» Змий, услыхав такие слова, сказал: «Мириться, что ли, али драться?» — «Не мириться я пришел, — говорит Фролка, — а драться!»
+<span class="lab" data-s="6">Б<sup>1</sup></span><span class="m" data-s="6">Вот разошлись они, соступились</span>, и <span class="lab" data-s="7">П<sup>1</sup></span><span class="m" data-s="7">Фролка с одного маху срубил все пять голов змию</span>, взял и положил их под камень, а туловище зарыл в землю. Тут девица обрадовалась и говорит этим молодцам: «Возьмите меня, голубчики, с собою». — «Да ты чья?» — спросили они. Она говорит, что царская дочь; Фролка также рассказал ей, что было нужно; вот и сошлось у них дело! Царевна позвала их в хоромы, накормила-напоила и просит, чтоб они выручили и других ее сестер. Фролка отвечал: «Да мы за этим и посланы!» Царевна рассказала, где живут ее сестры: «У средней сестры еще страшнее моего: с нею живет змий семиголовый». — «Нужды нет! — сказал Фролка. — Мы и с тем справимся; разве долго покопаюсь я с двенадцатиглавым змием». Распростились и пошли дальше.
+Приходят к средней сестре. Палаты, в которых она заключена была, огромные, а вокруг палат ограда высокая, чугунная. Вот подошли они и начали искать ворота; нашли, Фролка что ни есть силы бухнул в ворота, и ворота растворились; вошли они на двор и опять по-прежнему сели позакусить. Вдруг летит семиглавый змий. «Что-то русским духом пахнет! — говорит он. — Ба! Это ты, Фролка, сюда зашел. Зачем?» — «Я знаю, зачем!» — отвечал Фролка, сразился с змием и с одного маху сшиб ему все семь глав, положил их под камень, а туловище зарыл в землю. Потом вошли они в палаты; проходят комнату, другую и третью, в четвертой увидали среднюю царскую дочь — сидит на диване. Как рассказали они ей, каким образом и для чего сюда пришли, она повеселела, начала угощать их и просила выручить от двенадцатиглавого змия ее меньшую сестру. Фролка сказал: «А как же! Мы за этим и посланы. Только что-то робеет сердце; ну, да авось бог! Поднеси-ка нам еще по чарочке».
+Вот выпили они и пошли; шли-шли и пришли к оврагу крутому-раскрутому. На другой стороне оврага стояли вместо ворот огромные столбы, а к ним прикованы были два страшные льва и рычали так громко, что Фролка только один устоял на ногах, а товарищи его от страха попа́дали на землю. Фролка сказал им: «Я не такие страсти видал — и то не робел, пойдемте за мною!» — и пошли дальше.
+Вдруг вышел из палат старец — примерно лет семидесяти, увидал их, пошел к ним навстречу и говорит: «Куда вы идете, мои родимые?» — «Да вот в эти палаты», — отвечал Фролка. «И, мои родимые! Не на добро вы идете; в этих палатах живет двенадцатиглавый змий. Теперь его нет дома, а то бы он вас сейчас поел!» — «Да нам его-то и нужно». — «Когда так, — сказал старик, — ступайте; я проведу вас туда». Старик подошел ко львам и начал их гладить; тут Фролка пробрался с своими товарищами на двор.
+Вот взошли они и в палаты; старик повел их в ту комнату, где жила царевна. Увидала она их, проворно скочила с кровати, подошла и порасспросила: кто они таковые и зачем пришли? Они рассказали ей. Царевна угостила их, а сама уж начала сряжаться. Только стали они выходить из хором — вдруг видят в версте от них летит змий. Тут царская дочь бросилась назад в хоромы, а Фролка с товарищами пошел навстречу и сразился с змием. Змий сначала очень шибко напал на них, но Фролка — парень расторопный! — успел одержать победу, сшиб ему все двенадцать голов и кинул их в овраг. Потом вошли назад в хоромы и начали гулять от радости пуще прежнего; а после отправились в путь и <span class="lab" data-s="8">Л<sup>4</sup></span><span class="m" data-s="8">зашли за другими царевнами</span> и <span class="lab" data-s="9">↓</span><span class="m" data-s="9">все вместе прибыли на родину</span>. <span class="lab" data-s="10">с<sup>o</sup></span><span class="m" data-s="10">Царь оченно обрадовался, растворил им свою царскую казну и сказал: «Ну, верные мои слуги, — берите, сколько угодно, себе денег за работу»</span>. Фролка был тороват: принес свою большую шапку треу́ху; солдат принес свой ранец, а Ерема принес куриное лукошко. Вот Фролка первый стал насыпать, сыпал-сыпал, треуха и прорвалась, и серебро утонуло в грязь. Фролка опять начал сыпать: сыпет, а из треухи валится! «Нечего делать! — сказал Фролка. — Верно, вся царская казна за меня пойдет». — «А нам-то что останется?» — спросили его товарищи. «У царя достанет казны и на вас!» Ерема давай-ка, пока деньги есть, насыпать лукошко, а солдат ранец, насыпал и пошли себе домой. А Фролка с треухою остался подле царской казны и поныне сидит да насыпает. Когда насыпет треуху, тогда дальше скажу; а теперь нет мочи и духу.
+</div>
+<aside class="tp-side"><div class="tp-moves"><div class="mv"><span class="mvl">Ход I</span><button class="tk" data-s="0" title="отлучка"><span class="s">е<sup>3</sup></span></button><button class="tk" data-s="1" title="нарушение"><span class="s">b<sup>1</sup></span></button><button class="tk" data-s="2" title="вредительство"><span class="s">A<sup>1</sup></span></button><button class="tk" data-s="3" title="посредничество, соединительный момент"><span class="s">B<sup>1</sup></span></button><button class="tk" data-s="4" title="начинающееся противодействие"><span class="s">C</span></button><button class="tk" data-s="5" title="отправка"><span class="s">↑</span></button><button class="tk" data-s="6" title="борьба"><span class="s">Б<sup>1</sup></span></button><button class="tk" data-s="7" title="победа"><span class="s">П<sup>1</sup></span></button><button class="tk" data-s="8" title="ликвидация беды или недостачи"><span class="s">Л<sup>4</sup></span></button><button class="tk" data-s="9" title="возвращение"><span class="s">↓</span></button><button class="tk" data-s="10" title="свадьба"><span class="s">с<sup>o</sup></span></button></div></div><div class="detail" id="detail" aria-live="polite" hidden></div></aside>
+</main>
+<footer class="tp-foot"><p>Текст сказки: А. Н. Афанасьев, «Народные русские сказки» (текст ФЭБ). Разбор: В. Я. Пропп, «Морфология сказки» (Л.: Academia, 1928; текст ФЭБ). Каждое обозначение поставлено нами на фрагмент, который Пропп называет или пересказывает.</p></footer>
+</div></div>
+<script type="application/json" id="d">["<div class=\"dh\"><span><span class=\"s\">е<sup>3<\/sup><\/span> отлучка<\/span><button class=\"x\" aria-label=\"Закрыть\">×<\/button><\/div><div class=\"lab\">Разбор Проппа · 1928, с. 135<\/div><p lang=\"ru\">«Дочери гуляют» <span class=\"meta\">— е<sup>3<\/sup><\/span><\/p>", "<div class=\"dh\"><span><span class=\"s\">b<sup>1<\/sup><\/span> нарушение<\/span><button class=\"x\" aria-label=\"Закрыть\">×<\/button><\/div><div class=\"lab\">Разбор Проппа · 1928, с. 135<\/div><p lang=\"ru\">«опаздывают в саду» <span class=\"meta\">— b<sup>1<\/sup><\/span><\/p>", "<div class=\"dh\"><span><span class=\"s\">A<sup>1<\/sup><\/span> вредительство<\/span><button class=\"x\" aria-label=\"Закрыть\">×<\/button><\/div><div class=\"lab\">Разбор Проппа · 1928, с. 135<\/div><p lang=\"ru\">«Змей похищает их» <span class=\"meta\">— A<sup>1<\/sup><\/span><\/p>", "<div class=\"dh\"><span><span class=\"s\">B<sup>1<\/sup><\/span> посредничество, соединительный момент<\/span><button class=\"x\" aria-label=\"Закрыть\">×<\/button><\/div><div class=\"lab\">Разбор Проппа · 1928, с. 135<\/div><p lang=\"ru\">«Клич» <span class=\"meta\">— B<sup>1<\/sup><\/span><\/p>", "<div class=\"dh\"><span><span class=\"s\">C<\/span> начинающееся противодействие<\/span><button class=\"x\" aria-label=\"Закрыть\">×<\/button><\/div><div class=\"lab\">Разбор Проппа · 1928, с. 135<\/div><p lang=\"ru\">«Поиски трех героев» <span class=\"meta\">— C ↑<\/span><\/p>", "<div class=\"dh\"><span><span class=\"s\">↑<\/span> отправка<\/span><button class=\"x\" aria-label=\"Закрыть\">×<\/button><\/div><div class=\"lab\">Разбор Проппа · 1928, с. 135<\/div><p lang=\"ru\">«Поиски трех героев» <span class=\"meta\">— C ↑<\/span><\/p>", "<div class=\"dh\"><span><span class=\"s\">Б<sup>1<\/sup><\/span> борьба<\/span><button class=\"x\" aria-label=\"Закрыть\">×<\/button><\/div><div class=\"lab\">Разбор Проппа · 1928, с. 135<\/div><p lang=\"ru\">«Три боя со змеем» <span class=\"meta\">— Б<sup>1<\/sup>—П<sup>1<\/sup><\/span><\/p>", "<div class=\"dh\"><span><span class=\"s\">П<sup>1<\/sup><\/span> победа<\/span><button class=\"x\" aria-label=\"Закрыть\">×<\/button><\/div><div class=\"lab\">Разбор Проппа · 1928, с. 135<\/div><p lang=\"ru\">«Три боя со змеем» <span class=\"meta\">— Б<sup>1<\/sup>—П<sup>1<\/sup><\/span><\/p>", "<div class=\"dh\"><span><span class=\"s\">Л<sup>4<\/sup><\/span> ликвидация беды или недостачи<\/span><button class=\"x\" aria-label=\"Закрыть\">×<\/button><\/div><div class=\"lab\">Разбор Проппа · 1928, с. 135<\/div><p lang=\"ru\">«избавление девиц» <span class=\"meta\">— Л<sup>4<\/sup><\/span><\/p>", "<div class=\"dh\"><span><span class=\"s\">↓<\/span> возвращение<\/span><button class=\"x\" aria-label=\"Закрыть\">×<\/button><\/div><div class=\"lab\">Разбор Проппа · 1928, с. 135<\/div><p lang=\"ru\">«Возвращение» <span class=\"meta\">— ↓<\/span><\/p>", "<div class=\"dh\"><span><span class=\"s\">с<sup>o<\/sup><\/span> свадьба<\/span><button class=\"x\" aria-label=\"Закрыть\">×<\/button><\/div><div class=\"lab\">Разбор Проппа · 1928, с. 135<\/div><p lang=\"ru\">«награждение» <span class=\"meta\">— с<sup>o<\/sup><\/span><\/p>"]</script>
+<script>
+(() => {
+  const D = JSON.parse(document.getElementById("d").textContent), det = document.getElementById("detail");
+  let cur = null;
+  function sel(i, scroll) {
+    cur = i === cur ? null : i;
+    document.querySelectorAll(".on").forEach(e => e.classList.remove("on"));
+    if (cur === null) { det.hidden = true; history.replaceState(null, "", location.pathname); return; }
+    document.querySelectorAll('[data-s~="' + cur + '"]').forEach(e => e.classList.add("on"));
+    det.innerHTML = D[cur]; det.hidden = false;
+    const lab = document.querySelector('.tale-text .lab[data-s="' + cur + '"]');
+    if (scroll && lab) lab.scrollIntoView({ behavior: "smooth", block: "center" });
+    history.replaceState(null, "", "#s" + cur);
+  }
+  document.addEventListener("click", e => {
+    if (e.target.closest(".detail .x")) { sel(cur); return; }
+    const t = e.target.closest("[data-s]");
+    if (t) sel(+t.dataset.s.split(" ")[0], !t.closest(".tale-text"));
+  });
+  const h = /^#s(\d+)$/.exec(location.hash);
+  if (h && D[+h[1]] !== undefined) sel(+h[1], true);
+})();
+</script>
+</body>
+</html>
