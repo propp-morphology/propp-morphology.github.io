@@ -1,7 +1,9 @@
 // Tale pages: the tale's formula as the page's spine (move lines, a mark for each passage, Propp's symbols in the order of
 // the text, arcs joining the pairs, Propp's parts on wide screens), and the selected passage in a card at the passage.
 // One rule, as on the main page: the selected function is filled, its pair is outlined.
-// Page data: #t = the symbols ({s, move, f, name, sym, nospan, neg}), #d = Propp's passage for each symbol (HTML).
+// Page data: #t = the symbols ({s, move, f, name, sym, nospan, neg, inv}), #d = Propp's passage for each symbol (HTML);
+// neg and inv (⤺, out of sequence in Propp's order) as on the main page. The design of PR #3 of the site (24 Nov 2026).
+// On a phone (narrow or short screen) the page only shows the tale: no spine, no card; a link to a passage (#s3) lights it.
 (function () {
   "use strict";
   const $ = id => document.getElementById(id);
@@ -9,12 +11,10 @@
   const lang = document.documentElement.lang === "ru" ? "ru" : "en";
   const TOKS = JSON.parse($("t").textContent), DET = JSON.parse($("d").textContent);
   const L = { en: { move: "Move", pair: "Pair", close: "Close" }, ru: { move: "Ход", pair: "Пара", close: "Закрыть" } }[lang];
+  const PHONE = matchMedia("(max-width: 599px), (max-height: 479px)");
   const reduce = () => (matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth");
 
-  const SEQ = ["I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII","XIII","XIV","XV","XVI","XVII","XVIII",
-    "XIX","XX","XXI","XXII","XXIII","XXIV","XXV","XXVI","XXVII","XXVIII","XXIX","XXX","XXXI"];
   const col = f => (f === "VIIIa" ? "VIII" : f);
-  const IDX = Object.fromEntries(SEQ.map((f, i) => [f, i])); IDX.VIIIa = IDX.VIII;
   // the pairs as Propp names them (main page, “Thirty-one functions”)
   const PAIRS = [["II","III"],["IV","V"],["VI","VII"],["VIII","XIX"],["XVI","XVIII"],["XVII","XXVII"],["XXI","XXII"],["XXV","XXVI"]];
   // Propp's groups and the main page's names for the parts of a formula
@@ -58,6 +58,7 @@
   // ===== the spine =====
   // columns, left to right: move lines · leaders · symbols · pair arcs · names and parts (wide screens)
   function layout() {
+    if (PHONE.matches) { G = null; ENTRIES = []; link = {}; ["railsvg", "railover", "labels"].forEach(id => ($(id).innerHTML = "")); return; }
     const w = innerWidth, wide = w >= 1000, narrow = w < 600;
     const lane = wide ? 12 : narrow ? 8 : 10, lanesW = 14 + MOVES.length * lane;
     const leadW = wide ? 22 : narrow ? 12 : 16, symW = wide ? 52 : narrow ? 42 : 48, arcW = wide ? 48 : narrow ? 24 : 34;
@@ -70,9 +71,6 @@
     const byS = [...TOKS].sort((a, b) => a.s - b.s); let prev = textTop;
     const ents = byS.map(t => { const p = pos[t.s]; const e = { ...t, py: p !== undefined ? p : prev + 0.5, placed: p !== undefined }; prev = e.py; return e; });
     ents.sort((a, b) => a.py - b.py || a.s - b.s);
-    // out of sequence: a first occurrence that comes earlier in Propp's order than a function before it, within its move
-    MOVES.forEach(mv => { const seen = new Set(); let mx = -1;
-      ents.filter(e => e.move === mv).forEach(e => { const ix = IDX[e.f]; e.inv = ix !== undefined && !seen.has(col(e.f)) && ix < mx; seen.add(col(e.f)); if (ix !== undefined) mx = Math.max(mx, ix); }); });
     ENTRIES = ents; link = pairLinks(ents);
     // scale: the whole text into the spine's height; symbols pushed apart so none overlap
     const H = document.querySelector(".rail-in").clientHeight, y0 = 30, y1 = H - 16, n = ents.length;
@@ -149,7 +147,7 @@
   // the passage card: at the passage, with the move's formula around it
   function renderPop() {
     const pop = $("pop");
-    if (sel === null) { pop.hidden = true; return; }
+    if (sel === null || PHONE.matches) { pop.hidden = true; return; }
     const e = ENTRIES.find(x => x.s === sel), m = link[sel];
     const moveEnts = ENTRIES.filter(x => x.move === e.move), k = moveEnts.indexOf(e);
     const from = Math.max(0, k - 3), to = Math.min(moveEnts.length, k + 4);
@@ -166,8 +164,8 @@
   function anchorOf(s) {   // the passage itself, or, for a symbol with no words in the tale, the passage before it
     let el = document.querySelector(`#text .m[data-s~="${s}"]`);
     if (el) return el;
-    const k = ENTRIES.findIndex(x => x.s === s);
-    for (let j = k - 1; j >= 0; j--) { el = document.querySelector(`#text .m[data-s~="${ENTRIES[j].s}"]`); if (el) return el; }
+    const order = ENTRIES.length ? ENTRIES.map(x => x.s) : TOKS.map(t => t.s).sort((a, b) => a - b);   // no spine on a phone
+    for (let j = order.indexOf(s) - 1; j >= 0; j--) { el = document.querySelector(`#text .m[data-s~="${order[j]}"]`); if (el) return el; }
     return $("text");
   }
   function placePop(shift) {   // below the passage, or above it where there is no room below; shift: how far a jump will move the view
@@ -184,19 +182,20 @@
     pop.style.top = (below ? last.bottom - cr.top + 12 : first.top - cr.top - h - 12) + "px";
     pop.style.setProperty("--ax", Math.max(18, Math.min(w - 18, ref.left - cr.left - left + Math.min(ref.width, 48) / 2)) + "px");
   }
-  function select(s, scroll) {
+  function select(s, scroll, how) {
     sel = sel === s ? null : s;
     history.replaceState(null, "", sel === null ? location.pathname : "#s" + sel);
     if (sel !== null && scroll) {
       const r = anchorOf(sel).getBoundingClientRect(), maxY = document.documentElement.scrollHeight - innerHeight;
       const target = Math.max(0, Math.min(maxY, r.top + scrollY - innerHeight * 0.18));   // where the page can actually go
-      window.scrollTo({ top: target, behavior: reduce() });
+      window.scrollTo({ top: target, behavior: how || reduce() });
       apply(); placePop(target - scrollY); return;
     }
     apply();
   }
 
   document.addEventListener("click", e => {
+    if (PHONE.matches) return;   // on a phone the tale is only read
     if (e.target.closest(".pop .x")) { select(sel); return; }
     const go = e.target.closest("[data-go]"); if (go) { if (+go.dataset.go !== sel) select(+go.dataset.go, true); return; }
     const mv = e.target.closest("[data-mv]");
@@ -224,6 +223,8 @@
     if (Math.abs(innerWidth - lastW) > 2 || Math.abs(innerHeight - lastH) > 60) { lastW = innerWidth; lastH = innerHeight; layout(); apply(); } }); });
   layout();
   const h = /^#s(\d+)$/.exec(location.hash);   // links to a passage (#s3) keep working
-  if (h && DET[+h[1]] !== undefined) select(+h[1], true);
-  if (document.fonts) document.fonts.ready.then(() => { layout(); apply(); });
+  const opened = h && DET[+h[1]] !== undefined ? +h[1] : null;
+  if (opened !== null) select(opened, true, "auto");
+  // the web font moves the text: draw the spine again and, for a link to a passage, go to it again
+  if (document.fonts) document.fonts.ready.then(() => { layout(); apply(); if (opened !== null && sel === opened) { sel = null; select(opened, true, "auto"); } });
 })();

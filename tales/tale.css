@@ -1,5 +1,7 @@
 /* Tale pages: the tale's formula as the page's spine, the clean text beside it, the selected passage in a card at the passage.
-   Shared by /tales/N/ and /ru/tales/N/; the page data is in each page (#t: the symbols, #d: Propp's passages). */
+   Shared by /tales/N/ and /ru/tales/N/; the page data is in each page (#t: the symbols, #d: Propp's passages).
+   The design of PR #3 of the site (24 Nov 2026); source: scripts/propp/schema_page/tale.css, copied by tale_pages.py.
+   On a phone (narrow or short screen) the page only shows the tale: no spine, no card. */
 :root {
   --paper: #f5f5f1; --ink: #1e2230; --muted: #5b606d; --rule: #d4d3cb; --faint: #e8e7e1;
   --accent: #2c51c9; --wash: #dde4f8;
@@ -76,7 +78,7 @@ h1 { font-size: var(--s4); line-height: 1.15; font-weight: 800; letter-spacing: 
   font-size: 11px; font-weight: 700; color: var(--r-muted); line-height: 14px; }
 .rl { position: absolute; appearance: none; border: 0; background: none; padding: 0; cursor: pointer; text-align: left;
   display: flex; align-items: center; white-space: nowrap; overflow: hidden; border-radius: 2px; color: var(--r-muted); }
-.rl .s { font-size: 15px; width: var(--symw); flex: none; padding-left: 4px; }
+.rl .s { font-size: 15px; width: var(--symw); flex: none; padding-left: 4px; overflow: hidden; text-overflow: ellipsis; }
 .rl .nm { font-size: var(--s1); overflow: hidden; text-overflow: ellipsis; margin-left: var(--arcw); padding-right: 4px; }
 .rl.vis { color: var(--r-ink); }
 .rl.vis .s { font-weight: 700; }
@@ -89,7 +91,6 @@ h1 { font-size: var(--s4); line-height: 1.15; font-weight: 800; letter-spacing: 
 
 /* ---------- the text ---------- */
 .textcol { position: relative; padding-top: 24px; padding-bottom: 40px; display: grid; gap: 18px; align-content: start; }
-.help { font-size: var(--s1); color: var(--muted); max-width: 64ch; display: grid; gap: 4px; }
 .tale-text { white-space: pre-wrap; font-size: var(--s2); line-height: 1.8; max-width: 64ch; overflow-wrap: break-word; }
 .tale-text .m { cursor: pointer; text-decoration: underline; text-decoration-color: var(--rule); text-decoration-thickness: 1.5px; text-underline-offset: 5px;
   -webkit-box-decoration-break: clone; box-decoration-break: clone; border-radius: 2px; }
@@ -127,3 +128,11 @@ h1 { font-size: var(--s4); line-height: 1.15; font-weight: 800; letter-spacing: 
 footer { border-top: 1px solid var(--rule); padding-block: 18px 48px; color: var(--muted); font-size: var(--s1); }
 body::before { background: var(--band); }
 footer p { max-width: 90ch; }
+
+/* ---------- on a phone: the tale only (Maria, 24 Nov 2026); a link to a passage (#s3) still lights it ---------- */
+@media (max-width: 599px), (max-height: 479px) {
+  .page { grid-template-columns: minmax(0, 1fr); }
+  .rail { display: none; }
+  .band, .textcol, .page > footer { grid-column: 1 / -1; }
+  .tale-text .m { text-decoration: none; cursor: auto; }
+}
