@@ -28,11 +28,11 @@
       parts: { strug: [[["XV"], "transference"], [["XVI","XVII","XVIII"], "struggle"]], ret: [[["XIX"], "liquidation"], [["XX","XXI","XXII"], "return"]] } },
     ru: { short: { prep: "подготовка", compl: "завязка", donor: "даритель", strug: "борьба", ret: "возвращение", end: "развязка" },
       parts: { strug: [[["XV"], "перемещение"], [["XVI","XVII","XVIII"], "борьба"]], ret: [[["XIX"], "ликвидация"], [["XX","XXI","XXII"], "возвращение"]] } } }[lang];
-  function segName(g, items) {
-    const parts = SEG.parts[g.id]; if (!parts) return SEG.short[g.id];
+  function segName(g, items) {   // the label's lines: one per part («ликвидация,» / «возвращение»), so it stays inside the spine
+    const parts = SEG.parts[g.id]; if (!parts) return [SEG.short[g.id]];
     const has = new Set(items.map(x => col(x.f)));
     const ls = parts.filter(([fs]) => fs.some(f => has.has(f))).map(p => p[1]);
-    return ls.length ? ls.join(", ") : SEG.short[g.id];
+    return ls.length ? ls.map((l, i) => l + (i < ls.length - 1 ? "," : "")) : [SEG.short[g.id]];
   }
 
   const MOVES = []; TOKS.forEach(t => { if (!MOVES.includes(t.move)) MOVES.push(t.move); });
@@ -110,7 +110,8 @@
       segs.forEach(s => {
         if (!s.g) return;
         const a = s.items[0].ly - gap / 2 + 3, b = s.items[s.items.length - 1].ly + gap / 2 - 3;
-        over += `<path class="grp" d="M${grpX + 4} ${a}H${grpX}V${b}H${grpX + 4}"/><text class="gt" x="${grpX + 8}" y="${s.items[0].ly + 4}">${esc(segName(s.g, s.items))}</text>`;
+        const lines = segName(s.g, s.items).map((l, i) => `<tspan x="${grpX + 8}" dy="${i ? Math.min(13, gap) : 0}">${esc(l)}</tspan>`).join("");
+        over += `<path class="grp" d="M${grpX + 4} ${a}H${grpX}V${b}H${grpX + 4}"/><text class="gt" x="${grpX + 8}" y="${s.items[0].ly + 4}">${lines}</text>`;
       });
     }
     $("railover").innerHTML = over;

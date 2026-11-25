@@ -83,7 +83,6 @@ h1 { font-size: var(--s4); line-height: 1.15; font-weight: 800; letter-spacing: 
 .rl.vis { color: var(--r-ink); }
 .rl.vis .s { font-weight: 700; }
 .rl.nospan { opacity: 0.5; }
-.rl.neg .s { text-decoration: line-through; text-decoration-thickness: 1px; }
 .rl.inv .s::after { content: "⤺"; font-size: 11px; margin-left: 2px; }
 .rl:hover, .rl.hov { background: var(--r-win); color: var(--r-ink); }
 .rl.on { background: var(--r-on); color: var(--r-ink); box-shadow: inset 0 0 0 2px var(--r-accent); }
