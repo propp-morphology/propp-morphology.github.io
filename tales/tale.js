@@ -62,7 +62,12 @@
     const w = innerWidth, wide = w >= 1000, narrow = w < 600;
     const lane = wide ? 12 : narrow ? 8 : 10, lanesW = 14 + MOVES.length * lane;
     const leadW = wide ? 22 : narrow ? 12 : 16, symW = wide ? 52 : narrow ? 42 : 48, arcW = wide ? 48 : narrow ? 24 : 34;
-    const symX = lanesW + leadW, nameX = symX + symW + arcW, nameW = wide ? 150 : 0, grpX = nameX + nameW + 8, grpW = wide ? 104 : 0;
+    // the names column as wide as the tale's longest name, where the text keeps about 640 px (Maria, 25 Nov 2026); else cut with …
+    const ruler = document.createElement("span"); ruler.style.cssText = "position:absolute;visibility:hidden;white-space:nowrap;font-size:var(--s1)";
+    $("labels").appendChild(ruler);
+    const longest = Math.max(...TOKS.map(t => { ruler.textContent = t.name; return ruler.offsetWidth; })); ruler.remove();
+    const symX = lanesW + leadW, nameX = symX + symW + arcW, grpW = wide ? 104 : 0;
+    const nameW = wide ? Math.round(Math.max(150, Math.min(longest + 8, w - (nameX + 8 + grpW) - 640))) : 0, grpX = nameX + nameW + 8;
     document.documentElement.style.setProperty("--rw", (wide ? grpX + grpW : symX + symW + arcW + 2) + "px");
     // where each passage is in the text (page coordinates)
     const text = $("text"), textTop = text.getBoundingClientRect().top + scrollY, textH = text.offsetHeight, pos = {};
@@ -72,15 +77,18 @@
     const ents = byS.map(t => { const p = pos[t.s]; const e = { ...t, py: p !== undefined ? p : prev + 0.5, placed: p !== undefined }; prev = e.py; return e; });
     ents.sort((a, b) => a.py - b.py || a.s - b.s);
     ENTRIES = ents; link = pairLinks(ents);
-    // scale: the whole text into the spine's height; symbols pushed apart so none overlap
+    // the symbols evenly down the spine, in the order of the text, each mark level with its symbol (Maria, 25 Nov 2026: before,
+    // the marks stood at their places in the text and the symbols, pushed apart, slid down from them on bent leaders)
     const H = document.querySelector(".rail-in").clientHeight, y0 = 30, y1 = H - 16, n = ents.length;
-    const gap = Math.max(11, Math.min(wide ? 22 : 20, (y1 - y0) / Math.max(n, 1)));
-    const map = py => y0 + Math.min(1, Math.max(0, (py - textTop) / textH)) * (y1 - y0);
-    ents.forEach(e => { e.ty = map(e.py); });
-    let last = -1e9; ents.forEach(e => { e.ly = Math.max(e.ty, last + gap, y0); last = e.ly; });
-    let nxt = 1e9; for (let k = n - 1; k >= 0; k--) { ents[k].ly = Math.min(ents[k].ly, nxt - gap, y1); nxt = ents[k].ly; }
-    last = -1e9; ents.forEach(e => { e.ly = Math.max(e.ly, last + gap * 0.999, y0 - 10); last = e.ly; });
-    G = { lane, y0, y1, textTop, textH, map };
+    const step = Math.max(11, (y1 - y0) / Math.max(n - 1, 1)), gap = Math.min(step, wide ? 24 : 22);
+    ents.forEach((e, i) => { e.ly = e.ty = n > 1 ? y0 + i * step : (y0 + y1) / 2; });
+    // the text and the spine meet at the symbols with a passage: the frame for the part of the text on screen, a tap on the spine
+    const lerp = (xs, ys, x) => { if (x <= xs[0]) return ys[0];
+      for (let i = 1; i < xs.length; i++) if (x <= xs[i]) return xs[i] === xs[i - 1] ? ys[i] : ys[i - 1] + (ys[i] - ys[i - 1]) * (x - xs[i - 1]) / (xs[i] - xs[i - 1]);
+      return ys[ys.length - 1]; };
+    const pts = [[textTop, y0], ...ents.filter(e => e.placed).map(e => [e.py, e.ly]), [textTop + textH, ents[n - 1].ly]];
+    const PX = pts.map(p => p[0]), PY = pts.map(p => p[1]);
+    G = { lane, y0, y1, textTop, textH, map: py => lerp(PX, PY, py), unmap: y => lerp(PY, PX, y) };
     const laneX = mv => 12 + MOVES.indexOf(mv) * lane;
     // under the symbols: the frame, move lines, ticks, leaders
     let svg = `<rect class="bg" x="0" y="${y0}" width="${lanesW}" height="${y1 - y0}"/><rect class="win" id="win" x="4" width="${lanesW - 2}" y="${y0}" height="0"/>`;
@@ -91,7 +99,7 @@
     ents.forEach(e => {
       if (!e.placed) return;
       const x = laneX(e.move);
-      svg += `<path class="lead" d="M${x + 5} ${e.ty}C${symX - 4} ${e.ty} ${symX - 10} ${e.ly} ${symX} ${e.ly}"/><path class="tick" d="M${x} ${e.ty}H${x + 5}"/><circle class="dot" data-s="${e.s}" cx="${x}" cy="${e.ty}" r="3"/>`;
+      svg += `<path class="lead" d="M${x + 5} ${e.ly}H${symX}"/><path class="tick" d="M${x} ${e.ly}H${x + 5}"/><circle class="dot" data-s="${e.s}" cx="${x}" cy="${e.ly}" r="3"/>`;
     });
     $("railsvg").innerHTML = svg;
     // over the symbols: every pair as an arc, and (wide screens) Propp's parts as brackets
@@ -202,8 +210,8 @@
     const mv = e.target.closest("[data-mv]");
     if (mv) { const p = ENTRIES.find(x => x.move === mv.dataset.mv && x.placed); if (p) window.scrollTo({ top: p.py - innerHeight * 0.3, behavior: reduce() }); return; }
     if (e.target.closest("#railsvg .bg, #railsvg .win") && G) {   // the spine as a scrollbar: tap a place in the tale to go there
-      const r = document.querySelector(".rail-in").getBoundingClientRect(), f = (e.clientY - r.top - G.y0) / (G.y1 - G.y0);
-      window.scrollTo({ top: G.textTop + f * G.textH - innerHeight * 0.4, behavior: reduce() }); return;
+      const r = document.querySelector(".rail-in").getBoundingClientRect();
+      window.scrollTo({ top: G.unmap(e.clientY - r.top) - innerHeight * 0.4, behavior: reduce() }); return;
     }
     if (e.target.closest("#pop")) return;
     const t = e.target.closest("#text .m, #labels .rl");
